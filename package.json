@@ -1,0 +1,29 @@
+{
+  "name": "webapp",
+  "description": "my first package ever",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.20.1",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^15.15.0",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "prettier": "^3.5.1",
+    "sass": "^1.86.0",
+    "tailwindcss": "^3.4.1"
+  },
+  "scripts": {
+    "sass": "sass src/sass/style.scss src/styles/temp-sass.css",
+    "tailwind": "postcss src/styles/input.css -o src/styles/tailwind.css",
+    "merge": "powershell -Command \"Get-Content src/styles/temp-sass.css, src/styles/tailwind.css | Set-Content src/styles/style.css\"",
+    "build": "npm run sass && npm run tailwind && npm run merge",
+    "watch": "concurrently \"npm run sass -- --watch\" \"npx tailwindcss -i ./src/styles/input.css -o ./src/styles/tailwind.css --watch\""
+  }
+}

@@ -1,0 +1,625 @@
+@charset "UTF-8";
+/**
+ * クロソイド曲線の線形グラデーション
+ */
+/**
+ * クロソイド曲線の線形グラデーション（逆の変化曲線）
+ */
+/**
+ * クロソイド曲線の放射状グラデーション
+ */
+/**
+ * クロソイド曲線の放射状グラデーション（逆の変化曲線）
+ */
+/**
+ * サインカーブの線形グラデーション
+ */
+/**
+ * サインカーブの放射状グラデーション
+ */
+/**
+ * サインカーブの繰り返し線形グラデーション
+ */
+/**
+ * サインカーブの繰り返し放射状グラデーション
+ */
+body {
+  font-family: Noto Sans JP, -apple-system, blinkmacsystemfont, Segoe UI, Hiragino Kaku Gothic ProN, BIZ UDPGothic, meiryo, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+  --tw-text-opacity: 1;
+  color: rgb(51 51 51/var(--tw-text-opacity));
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* ブラウザのウィンドウサイズを変更すると、ビューポートの高さの100％相当に変更される
+     つまり現在のブラウザウィンドウの高さ全体を表す
+     ウェブページのコンテンツがどれだけ少なくても、
+     <body> 要素の高さは常にブラウザウィンドウの高さ全体を占める*/
+  min-height: 100vh;
+}
+
+header {
+  background-color: hsla(0, 0%, 100%, 0.88);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.header__content {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: var(--header-block-size);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header__inner {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  width: 100%;
+}
+
+.header-item {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: calc(infinity * 1rem);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.875rem;
+  font-weight: 400;
+  gap: 0.5rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  min-height: 2rem;
+  padding: 0.5rem;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+/* 本来はボタンではない<div>要素や<a>要素に対して、ボタンとしての見た目を付与
+    ボタンの見た目を持つ要素には、role="button"属性を付与*/
+[role=button], button {
+  /* マウスカーソルをポインター（手の形）に変更し、
+  視覚的にボタンであることを示し、ユーザーにクリック可能であることを伝える*/
+  cursor: pointer;
+}
+
+.header-item__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 1rem;
+  --tw-translate-y: 0.0625rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+          transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.icon {
+  fill: currentColor;
+  line-height: 1;
+}
+
+.header-item__text--close:lang(ja), .header-item__text--open:lang(ja) {
+  min-width: 7.125rem;
+}
+
+.header-dropdown {
+  border-top-width: 1px;
+  /* ドロップダウンメニューの左端を、
+     その親要素（position: relative, absolute, fixed のいずれかが設定されている要素）の左端に揃える */
+  left: 0;
+  /* ドロップダウンメニュー絶対配置：
+      通常のドキュメントフローから外れ、最も近い position プロパティが relative, absolute, fixed の
+      いずれかに設定されている祖先要素を基準に配置。基準がない場合は<html>要素を基準に配置 */
+  position: absolute;
+  right: 0;
+  top: 4.5rem;
+  z-index: 1;
+  --tw-border-opacity: 1;
+  background-color: hsla(0, 0%, 100%, 0.88);
+  border-color: rgb(216 216 216/var(--tw-border-opacity));
+  /* 影
+     0: 水平方向のオフセット（影を左右にずらさない）
+     0.25rem: 垂直方向のオフセット（影を下に 0.25rem ずらす）
+     0.25rem: ぼかしの半径（影を 0.25rem ぼかす）
+     0: 広がりの半径（影を広げない）
+     rgba(0, 0, 0, .16): 影の色（黒色で 16% の透明度）*/
+  --tw-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, .16);
+  --tw-shadow-colored: 0 0.25rem 0.25rem 0 var(--tw-shadow-color);
+  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
+          box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
+}
+
+.header-dropdown__container {
+  margin-left: auto;
+  margin-right: auto;
+  /* コンテナの最大の高さ
+      calc(): 値を計算 */
+  max-height: calc(100dvh - var(--header-block-size));
+  max-width: 74.375rem;
+  overflow-y: auto;
+  padding: 3rem 1.5rem 4rem;
+  scrollbar-gutter: stable;
+  width: 100%;
+}
+
+.template__main {
+  margin: 3rem auto 9rem;
+  max-width: 77.375rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  width: 100%;
+}
+
+.section {
+  margin-bottom: 2rem;
+  margin-top: 4rem;
+}
+
+.section:nth-child(2) {
+  margin-top: 0;
+}
+
+.section__header {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.75rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.section__title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.attention {
+  list-style-type: disc;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding-left: 2rem;
+}
+
+/* .attention-item__link クラスを持つ要素のうち、
+.attention-item__text--isInformation クラスを持つ子要素が対象
+:has() は、指定されたセレクターを持つ要素を選択、古いブラウザではサポートされていない場合がある
+:hover により、マウスが要素の上にある状態を指定
+*/
+.attention-item__link:has(.attention-item__text--isInformation), .attention-item__link:not(.no-link):has(.attention-item__text--isInformation):hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 17 143/var(--tw-text-opacity));
+}
+
+.attention-item__link:not(.no-link) {
+  text-decoration-line: underline;
+  text-underline-offset: 0.1875rem;
+}
+
+.card {
+  border-radius: 1.5rem;
+  border-width: 1px;
+  display: grid;
+  height: 100%;
+  overflow: hidden;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0/var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+}
+
+/* カード内に画像がある場合に、グリッドレイアウトの行のサイズを調整
+    1. 最初の行（画像の行など）は、コンテンツの最小サイズで表示されます。
+    2. 2番目の行（コンテンツの行）は、残りのスペースをすべて埋めて表示されます。*/
+.card:has(.card__image) {
+  grid-template-rows: -webkit-min-content 1fr;
+  grid-template-rows: min-content 1fr;
+}
+
+.anchor-card, a.card {
+  --tw-text-opacity: 1;
+  color: rgb(51 51 51/var(--tw-text-opacity));
+  text-decoration-line: none;
+}
+
+.card__image {
+  border-bottom-width: 1px;
+  overflow: hidden;
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(0 0 0/var(--tw-border-opacity));
+}
+
+.main-button {
+  padding: 10px 15px;
+  margin: 5px;
+}
+
+.btn-real-dent {
+  /*周りの凹み*/
+  mix-blend-mode: multiply;
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(#FFF 0.1%, #72736f 20%, #bfbfbf 100%);
+  background-size: 400% 400%;
+  background-position: 44% 55%;
+}
+
+.btn-real-dent span {
+  /* ボタン自体 */
+  position: absolute;
+  content: "";
+  width: 70px;
+  height: 70px;
+  left: 15px;
+  top: 15px;
+  border-radius: 50%;
+  background: url("../images/Button/seigaiha.jpg");
+  background-size: 1150%;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 0 0 1px #EADAB6;
+          box-shadow: 0 0 0 1px #EADAB6;
+}
+
+/* マウスオーバーのボタン */
+.btn-real-dent .fa:hover {
+  background: url("../images/Button/seigaiha.jpg");
+  background-size: 1150%;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 0 0 1px #FFFEF7;
+          box-shadow: 0 0 0 1px #FFFEF7;
+}
+
+/* クリック後のボタン */
+.btn-real-dent .fa.clicked {
+  width: 68px;
+  height: 68px;
+  left: 16px;
+  top: 16px;
+  background: radial-gradient(circle, rgba(242, 205, 77, 0.2), rgba(218, 181, 103, 0.2)), url("Aggregation/src/images/Button/seigaiha.jpg"); /* 画像 */
+  background-size: 1111%;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: inset 0 0 0 2.5px rgba(66, 66, 66, 0.25);
+          box-shadow: inset 0 0 0 2.5px rgba(66, 66, 66, 0.25);
+}
+
+.Form-text {
+  border-top: 1px solid #ddd;
+}
+.Form-text p {
+  margin: 1px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.Form-name {
+  padding-top: 0px;
+  padding-bottom: 24px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+@media screen and (max-width: 480px) {
+  .Form-name {
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 5px;
+    padding-bottom: 16px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+.Form-Item-Label {
+  width: 100%;
+  max-width: 248px;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 480px) {
+  .Form-Item-Label {
+    max-width: inherit;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    font-size: 15px;
+  }
+}
+.Form-Item-Label-Required {
+  border-radius: 6px;
+  margin-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 48px;
+  display: inline-block;
+  text-align: center;
+  background: #5bc8ac;
+  color: #fff;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 480px) {
+  .Form-Item-Label-Required {
+    border-radius: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 32px;
+    font-size: 10px;
+  }
+}
+.Form-Item-Input {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-left: 10px;
+  padding-left: 1em;
+  padding-right: 1em;
+  height: 48px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  width: 100%;
+  max-width: 410px;
+  background: #eaedf2;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 480px) {
+  .Form-Item-Input {
+    margin-left: 0;
+    margin-top: 18px;
+    height: 40px;
+    -webkit-box-flex: inherit;
+        -ms-flex: inherit;
+            flex: inherit;
+    font-size: 15px;
+  }
+}
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.number-button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+
+.number-buttons h2 {
+  padding: 20px -10px 0px;
+  margin: 20px -10px 0px;
+}
+
+.number-button.selected {
+  background-color: #0056b3;
+}
+
+.submit-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.template__pagetop {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 1.25rem;
+  pointer-events: none;
+  width: 100vw;
+}
+
+/* ---------------------------------------------
+デザインを独創的に統一する
+・ChromeとSafariなどブラウザによって表示の違いがある。
+・その違いをなくすためにTailwind CSSはリセットCSSを標準で組み込んでいる。
+参考
+*:      すべての<html>要素だけでなく、<body>、<div>、<p>など、ウェブページ内のすべての要素が対象
+        すべての要素のボックスモデルをborder-boxに変更したり、マージンやパディングをリセットしたりする場合に使用
+after:  疑似要素（要素の最後に追加される内容）
+before: 疑似要素（要素の最初に追加される内容）
+where:  セレクタリストを受け取り、その中のいずれかのセレクタに一致する要素を選択
+        セレクタの特異度が 0 になるため、後から別のセレクタでスタイルを定義した場合に、特異度による競合が発生しにくくなる
+------------------------------------------------- */
+/* ボーダーおよびボックスの統一 */
+*, :after, :before {
+  /*  0:       ボーダーを非表示
+      solid:   実線
+      #e5e7eb: 薄い灰色
+      すべての要素からデフォルトのボーダーを削除し、必要に応じて後から追加 */
+  border: 0 solid #e5e7eb;
+  /* border-box
+  要素の幅と高さにパディングとボーダーが含まれるため計算しやすい。
+  そのため、パディングやボーダーを追加しても、要素のサイズは変わらない
+  レスポンシブデザインに対応しやすい
+   */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* ボタンのデザインをリセット */
+button, input:where([type=button]), input:where([type=reset]), input:where([type=submit]) {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+       appearance: button;
+  background-color: initial;
+  background-image: none;
+}
+
+/* 大文字小文字の変換をリセット
+ブラウザによっては"TEST BUTTON"が大文字で表示されてしまったり、
+"Test Option"の最初の文字だけが大文字で表示されてしまう可能性があるため */
+button, select {
+  text-transform: none;
+}
+
+/* ---------------------------------------------
+統一のためのデフォルト設定
+・デフォルトの変数を設定
+・親要素のスタイルと統一
+参考
+:root:      <html>要素のみを対象
+            例えば、ウェブサイトの主要な色、フォント、間隔などをCSS変数として:rootに定義し、他のCSSルールから参照
+::backdrop: 全画面表示(フルスクリーン)要素の背後に表示される疑似要素
+            <video>要素全画面表示時やモーダルダイアログの背後にあるコンテンツを暗くしたり、ぼかしたり、その他の視覚効果を加えたりするために使用
+::marker:   リストのマーカーに対してスタイルを適用
+!important; 重要度を持つプロパティを設定
+            他のスタイルよりも優先される
+------------------------------------------------- */
+/*  */
+:root {
+  --header-block-size: 4.5rem;
+}
+
+/* リストのマーカーに対してスタイルを適用 */
+::marker {
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+  text-transform: none;
+  text-indent: 0px !important;
+  text-align: start !important;
+  -moz-text-align-last: auto !important;
+       text-align-last: auto !important;
+}
+
+/* フォーム要素のスタイルを親要素のスタイルと統一 */
+button, input, optgroup, select, textarea {
+  color: inherit;
+  font-family: inherit;
+  -webkit-font-feature-settings: inherit;
+          font-feature-settings: inherit;
+  font-size: 100%;
+  font-variation-settings: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* フォーム要素のスタイルを親要素のスタイルと統一 */
+audio, canvas, embed, iframe, img, object, svg, video {
+  display: block;
+}
+
+/* 複数の条件の要素を非表示 */
+.header-item__toggle[aria-expanded=false] .header-item__icon--close, .header-item__toggle[aria-expanded=false] .header-item__text--close, .header-item__toggle[aria-expanded=true] .header-item__icon--open, .header-item__toggle[aria-expanded=true] .header-item__text--open {
+  display: none;
+}
+
+/* hidden属性を非表示
+目的：
+  JavaScriptが利用できない環境でも、Drupalがメッセージを表示できるようにする
+Drupalについて：
+  JavaScriptによって動的に生成されたユーザーへの通知やエラーメッセージを表示する
+JavaScriptが有効な場合:
+  メッセージはJavaScriptによって動的に生成され、この \<div\> 要素は非表示のまま
+JavaScriptが無効な場合:
+  Drupalは、この \<div\> 要素内にメッセージを挿入し、hidden クラスを削除することで、メッセージを表示
+*/
+[hidden] {
+  display: none;
+}
+
+menu, ol, ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.timeline .columns {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.columns {
+  display: grid;
+  gap: 2rem;
+}
+
+blockquote, dd, dl, figure, h1, h2, h3, h4, h5, h6, hr, p, pre {
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* ---------------------------------------------
+ユニバーサルデザイン
+------------------------------------------------- */
+.u-visually-hidden {
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  clip: rect(0, 0, 0, 0);
+  border-width: 0;
+  white-space: nowrap;
+}/*# sourceMappingURL=style.css.map */
