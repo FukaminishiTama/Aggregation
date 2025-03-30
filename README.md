@@ -27,26 +27,38 @@
       ↓ merge
 [style.css]（← HTMLに読み込ませる）
 
+Git
+git remote add origin https://github.com/FukaminishiTama/Aggregation.git
 
 # ディレクトリ構成
 ```
-Aggregation/
- ├── node_modules/ 
- ├── src/
- │   ├── images/
- │   ├── sass/          
- │   │   ├── style.scss
- │   ├── scripts/          
- │   │   ├── app.js
- │   ├── styles/
- │   │   ├── input.css        
- │   │   ├── style.css
- │   │   ├── style.css.map
- │   │   ├── tailwind.css
- │   ├── index.html     
- ├── tailwind.config.js  
- ├── package.json        
- ├── package-lock.json 
+ Aggregation/
+  ├── node_modules/       
+  ├ src
+  │   ├─index.html
+  │   │
+  │   ├─images
+  │   │
+  │   ├─sass
+  │   │  ├─ style.scss
+  │   │  │
+  │   │  └─mixin
+  │   │          gradient-mixin.scss
+  │   │
+  │   ├─scripts
+  │   │    └─app.js
+  │   │
+  │   └─styles
+  │        ├─input.css
+  │        ├─style.css
+  │        ├─style.css.map
+  │        ├─tailwind.css
+  │        ├─temp-sass.css
+  │        └─temp-sass.css.mapsrc/
+  │
+  ├── tailwind.config.js  
+  ├── package.json        
+  ├── package-lock.json  
 ```
 
 ## ファイル構成

@@ -196,8 +196,7 @@
                                 <span class="language-selector__text language-selector__text--close"
                                     aria-hidden="true">Language</span>
                                 <!-- スクリーンリーダーに対してのみ表示されるテキストを格納するspan要素 -->
-                                <span
-                                    class="language-selector__text language-selector__text--close u-visually-hidden">Close</span>
+                                <span class="language-selector__text language-selector__text--close u-visually-hidden">Close</span>
                                 <!-- ドロップダウンメニューの矢印アイコンを格納するspan要素 -->
                                 <span class="language-selector__arrow-icon">
                                     <span aria-hidden="true" class="icon icon--px" role="img">
@@ -297,7 +296,8 @@
                             <span class="header-item__text header-item__text--close" data-text="メニューを閉じる">
                                 メニューを閉じる</span>
                         </button>
-                        <!-- ドロップダウンメニューのコンテンツ全体を格納 -->
+                        <!-- ドロップダウンメニューのコンテンツ全体を格納
+                         hiddenで非表示、JSでクリック表示されるようにするため -->
                         <div id="header-dropdown" class="header-dropdown" hidden="" aria-hidden="true">
                             <!-- ドロップダウンコンテンツのコンテナを格納 -->
                             <div class="header-dropdown__container">
@@ -605,7 +605,7 @@
         <div data-drupal-messages-fallback class="hidden"></div>
         <section class="section">
             <header class="section__header">
-                <h2 class="section__title">重要なお知らせ</h2>
+                <h2 class="section__title">READE ME</h2>
             </header>
         </section>
         <ul class="attention">
@@ -613,7 +613,19 @@
             <li class="attention-item">
                 <a class="attention-item__link" href="/policies/mynumber/insurance-card">
                     <span class="attention-item__text--isInformation">
-                        これは重要なツールです、信じてください</span>
+                        概要</span>
+                </a>
+            </li>
+            <li class="attention-item">
+                <a class="attention-item__link" href="/policies/mynumber/insurance-card">
+                    <span class="attention-item__text--isInformation">
+                        ディレクトリ構成</span>
+                </a>
+            </li>
+            <li class="attention-item">
+                <a class="attention-item__link" href="/policies/mynumber/insurance-card">
+                    <span class="attention-item__text--isInformation">
+                        主な開発フレームワーク</span>
                 </a>
             </li>
         </ul>
@@ -1160,8 +1172,7 @@
     </footer>
 
 
-    <script src="scripts/image_clicke.js"></script>
-    <script src="scripts/number_clicke.js"></script>
+    <script src="scripts/app.js"></script>
 </body>
 
 </html>
