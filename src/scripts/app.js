@@ -6,7 +6,8 @@ addEventListener関数 「この場所で何かが起きたら何をするか」
 document.addEventListener('DOMContentLoaded', () => {
     /* HTMLの中から、
     data-dropdown-toggleという名前のボタンを
-    querySelectorAll関数で全部見つけて、
+    querySelectorAll関数で、全部見つけて、タグも、名前も、文字もすべて
+    NodeListという「集まり」を返り値として出し、
     変数dropdownToggles で使えるようにする */
     const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
     
@@ -19,22 +20,36 @@ document.addEventListener('DOMContentLoaded', () => {
         data-dropdown-toggleという名前の属性の値を取り出し
         変数targetIdで使えるようにする */
         const targetId = button.getAttribute('data-dropdown-toggle');
-        /*  idがtargetIdのタグまるごとを
+        /* idがtargetIdである要素を
+        getElementById関数で１つだけ、タグも、名前も、文字もすべて
         変数targetで使えるようにする */
         const target = document.getElementById(targetId);
-        /*   */
+        /* target がければ処理を終了して、次のtarget */
         if (!target) return;
-        /*   */
-        button.addEventListener('click', () => {
-        /*   */
-        const isOpen = button.getAttribute('aria-expanded') === 'true';
-        /*   */
-        button.setAttribute('aria-expanded', String(!isOpen));
-        /*   */
-        target.hidden = isOpen;
-        /*   */
-        target.setAttribute('aria-hidden', String(isOpen));
-      });
+          /* buttonがクリックされたらという条件 */
+          button.addEventListener('click', () => {
+          /* trueならtrue、falseならfalseを
+          isOpenに代入 */
+          const isOpen = button.getAttribute('aria-expanded') === 'true';
+          /* isOpenはtrueだったのが、
+          以下の「!」によって逆のfalseになる
+          さらにStringで文字列のfalseにして、
+          buttonのaria-expanded属性をfalseに更新
+          開くか、閉じるか */
+          button.setAttribute('aria-expanded', String(!isOpen));
+          /* targetのhidden属性に格納して更新
+          hidden = true → 隠れる（非表示）
+          hidden = false → 表示される
+          hiddenはプロパティとして扱い、
+          JSが動いている間に使える情報のため以下の書き方 */
+          target.hidden = isOpen;
+          /* isOpenはfalseだったのが、
+          以下の「!」によって逆のtrueになる
+          さらにStringで文字列のtrueにして、
+          targetのaria-hidden属性をtrueに更新
+          スクリーンリーダになるか、ならないか */
+          target.setAttribute('aria-hidden', String(isOpen));
+          });
     });
   });
   

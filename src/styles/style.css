@@ -1,28 +1,4 @@
 @charset "UTF-8";
-/**
- * クロソイド曲線の線形グラデーション
- */
-/**
- * クロソイド曲線の線形グラデーション（逆の変化曲線）
- */
-/**
- * クロソイド曲線の放射状グラデーション
- */
-/**
- * クロソイド曲線の放射状グラデーション（逆の変化曲線）
- */
-/**
- * サインカーブの線形グラデーション
- */
-/**
- * サインカーブの放射状グラデーション
- */
-/**
- * サインカーブの繰り返し線形グラデーション
- */
-/**
- * サインカーブの繰り返し放射状グラデーション
- */
 body {
   font-family: Noto Sans JP, -apple-system, blinkmacsystemfont, Segoe UI, Hiragino Kaku Gothic ProN, BIZ UDPGothic, meiryo, sans-serif;
   font-size: 1.0625rem;
