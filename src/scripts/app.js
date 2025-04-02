@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     NodeListという「集まり」を返り値として出し、
     変数dropdownToggles で使えるようにする */
     const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
+    console.log(dropdownToggles);
     
     /* 変数dropdownTogglesのボタンのリストを
     forEach関数で1つずつ取り出す
@@ -51,5 +52,45 @@ document.addEventListener('DOMContentLoaded', () => {
           target.setAttribute('aria-hidden', String(isOpen));
           });
     });
+
+    /* 言語選択(Launguage)のドロップダウンメニュー */
+    // ドロップダウンを開くためのボタン
+    const language_button = document.getElementById('language-selector-toggle-desktop');
+    // 実際に開いたり閉じたりするメニュー（<ul id="language-selector-desktop"）を取得
+    const language_menu = document.getElementById('language-selector-desktop');
+    //  ボタンorメニューがnull値以外を取得できなかったら、終了(null値チェック)
+    if (!language_button || !language_menu) return;
+
+    console.log(language_button);
+    console.log(language_menu);
+
+    // ドロップダウンを開いたり閉じたりするための関数
+    // 表示・非表示や `aria-属性` の切り替え
+    function toggleDropdown() {
+      // 今ドロップダウンが開いているかどうか("true" なら開いてる)
+      const isOpen = language_button.getAttribute('aria-expanded') === 'true';
+      language_button.setAttribute('aria-expanded', String(!isOpen));
+      language_menu.hidden = isOpen;
+      language_menu.setAttribute('aria-hidden', String(isOpen));
+    }
+
+    language_button.addEventListener('click', toggleDropdown);
+
+    document.addEventListener('click', (event) => {
+      if (
+        !language_button.contains(event.target) &&
+        !language_menu.contains(event.target) &&
+        language_button.getAttribute('aria-expanded') === 'true'
+      ) {
+        toggleDropdown();
+      }
+    });
+  
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && language_button.getAttribute('aria-expanded') === 'true') {
+        toggleDropdown();
+      }
+    });
+
   });
   

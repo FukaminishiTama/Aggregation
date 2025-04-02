@@ -28,6 +28,15 @@ header {
   z-index: 1;
 }
 
+.header__inner {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  width: 100%;
+}
+
 .header__content {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -39,15 +48,6 @@ header {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
-
-.header__inner {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 90rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  width: 100%;
 }
 
 .header-item {
@@ -67,6 +67,25 @@ header {
   padding: 0.5rem;
   text-align: center;
   text-wrap: nowrap;
+}
+
+.header-title {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  width: 100%;
+}
+
+.header__nav, .language-selector__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
 }
 
 /* 本来はボタンではない<div>要素や<a>要素に対して、ボタンとしての見た目を付与
@@ -97,6 +116,16 @@ header {
 
 .header-item__text--close:lang(ja), .header-item__text--open:lang(ja) {
   min-width: 7.125rem;
+}
+
+/* 初期状態：閉じているので「閉じる」テキストを非表示 */
+.language-selector__button[aria-expanded=false] .language-selector__text--close {
+  display: none;
+}
+
+/* 開いた状態：開いているので「開く」テキストを非表示 */
+.language-selector__button[aria-expanded=true] .language-selector__text--open {
+  display: none;
 }
 
 .header-dropdown {
@@ -137,6 +166,10 @@ header {
   padding: 3rem 1.5rem 4rem;
   scrollbar-gutter: stable;
   width: 100%;
+}
+
+.header__menu--desktop-only {
+  display: none;
 }
 
 .template__main {
@@ -499,6 +532,20 @@ button, select {
 !important; 重要度を持つプロパティを設定
             他のスタイルよりも優先される
 ------------------------------------------------- */
+@media (min-width: 64em) {
+  .header__nav {
+    -webkit-margin-end: -0.3125rem;
+            margin-inline-end: -0.3125rem;
+  }
+  .header__menu--desktop-only {
+    display: block;
+  }
+}
+@media (min-width: 80em) {
+  .header-menu {
+    gap: 0.875rem;
+  }
+}
 /*  */
 :root {
   --header-block-size: 4.5rem;
@@ -536,21 +583,10 @@ audio, canvas, embed, iframe, img, object, svg, video {
 }
 
 /* 複数の条件の要素を非表示 */
-.header-item__toggle[aria-expanded=false] .header-item__icon--close, .header-item__toggle[aria-expanded=false] .header-item__text--close, .header-item__toggle[aria-expanded=true] .header-item__icon--open, .header-item__toggle[aria-expanded=true] .header-item__text--open {
-  display: none;
-}
-
-/* hidden属性を非表示
-目的：
-  JavaScriptが利用できない環境でも、Drupalがメッセージを表示できるようにする
-Drupalについて：
-  JavaScriptによって動的に生成されたユーザーへの通知やエラーメッセージを表示する
-JavaScriptが有効な場合:
-  メッセージはJavaScriptによって動的に生成され、この \<div\> 要素は非表示のまま
-JavaScriptが無効な場合:
-  Drupalは、この \<div\> 要素内にメッセージを挿入し、hidden クラスを削除することで、メッセージを表示
-*/
-[hidden] {
+.header-item__toggle[aria-expanded=false] .header-item__icon--close,
+.header-item__toggle[aria-expanded=false] .header-item__text--close,
+.header-item__toggle[aria-expanded=true] .header-item__icon--open,
+.header-item__toggle[aria-expanded=true] .header-item__text--open {
   display: none;
 }
 
@@ -586,8 +622,12 @@ a {
 }
 
 /* ---------------------------------------------
-ユニバーサルデザイン
+アクセシビリティ対応
 ------------------------------------------------- */
+[hidden] {
+  display: none;
+}
+
 .u-visually-hidden {
   height: 1px;
   margin: -1px;

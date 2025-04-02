@@ -30,23 +30,10 @@ body {
 
 header {
   background-color: hsla(0, 0%, 100%, .88);
-  // background-color: #333;
-  // color: white;
-  // padding: 10px 0;
-  // text-align: center;
+  // 
   position: sticky;
   top: 0;
   z-index: 1;
-}
-
-// タイトルを左側、ドロップダウンメニューを右側に配置
-.header__content {
-  // 垂直方向の中央に配置
-  align-items: center;
-  display: flex;
-  height: var(--header-block-size);
-  // ヘッダーコンテンツ内のアイテムを左右両端に配置し、中央にスペースを空ける
-  justify-content: space-between;
 }
 
 .header__inner {
@@ -62,11 +49,21 @@ header {
   width: 100%;
 }
 
+// タイトルを左側、ドロップダウンメニューを右側に配置
+.header__content {
+  // 垂直方向の中央に配置
+  align-items: center;
+  display: flex;
+  height: var(--header-block-size);
+  // ヘッダーコンテンツ内のアイテムを左右両端に配置し、中央にスペースを空ける
+  justify-content: space-between;
+}
 
 .header-item {
   align-items: center;
   // 要素の角を可能な限り丸くして、要素を完全な円形または楕円形にする
   border-radius: calc(infinity* 1rem);
+  // テキスト、アイコンを横並び
   display: flex;
   font-size: .875rem;
   font-weight: 400;
@@ -77,6 +74,22 @@ header {
   padding: .5rem;
   text-align: center;
   text-wrap: nowrap;
+}
+
+.header-title {
+  margin-left: auto;
+  margin-right: auto;
+  // ヘッダーのタイトルのフォントサイズを1.125remに設定
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  width: 100%;
+}
+
+.header__nav, .language-selector__button {
+  display: flex;             
+  align-items: center;       
+  gap: .5rem;
 }
 
 /* 本来はボタンではない<div>要素や<a>要素に対して、ボタンとしての見た目を付与
@@ -107,6 +120,16 @@ header {
 .header-item__text--close:lang(ja), .header-item__text--open:lang(ja) {
   // 最小幅
   min-width: 7.125rem;
+}
+
+/* 初期状態：閉じているので「閉じる」テキストを非表示 */
+.language-selector__button[aria-expanded="false"] .language-selector__text--close {
+  display: none;
+}
+
+/* 開いた状態：開いているので「開く」テキストを非表示 */
+.language-selector__button[aria-expanded="true"] .language-selector__text--open {
+  display: none;
 }
 
 
@@ -145,7 +168,6 @@ header {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-
 .header-dropdown__container {
   // 水平方向、中央揃え
   margin-left: auto;
@@ -160,6 +182,11 @@ header {
   // スクロールバーの表示/非表示によってレイアウトが変動するのを防ぐ
   scrollbar-gutter: stable;
   width: 100%;
+}
+
+// 最初は非表示（スマホ用）
+.header__menu--desktop-only {
+  display: none;
 }
 
 // メイン
@@ -509,13 +536,28 @@ button, select {
 !important; 重要度を持つプロパティを設定
             他のスタイルよりも優先される
 ------------------------------------------------- */
+// 「画面が64em（約1024px）以上になったら
+@media (min-width: 64em) {
+  .header__nav {
+    // 右に少し詰める(マイナスマージン)
+      margin-inline-end: -.3125rem;
+  }
+  // 1024px（64em）以上なら表示（「すべてのメニュー」以外の項目も表示）
+  .header__menu--desktop-only {
+    display: block;
+  }
+}
+// 「画面が80em（約1280px）以上になったら
+@media (min-width: 80em) {
+  .header-menu {
+      gap: .875rem;
+  }
+}
 
 /*  */
   :root {
   --header-block-size: 4.5rem;
   }
-
-
 
 /* リストのマーカーに対してスタイルを適用 */
 ::marker {
@@ -564,21 +606,10 @@ audio, canvas, embed, iframe, img, object, svg, video {
 }
 
 /* 複数の条件の要素を非表示 */
-.header-item__toggle[aria-expanded=false] .header-item__icon--close, .header-item__toggle[aria-expanded=false] .header-item__text--close, .header-item__toggle[aria-expanded=true] .header-item__icon--open, .header-item__toggle[aria-expanded=true] .header-item__text--open {
-  display: none;
-}
-
-/* hidden属性を非表示
-目的：
-  JavaScriptが利用できない環境でも、Drupalがメッセージを表示できるようにする
-Drupalについて：
-  JavaScriptによって動的に生成されたユーザーへの通知やエラーメッセージを表示する
-JavaScriptが有効な場合:
-  メッセージはJavaScriptによって動的に生成され、この \<div\> 要素は非表示のまま
-JavaScriptが無効な場合:
-  Drupalは、この \<div\> 要素内にメッセージを挿入し、hidden クラスを削除することで、メッセージを表示
-*/
-[hidden] {
+.header-item__toggle[aria-expanded=false] .header-item__icon--close,
+.header-item__toggle[aria-expanded=false] .header-item__text--close,
+.header-item__toggle[aria-expanded=true] .header-item__icon--open,
+.header-item__toggle[aria-expanded=true] .header-item__text--open {
   display: none;
 }
 
@@ -615,8 +646,12 @@ a {
 }
 
 /* ---------------------------------------------
-ユニバーサルデザイン
+アクセシビリティ対応
 ------------------------------------------------- */
+[hidden] {
+  display: none;
+}
+
 
 // 視覚的に隠しつつ、スクリーンリーダーなどの支援技術には認識させる
 .u-visually-hidden {
