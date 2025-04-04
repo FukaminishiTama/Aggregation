@@ -1,96 +1,80 @@
-// JavaScriptがHTMLより先に動かないように「ページの内容が全部準備できたら、この中のコードを動かす」
+// ページの HTML がすべて読み込まれた後にJS処理を実行
 /* HTMLファイルを開くと、ブラウザの中でそれが「document」として扱われる
 addEventListener関数 「この場所で何かが起きたら何をするか」を登録
 'DOMContentLoaded' 「HTMLが全部読み込まれたとき」
-() => {（アロー関数）「関数の中身」の始まり */ 
+アロー関数【() => {】「関数の中身」の始まり */ 
 document.addEventListener('DOMContentLoaded', () => {
-    /* HTMLの中から、
-    data-dropdown-toggleという名前のボタンを
-    querySelectorAll関数で、全部見つけて、タグも、名前も、文字もすべて
-    NodeListという「集まり」を返り値として出し、
-    変数dropdownToggles で使えるようにする */
-    const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
-    console.log(dropdownToggles);
-    
-    /* 変数dropdownTogglesのボタンのリストを
-    forEach関数で1つずつ取り出す
-    変数button で使えるようにする */
-    dropdownToggles.forEach(button => {
-        /* 変数buttonから取り出した1つを
-        getAttribute関数で
-        data-dropdown-toggleという名前の属性の値を取り出し
-        変数targetIdで使えるようにする */
-        const targetId = button.getAttribute('data-dropdown-toggle');
-        /* idがtargetIdである要素を
-        getElementById関数で１つだけ、タグも、名前も、文字もすべて
-        変数targetで使えるようにする */
-        const target = document.getElementById(targetId);
-        /* target がければ処理を終了して、次のtarget */
-        if (!target) return;
-          /* buttonがクリックされたらという条件 */
-          button.addEventListener('click', () => {
-          /* trueならtrue、falseならfalseを
-          isOpenに代入 */
-          const isOpen = button.getAttribute('aria-expanded') === 'true';
-          /* isOpenはtrueだったのが、
-          以下の「!」によって逆のfalseになる
-          さらにStringで文字列のfalseにして、
-          buttonのaria-expanded属性をfalseに更新
-          開くか、閉じるか */
-          button.setAttribute('aria-expanded', String(!isOpen));
-          /* targetのhidden属性に格納して更新
-          hidden = true → 隠れる（非表示）
-          hidden = false → 表示される
-          hiddenはプロパティとして扱い、
-          JSが動いている間に使える情報のため以下の書き方 */
-          target.hidden = isOpen;
-          /* isOpenはfalseだったのが、
-          以下の「!」によって逆のtrueになる
-          さらにStringで文字列のtrueにして、
-          targetのaria-hidden属性をtrueに更新
-          スクリーンリーダになるか、ならないか */
-          target.setAttribute('aria-hidden', String(isOpen));
-          });
+  // ドロップダウン開閉関数(現在のボタンの状態を確認し、ドロップダウンの表示・非表示を切り替える)
+  function toggleDropdown(button, target) {
+    // trueなら開いている、falseなら閉じている
+    const isOpen = button.getAttribute('aria-expanded') === 'true';
+    // aria-expandedの切替(trueならfalseにして閉じる)
+    button.setAttribute('aria-expanded', String(!isOpen));
+    // hiddenに現在の状態を入力(trueならtrueにして非表示)
+    target.hidden = isOpen;
+    // aria-hiddenに現在の状態を入力(trueならfalseにして読み上げない)
+    target.setAttribute('aria-hidden', String(isOpen));
+  }
+
+  // data-dropdown-toggle 属性を持つ全てのボタンが対象(イベントリスナーを登録)
+  // Nodelist
+  const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
+  console.log(dropdownToggles);
+  
+  // dropdownTogglesのループ処理
+  dropdownToggles.forEach(button => {
+    const targetId = button.getAttribute('data-dropdown-toggle');
+    console.log(targetId);
+    const target = document.getElementById(targetId);
+    console.log(target);
+
+    // targetが存在しない場合(none)は処理を終了
+    if (!target) return;
+
+    // クリックしたとき
+    button.addEventListener('click', (event) => {
+      // ドロップダウン開閉関数を実行
+      toggleDropdown(button, target);
+      // クリックイベントの伝播を止めることで、外部クリック処理と競合しないようにする
+      // ボタン内のクリックがさらに上位のイベントリスナーに伝わらなくなる
+      event.stopPropagation();
     });
+  });
 
-    /* 言語選択(Launguage)のドロップダウンメニュー */
-    // ドロップダウンを開くためのボタン
-    const language_button = document.getElementById('language-selector-toggle-desktop');
-    // 実際に開いたり閉じたりするメニュー（<ul id="language-selector-desktop"）を取得
-    const language_menu = document.getElementById('language-selector-desktop');
-    //  ボタンorメニューがnull値以外を取得できなかったら、終了(null値チェック)
-    if (!language_button || !language_menu) return;
+  // 言語選択ドロップダウンの外部クリック／Escキーによる閉じる処理
+  const languageButton = document.getElementById('language-selector-toggle-desktop');
+  console.log(languageButton);
+  const languageMenu = document.getElementById('language-selector-desktop');
+  console.log(languageMenu);
 
-    console.log(language_button);
-    console.log(language_menu);
-
-    // ドロップダウンを開いたり閉じたりするための関数
-    // 表示・非表示や `aria-属性` の切り替え
-    function toggleDropdown() {
-      // 今ドロップダウンが開いているかどうか("true" なら開いてる)
-      const isOpen = language_button.getAttribute('aria-expanded') === 'true';
-      language_button.setAttribute('aria-expanded', String(!isOpen));
-      language_menu.hidden = isOpen;
-      language_menu.setAttribute('aria-hidden', String(isOpen));
-    }
-
-    language_button.addEventListener('click', toggleDropdown);
-
+  // 両方の要素が正しく取得できた場合のみ処理を実行(イベントリスナー登録)
+  if (languageButton && languageMenu) {
+    // クリックしたとき
     document.addEventListener('click', (event) => {
       if (
-        !language_button.contains(event.target) &&
-        !language_menu.contains(event.target) &&
-        language_button.getAttribute('aria-expanded') === 'true'
+        // クリックされた要素が、言語選択ボタン内に含まれていないAND
+        !languageButton.contains(event.target) &&
+        // クリックされた要素が、言語選択メニュー内に含まれていないAND
+        !languageMenu.contains(event.target) &&
+        // 現在言語選択ドロップダウンが開いている（aria-expanded が 'true'）
+        languageButton.getAttribute('aria-expanded') === 'true'
       ) {
-        toggleDropdown();
+        // ドロップダウン開閉関数を実行
+        toggleDropdown(languageButton, languageMenu);
       }
     });
-  
+    // Escキーで閉じる
+    // ドキュメント全体に対してキーダウンイベントリスナーを登録
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && language_button.getAttribute('aria-expanded') === 'true') {
-        toggleDropdown();
+      // 押されたキーが「Esc」AND、ドロップダウンが開いている
+      if (event.key === 'Escape' && languageButton.getAttribute('aria-expanded') === 'true') {
+        // ドロップダウン開閉関数を実行
+        toggleDropdown(languageButton, languageMenu);
       }
     });
+  }
+});
 
-  });
-  
+
+
+

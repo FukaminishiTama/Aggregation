@@ -21,6 +21,9 @@ body {
   min-height: 100vh;
 }
 
+/* -------------------------------------------------
+ヘッダー 
+----------------------------------------------------*/
 header {
   background-color: hsla(0, 0%, 100%, 0.88);
   position: sticky;
@@ -50,6 +53,143 @@ header {
           justify-content: space-between;
 }
 
+.header__nav, .header-menu, .language-selector__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+}
+
+.header-title {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  width: 100%;
+}
+
+.header__menu--desktop-only, .header-menu__item.header-menu__item--divider {
+  display: none;
+}
+
+/* -------------------------------------------------
+言語選択「日本語」「English」
+ 地球儀と「Language」と下矢印
+----------------------------------------------------*/
+.language-selector {
+  position: relative;
+}
+
+.language-selector__button {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: calc(infinity * 1rem);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.875rem;
+  font-weight: 400;
+  gap: 0.25rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  min-height: 2.75rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  --tw-text-opacity: 1;
+  color: rgb(51 51 51/var(--tw-text-opacity));
+}
+
+.language-selector__check-icon, .language-selector__language-icon svg {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+/* 閉じているテキスト、アイコンを非表示 */
+.language-selector__button[aria-expanded=false] .language-selector__text--close {
+  display: none;
+}
+
+/* 開いているので「閉じる関連」テキスト、アイコンを非表示 */
+.language-selector__button[aria-expanded=true] .language-selector__text--open {
+  display: none;
+}
+
+.language-selector__button:hover {
+  outline-color: #000;
+  outline-style: dashed;
+  outline-width: 1px;
+}
+
+.language-selector__list {
+  border-radius: 0.5rem;
+  border-width: 1px;
+  left: 0;
+  max-height: 18.875rem;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  overflow: auto;
+  position: absolute;
+  top: 100%;
+  width: auto;
+  --tw-border-opacity: 1;
+  border-color: rgb(148 148 148/var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  --tw-shadow: 0 2px 8px 1px #0000001a, 0 1px 5px 0 #0000004d;
+  --tw-shadow-colored: 0 2px 8px 1px var(--tw-shadow-color), 0 1px 5px 0 var(--tw-shadow-color);
+  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
+          box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
+}
+
+.language-selector__link[aria-current=true] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(217, 230, 255) !important;
+  font-weight: 700;
+  --tw-text-opacity: 1 !important;
+  color: rgb(0, 17, 143) !important;
+}
+
+.language-selector__link {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 0.5rem;
+     -moz-column-gap: 0.5rem;
+          column-gap: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  text-wrap: nowrap;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255, 255, 255) !important;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  padding: 0.75rem 1.5rem 0.75rem 0.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(51, 51, 51) !important;
+}
+
+.header-item__text--close:lang(ja), .header-item__text--open:lang(ja) {
+  min-width: 7.125rem;
+}
+
+/* -------------------------------------------------
+ヘッダードロップダウンメニュー
+----------------------------------------------------*/
 .header-item {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -69,31 +209,11 @@ header {
   text-wrap: nowrap;
 }
 
-.header-title {
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  width: 100%;
-}
-
-.header__nav, .language-selector__button {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 0.5rem;
-}
-
-/* 本来はボタンではない<div>要素や<a>要素に対して、ボタンとしての見た目を付与
-    ボタンの見た目を持つ要素には、role="button"属性を付与*/
-[role=button], button {
-  /* マウスカーソルをポインター（手の形）に変更し、
-  視覚的にボタンであることを示し、ユーザーにクリック可能であることを伝える*/
-  cursor: pointer;
+.header-item__toggle[aria-expanded=false] .header-item__icon--close,
+.header-item__toggle[aria-expanded=true] .header-item__icon--open,
+.header-item__toggle[aria-expanded=false] .header-item__text--close,
+.header-item__toggle[aria-expanded=true] .header-item__text--open {
+  display: none;
 }
 
 .header-item__icon {
@@ -107,25 +227,6 @@ header {
           align-items: center;
   -webkit-transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
           transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.icon {
-  fill: currentColor;
-  line-height: 1;
-}
-
-.header-item__text--close:lang(ja), .header-item__text--open:lang(ja) {
-  min-width: 7.125rem;
-}
-
-/* 初期状態：閉じているので「閉じる」テキストを非表示 */
-.language-selector__button[aria-expanded=false] .language-selector__text--close {
-  display: none;
-}
-
-/* 開いた状態：開いているので「開く」テキストを非表示 */
-.language-selector__button[aria-expanded=true] .language-selector__text--open {
-  display: none;
 }
 
 .header-dropdown {
@@ -158,8 +259,7 @@ header {
 .header-dropdown__container {
   margin-left: auto;
   margin-right: auto;
-  /* コンテナの最大の高さ
-      calc(): 値を計算 */
+  /* 高さ calc(): 値を計算 */
   max-height: calc(100dvh - var(--header-block-size));
   max-width: 74.375rem;
   overflow-y: auto;
@@ -168,10 +268,58 @@ header {
   width: 100%;
 }
 
-.header__menu--desktop-only {
+.header-dropdown-list__external-link, .header-dropdown-list__item {
+  margin-bottom: 0.5rem;
+}
+
+.header-dropdown-list__external-link, .header-dropdown-list__link {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 500;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  min-height: 3rem;
+  padding: 0.5rem 1.25rem;
+}
+
+.header-dropdown-list__link .icon--link {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 624.9375rem;
+  border-width: 1px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  height: 1.5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 1.5rem;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 17 143/var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(0 17 143/var(--tw-text-opacity));
+}
+
+.header-dropdown-list__item [data-content="|"], .header-dropdown-list__item--desktop-only {
   display: none;
 }
 
+/* -------------------------------------------------
+メイン
+----------------------------------------------------*/
 .template__main {
   margin: 3rem auto 9rem;
   max-width: 77.375rem;
@@ -201,6 +349,7 @@ header {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-bottom: 2rem;
+  z-index: auto;
 }
 
 .section__title {
@@ -265,6 +414,9 @@ header {
   border-bottom-color: rgb(0 0 0/var(--tw-border-opacity));
 }
 
+/* -------------------------------------------------
+スイッチ
+----------------------------------------------------*/
 .main-button {
   padding: 10px 15px;
   margin: 5px;
@@ -324,6 +476,9 @@ header {
           box-shadow: inset 0 0 0 2.5px rgba(66, 66, 66, 0.25);
 }
 
+/* -------------------------------------------------
+名前入力
+----------------------------------------------------*/
 .Form-text {
   border-top: 1px solid #ddd;
 }
@@ -425,6 +580,9 @@ header {
     font-size: 15px;
   }
 }
+/* -------------------------------------------------
+数字ボタン
+----------------------------------------------------*/
 button {
   padding: 10px 15px;
   margin: 5px;
@@ -436,7 +594,9 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  outline-color: #000;
+  outline-style: dashed;
+  outline-width: 1px;
 }
 
 .number-button {
@@ -463,6 +623,9 @@ button:hover {
   margin-top: 20px;
 }
 
+/* -------------------------------------------------
+画面前面にある要素
+----------------------------------------------------*/
 .template__pagetop {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -476,9 +639,8 @@ button:hover {
 }
 
 /* ---------------------------------------------
-デザインを独創的に統一する
-・ChromeとSafariなどブラウザによって表示の違いがある。
-・その違いをなくすためにTailwind CSSはリセットCSSを標準で組み込んでいる。
+リセットCSS
+
 参考
 *:      すべての<html>要素だけでなく、<body>、<div>、<p>など、ウェブページ内のすべての要素が対象
         すべての要素のボックスモデルをborder-boxに変更したり、マージンやパディングをリセットしたりする場合に使用
@@ -520,7 +682,52 @@ button, select {
 }
 
 /* ---------------------------------------------
-統一のためのデフォルト設定
+レスポンシブデザイン
+------------------------------------------------- */
+@media (min-width: 48em) {
+  .section__header {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    margin-bottom: 3rem;
+  }
+}
+@media (min-width: 64em) {
+  .header__nav {
+    -webkit-margin-end: -0.3125rem;
+            margin-inline-end: -0.3125rem;
+  }
+  .header__menu--desktop-only {
+    display: block;
+  }
+  .header-dropdown__container {
+    padding-bottom: 3.5rem;
+    padding-top: 2rem;
+  }
+  .header-dropdown-list {
+    -webkit-column-gap: 1.625rem;
+       -moz-column-gap: 1.625rem;
+            column-gap: 1.625rem;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+  }
+  .header-dropdown__menu--divider {
+    border-left-width: 1px;
+    margin-left: 3.5rem;
+    padding-left: 3.5rem;
+  }
+}
+@media (min-width: 80em) {
+  .header-menu {
+    gap: 0.875rem;
+  }
+  .header-menu__item.header-menu__item--divider {
+    display: block;
+  }
+}
+/* ---------------------------------------------
+デザインの統一性
 ・デフォルトの変数を設定
 ・親要素のスタイルと統一
 参考
@@ -532,20 +739,12 @@ button, select {
 !important; 重要度を持つプロパティを設定
             他のスタイルよりも優先される
 ------------------------------------------------- */
-@media (min-width: 64em) {
-  .header__nav {
-    -webkit-margin-end: -0.3125rem;
-            margin-inline-end: -0.3125rem;
-  }
-  .header__menu--desktop-only {
-    display: block;
-  }
+/* HTMLの<button>要素はもちろん、role="button"が付与された要素に適用 */
+[role=button], button {
+  /* ポインター（手の形）*/
+  cursor: pointer;
 }
-@media (min-width: 80em) {
-  .header-menu {
-    gap: 0.875rem;
-  }
-}
+
 /*  */
 :root {
   --header-block-size: 4.5rem;
@@ -560,6 +759,11 @@ button, select {
   text-align: start !important;
   -moz-text-align-last: auto !important;
        text-align-last: auto !important;
+}
+
+.icon {
+  fill: currentColor;
+  line-height: 1;
 }
 
 /* フォーム要素のスタイルを親要素のスタイルと統一 */
@@ -580,14 +784,6 @@ button, input, optgroup, select, textarea {
 /* フォーム要素のスタイルを親要素のスタイルと統一 */
 audio, canvas, embed, iframe, img, object, svg, video {
   display: block;
-}
-
-/* 複数の条件の要素を非表示 */
-.header-item__toggle[aria-expanded=false] .header-item__icon--close,
-.header-item__toggle[aria-expanded=false] .header-item__text--close,
-.header-item__toggle[aria-expanded=true] .header-item__icon--open,
-.header-item__toggle[aria-expanded=true] .header-item__text--open {
-  display: none;
 }
 
 menu, ol, ul {

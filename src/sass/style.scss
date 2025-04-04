@@ -28,11 +28,18 @@ body {
   min-height: 100vh;
 }
 
+/* -------------------------------------------------
+ヘッダー 
+----------------------------------------------------*/
+
 header {
+  // 白色（100%明度）で透明度88%
   background-color: hsla(0, 0%, 100%, .88);
-  // 
+  // ヘッダーを スクロールに応じて固定
   position: sticky;
+  // 上端（top）を基準に 0pxの位置
   top: 0;
+  // ヘッダーの重なり順を最前面に指定
   z-index: 1;
 }
 
@@ -59,6 +66,133 @@ header {
   justify-content: space-between;
 }
 
+// 中央揃え
+// ヘッダーの項目、「ホーム」と区切り線、地球儀と「Language」と下矢印
+.header__nav, .header-menu, .language-selector__button {
+  display: flex;             
+  align-items: center;       
+  gap: .5rem;
+}
+
+// ヘッダーのタイトルのフォント、配置設定
+.header-title {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  width: 100%;
+}
+
+// 最初は非表示（画面サイズによって変更）
+.header__menu--desktop-only, .header-menu__item.header-menu__item--divider {
+  display: none;
+}
+
+/* -------------------------------------------------
+言語選択「日本語」「English」
+ 地球儀と「Language」と下矢印
+----------------------------------------------------*/
+.language-selector {
+  position: relative;
+}
+
+.language-selector__button {
+  align-items: center;
+  border-radius: calc(infinity* 1rem);
+  display: flex;
+  font-size: .875rem;
+  font-weight: 400;
+  gap: .25rem;
+  letter-spacing: .02em;
+  line-height: 1;
+  min-height: 2.75rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  width: fit-content;
+  --tw-text-opacity: 1;
+  color: rgb(51 51 51 / var(--tw-text-opacity));
+}
+
+.language-selector__check-icon, .language-selector__language-icon svg {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+/* 閉じているテキスト、アイコンを非表示 */
+.language-selector__button[aria-expanded="false"] .language-selector__text--close {
+  display: none;
+}
+
+/* 開いているので「閉じる関連」テキスト、アイコンを非表示 */
+.language-selector__button[aria-expanded="true"] .language-selector__text--open {
+  display: none;
+}
+
+.language-selector__button:hover {
+  outline-color: #000;
+  outline-style: dashed;
+  outline-width: 1px;
+}
+
+// Languageをクリックしたときに表示される「日本語」「English」のボックス表示
+.language-selector__list {
+  border-radius: .5rem;
+  border-width: 1px;
+  left: 0;
+  max-height: 18.875rem;
+  min-width: fit-content;
+  overflow: auto;
+  position: absolute;
+  top: 100%;
+  width: auto;
+  --tw-border-opacity: 1;
+  border-color: rgb(148 148 148 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-bottom: .5rem;
+  padding-top: .5rem;
+  --tw-shadow: 0 2px 8px 1px #0000001a, 0 1px 5px 0 #0000004d;
+  --tw-shadow-colored: 0 2px 8px 1px var(--tw-shadow-color), 0 1px 5px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.language-selector__link[aria-current=true] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(217 230 255/ 1) !important;
+  font-weight: 700;
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 17 143/ 1) !important;
+}
+
+.language-selector__link {
+  align-items: center;
+  column-gap: .5rem;
+  display: flex;
+  position: relative;
+  text-wrap: nowrap;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255/ 1)!important;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .02em;
+  line-height: 1;
+  padding: .75rem 1.5rem .75rem .75rem;
+  --tw-text-opacity: 1;
+  color: rgb(51 51 51/ 1)!important;
+}
+
+// 閉じる状態のテキスト要素のうち、言語が日本語である場合
+.header-item__text--close:lang(ja), .header-item__text--open:lang(ja) {
+  // 最小幅
+  min-width: 7.125rem;
+}
+
+/* -------------------------------------------------
+ヘッダードロップダウンメニュー
+----------------------------------------------------*/
+
+// 「ホーム」と区切り線、ハンバーガーアイコンと「すべてのメニュー」
 .header-item {
   align-items: center;
   // 要素の角を可能な限り丸くして、要素を完全な円形または楕円形にする
@@ -76,30 +210,15 @@ header {
   text-wrap: nowrap;
 }
 
-.header-title {
-  margin-left: auto;
-  margin-right: auto;
-  // ヘッダーのタイトルのフォントサイズを1.125remに設定
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: .02em;
-  width: 100%;
+//  ドロップダウンメニュー「ハンバーガーアイコンとすべてのメニュー」←→「×メニューを閉じる」表示切り替え
+.header-item__toggle[aria-expanded=false] .header-item__icon--close,
+.header-item__toggle[aria-expanded=true] .header-item__icon--open,
+.header-item__toggle[aria-expanded=false] .header-item__text--close,
+.header-item__toggle[aria-expanded=true] .header-item__text--open {
+  display: none;
 }
 
-.header__nav, .language-selector__button {
-  display: flex;             
-  align-items: center;       
-  gap: .5rem;
-}
-
-/* 本来はボタンではない<div>要素や<a>要素に対して、ボタンとしての見た目を付与
-    ボタンの見た目を持つ要素には、role="button"属性を付与*/
-[role=button], button {
-  /* マウスカーソルをポインター（手の形）に変更し、
-  視覚的にボタンであることを示し、ユーザーにクリック可能であることを伝える*/
-  cursor: pointer;
-}
-
+// ハンバーガーアイコンと閉じる（×）アイコン
 .header-item__icon {
   display: flex;
   height: 1rem;
@@ -110,28 +229,6 @@ header {
   // アイコンの変換（移動、回転、歪み、拡大縮小）を定義
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
-.icon {
-  fill: currentColor;
-  line-height: 1;
-}
-
-// 閉じる状態のテキスト要素のうち、言語が日本語である場合
-.header-item__text--close:lang(ja), .header-item__text--open:lang(ja) {
-  // 最小幅
-  min-width: 7.125rem;
-}
-
-/* 初期状態：閉じているので「閉じる」テキストを非表示 */
-.language-selector__button[aria-expanded="false"] .language-selector__text--close {
-  display: none;
-}
-
-/* 開いた状態：開いているので「開く」テキストを非表示 */
-.language-selector__button[aria-expanded="true"] .language-selector__text--open {
-  display: none;
-}
-
 
 .header-dropdown {
   // ドロップダウンメニューの上部のボーダーの太さを1pxに設定
@@ -147,7 +244,7 @@ header {
   right: 0;
   // ドロップダウンメニューの上端を、その親要素の上端から 4.5rem 下に配置
   top: 4.5rem;
-  // 値が大きい要素ほど、前面に表示
+  // 前面に表示
   z-index: 1;
   // ボーダーの透明度を 1（不透明）
   --tw-border-opacity: 1;
@@ -168,12 +265,12 @@ header {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+// ドロップダウンのコンテナ
 .header-dropdown__container {
   // 水平方向、中央揃え
   margin-left: auto;
   margin-right: auto;
-  /* コンテナの最大の高さ
-      calc(): 値を計算 */
+  /* 高さ calc(): 値を計算 */
   max-height: calc(100dvh - var(--header-block-size));
   max-width: 74.375rem;
   // コンテナの内容がコンテナの高さからはみ出す場合に、垂直方向のスクロールバーを表示
@@ -184,12 +281,49 @@ header {
   width: 100%;
 }
 
-// 最初は非表示（スマホ用）
-.header__menu--desktop-only {
+// ドロップダウンコンテナ内の各項目
+.header-dropdown-list__external-link, .header-dropdown-list__item {
+  margin-bottom: .5rem;
+}
+.header-dropdown-list__external-link, .header-dropdown-list__link {
+  align-items: center;
+  border-radius: 1rem;
+  display: flex;
+  font-weight: 500;
+  justify-content: space-between;
+  min-height: 3rem;
+  padding: .5rem 1.25rem;
+}
+
+
+
+// ドロップダウンコンテナ内の矢印アイコン
+.header-dropdown-list__link .icon--link {
+  align-items: center;
+  border-radius: 624.9375rem;
+  border-width: 1px;
+  display: inline-flex;
+  flex: none;
+  height: 1.5rem;
+  justify-content: center;
+  width: 1.5rem;
+  --tw-border-opacity: 1;
+  // 青の囲い円
+  border-color: rgb(0 17 143 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(0 17 143 / var(--tw-text-opacity));
+}
+
+// ドロップダウンコンテナ内の区切り「|」
+.header-dropdown-list__item [data-content="|"], .header-dropdown-list__item--desktop-only {
   display: none;
 }
 
-// メイン
+/* -------------------------------------------------
+メイン
+----------------------------------------------------*/
 .template__main {
   margin: 3rem auto 9rem;
   max-width: 77.375rem;
@@ -215,6 +349,8 @@ header {
   gap: .75rem;
   justify-content: space-between;
   margin-bottom: 2rem;
+  // headerのz-index:1が適用されるように、main.sectionにも指定
+  z-index: auto;
 }
 
 // メインの各項目のタイトルフォント
@@ -289,8 +425,9 @@ header {
   border-bottom-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-
-
+/* -------------------------------------------------
+スイッチ
+----------------------------------------------------*/
 .main-button {
   padding: 10px 15px;
   margin: 5px;
@@ -350,6 +487,9 @@ header {
     box-shadow: inset 0 0 0 2.5px rgba(66, 66, 66, 0.25); 
 }
 
+/* -------------------------------------------------
+名前入力
+----------------------------------------------------*/
 .Form-text {
   border-top: 1px solid #ddd;
   p {
@@ -358,6 +498,7 @@ header {
   padding-bottom: 0px;
   }
 }
+
 .Form-name {
   // 名前入力
   padding-top: 0px;
@@ -437,6 +578,10 @@ header {
   }
 }
 
+/* -------------------------------------------------
+数字ボタン
+----------------------------------------------------*/
+
 button {
   padding: 10px 15px;
   margin: 5px;
@@ -448,23 +593,39 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  outline-color: #000;
+  outline-style: dashed;
+  outline-width: 1px;
 }
 
-.number-button { padding: 10px 15px; margin: 5px; border: none; border-radius: 4px; background-color: #007BFF; color: white; cursor: pointer; }
+.number-button {
+   padding: 10px 15px; 
+   margin: 5px; 
+   border: none; 
+   border-radius: 4px; 
+   background-color: #007BFF; 
+   color: white; cursor: pointer; }
 
 .number-buttons h2 {
   padding: 20px -10px 0px;
   margin: 20px -10px 0px;
 }
 
-.number-button.selected { background-color: #0056b3; }
+.number-button.selected { 
+  background-color: #0056b3; }
 
+// 送信ボタン
 .submit-button {
   text-align: center;
   margin-top: 20px;
 }
 
+
+/* -------------------------------------------------
+画面前面にある要素
+----------------------------------------------------*/
+
+// 画面右下に常にあるトップに戻れるボタン
 .template__pagetop {
   display: flex;
   // ページトップボタンを右側に配置
@@ -475,9 +636,8 @@ button:hover {
 }
 
 /* ---------------------------------------------
-デザインを独創的に統一する
-・ChromeとSafariなどブラウザによって表示の違いがある。
-・その違いをなくすためにTailwind CSSはリセットCSSを標準で組み込んでいる。
+リセットCSS
+
 参考
 *:      すべての<html>要素だけでなく、<body>、<div>、<p>など、ウェブページ内のすべての要素が対象
         すべての要素のボックスモデルをborder-boxに変更したり、マージンやパディングをリセットしたりする場合に使用
@@ -522,9 +682,64 @@ button, select {
   text-transform: none;
 }
 
+/* ---------------------------------------------
+レスポンシブデザイン
+------------------------------------------------- */
+
+// 「画面が48em（約768px）以上になったら
+@media (min-width: 48em) {
+  .section__header {
+    // 子要素を左揃え
+      justify-content: flex-start;
+      margin-bottom: 3rem;
+  }
+}
+
+// 「画面が64em（約1024px）以上になったら
+@media (min-width: 64em) {
+  .header__nav {
+    // 右に少し詰める(マイナスマージン)
+      margin-inline-end: -.3125rem;
+  }
+  // 1024px（64em）以上なら表示（「すべてのメニュー」以外の項目も表示）
+  .header__menu--desktop-only {
+    display: block;
+  }
+
+  .header-dropdown__container {
+    padding-bottom: 3.5rem;
+    padding-top: 2rem;
+}
+// ドロップダウンコンテナの各項目
+.header-dropdown-list {
+  column-gap: 1.625rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+// ドロップダウンコンテナの右側に作るサブメニュー項目
+.header-dropdown__menu--divider {
+  border-left-width: 1px;
+  margin-left: 3.5rem;
+  padding-left: 3.5rem;
+}
+}
+
+// 「画面が80em（約1280px）以上になったら
+@media (min-width: 80em) {
+  // 子要素の間に 0.875rem の隙間
+  .header-menu {
+      gap: .875rem;
+  }
+  // 1280px（80em）以上なら表示
+  .header-menu__item.header-menu__item--divider {
+    display: block;
+  }
+}
+
 
 /* ---------------------------------------------
-統一のためのデフォルト設定
+デザインの統一性
 ・デフォルトの変数を設定
 ・親要素のスタイルと統一
 参考
@@ -536,22 +751,10 @@ button, select {
 !important; 重要度を持つプロパティを設定
             他のスタイルよりも優先される
 ------------------------------------------------- */
-// 「画面が64em（約1024px）以上になったら
-@media (min-width: 64em) {
-  .header__nav {
-    // 右に少し詰める(マイナスマージン)
-      margin-inline-end: -.3125rem;
-  }
-  // 1024px（64em）以上なら表示（「すべてのメニュー」以外の項目も表示）
-  .header__menu--desktop-only {
-    display: block;
-  }
-}
-// 「画面が80em（約1280px）以上になったら
-@media (min-width: 80em) {
-  .header-menu {
-      gap: .875rem;
-  }
+/* HTMLの<button>要素はもちろん、role="button"が付与された要素に適用 */
+[role=button], button {
+  /* ポインター（手の形）*/
+  cursor: pointer;
 }
 
 /*  */
@@ -572,6 +775,14 @@ button, select {
   text-align: start !important;
   // テキストの最後の行が、text-align プロパティと同じ配置方法を使用
   text-align-last: auto !important;
+}
+
+// アイコン（SVG）
+.icon {
+  // 親要素の color で指定された色を使う
+  fill: currentColor;
+  // 最小限の行の高さを指定し、アイコンの上下余白をなくす
+  line-height: 1;
 }
 
 /* フォーム要素のスタイルを親要素のスタイルと統一 */
@@ -603,14 +814,6 @@ audio, canvas, embed, iframe, img, object, svg, video {
   // 要素が横までいっぱいに広がり、縦に並んでいく
   display: block;
   // vertical-align: middle;
-}
-
-/* 複数の条件の要素を非表示 */
-.header-item__toggle[aria-expanded=false] .header-item__icon--close,
-.header-item__toggle[aria-expanded=false] .header-item__text--close,
-.header-item__toggle[aria-expanded=true] .header-item__icon--open,
-.header-item__toggle[aria-expanded=true] .header-item__text--open {
-  display: none;
 }
 
 menu, ol, ul {
@@ -651,7 +854,6 @@ a {
 [hidden] {
   display: none;
 }
-
 
 // 視覚的に隠しつつ、スクリーンリーダーなどの支援技術には認識させる
 .u-visually-hidden {

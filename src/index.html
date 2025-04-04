@@ -133,10 +133,9 @@
                                         ホーム</span>
                                 </a>
                             </li>
-                            <!-- ナビゲーションメニュー内の区切り線を格納 
-                             aria-hidden="true" : 読み上げ無視 -->
+                            <!-- 区切り線 -->
                             <li aria-hidden="true" class="header-menu__item header-menu__item--divider">
-                                <!-- 区切り線の視覚的な要素を格納 -->
+                                <!-- 区切り線の要素 -->
                                 <span class="header__nav-divider">
                                     <!-- 区切り線のSVG(｜) -->
                                     <svg width="2" height="16" viewBox="0 0 2 16" fill="none"
@@ -145,6 +144,7 @@
                                     </svg>
                                 </span>
                             </li>
+                        </ul>
                     </div>
                     <!-- 言語選択(Launguage)のドロップダウンメニュー -->
                     <div class="header__menu--desktop-only">
@@ -157,8 +157,7 @@
                         <div class="js-dropdown language-selector" data-dropdown-id="language-selector-desktop"
                             data-dropdown-close-on-outside data-dropdown-close-on-escape data-dropdown-trap-focus
                             data-dropdown-reset-focus="language-selector-toggle-desktop">
-                            <!-- ドロップダウンメニューのトグルボタンを定義するbutton要素 
-                             aria-expandedは表示されているかどうかの属性、ドロップダウンメニューは最初は閉じているため"false"-->
+                            <!-- ドロップダウンメニューのトグル-->
                             <button id="language-selector-toggle-desktop" class="language-selector__button"
                                 type="button" data-dropdown-toggle="language-selector-desktop" aria-expanded="false"
                                 aria-controls="language-selector-desktop">
@@ -211,6 +210,7 @@
                                     <a lang="ja" href="/" class="language-selector__link is-active" aria-current="true">
                                         <span class="language-selector__check-icon">
                                             <span aria-hidden="true" class="icon icon--px" role="img">
+                                                <!-- 青い色の✔チェックマーク -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20"
                                                     viewBox="0 0 21 20" fill="none">
                                                     <mask id="mask0_329_310" style="mask-type:alpha"
@@ -219,7 +219,6 @@
                                                             fill="#D9D9D9"></rect>
                                                     </mask>
                                                     <g mask="url(#mask0_329_310)">
-                                                        <!-- 青い色の✔チェックマーク -->
                                                         <path
                                                             d="M8.57441 14.4169L4.12891 9.9714L5.01993 9.0804L8.57441 12.6349L16.2122 4.99707L17.1032 5.88807L8.57441 14.4169Z"
                                                             fill="#00118F"></path>
@@ -227,37 +226,18 @@
                                                 </svg>
                                             </span>
                                         </span>
-                                        日本語
-                                    </a>
+                                    日本語</a>
                                 </li>
                                 <li class="language-selector__item">
                                     <!-- 英語選択リンクを定義するアンカー要素（<a>タグ） -->
                                     <a lang="en" href="/en" class="language-selector__link ">
                                         <span class="language-selector__check-icon"></span>
-                                        English
-                                    </a>
+                                    English</a>
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="header__menu--desktop-only">
-                        <!-- 検索ページへのリンクを定義するアンカー要素（<a>タグ） -->
-                        <a class="header-item  header-item__search" href="/search">
-                            <span class="header-item__icon">
-                                <span aria-hidden="true" class="icon icon--16px" role="img">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                                        <path
-                                            d="m16 15.18-5.053-4.924c1.01-1.066 1.6-2.543 1.6-4.102C12.632 2.79 9.768 0 6.316 0 2.863 0 0 2.79 0 6.154s2.779 6.154 6.316 6.154c1.431 0 2.695-.493 3.79-1.231L15.157 16l.842-.82ZM1.263 6.154c0-2.708 2.274-4.923 5.053-4.923s5.052 2.215 5.052 4.923-2.273 4.923-5.052 4.923c-2.78 0-5.053-2.215-5.053-4.923Z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </span>
-                            <!-- 検索リンクのテキストを格納するspan要素 -->
-                            <span class="header-item__text" data-text="検索">
-                                検索
-                            </span>
-                        </a>
-                    </div>
+                    </div>                
+
                     <!-- JavaScriptで制御されるドロップダウンメニューを格納するdiv要素 -->
                     <div class="js-dropdown" data-dropdown-id="header-dropdown" data-dropdown-close-on-outside=""
                         data-dropdown-close-on-escape="" data-dropdown-disable-scroll="" data-dropdown-trap-focus=""
@@ -267,83 +247,48 @@
                         <button id="header-dropdown-toggle" class="header-item header-item__toggle" type="button"
                             data-dropdown-toggle="header-dropdown" aria-expanded="false"
                             aria-controls="header-dropdown">
-                            <!-- ドロップダウンメニューが開く前のハンバーガーアイコンを格納 -->
+                            <!-- ドロップダウンメニューのハンバーガーアイコン -->
                             <span class="header-item__icon header-item__icon--open">
                                 <span aria-hidden="true" class="icon icon--24px" role="img">
-                                    <svgxmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                         <path d="M3 6v1h18V6Zm0 5v1h18v-1Zm0 5v1h18v-1Z"></path>
                                         </svg>
                                 </span>
                             </span>
-                            <!-- ドロップダウンメニューが開いた後の閉じる（×）アイコンを格納 -->
+                            <!-- ドロップダウンメニューが開いた後の閉じる（×）アイコン -->
                             <span class="header-item__icon header-item__icon--close">
-                                <span aria-hidden="true" class="icon icon--24px" role="img"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <span aria-hidden="true" class="icon icon--24px" role="img">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                         <path
                                             d="m18.029 5.07-5.87 5.87-5.797-5.8-1.06 1.06 5.797 5.8-5.798 5.798 1.06 1.06 5.799-5.797 5.869 5.869 1.06-1.061L13.22 12l5.87-5.869-1.061-1.06Z">
                                         </path>
                                     </svg>
                                 </span>
                             </span>
-                            <!-- ドロップダウンメニューが開く前のハンバーガーアイコンのテキストを格納 -->
+                            <!-- ドロップダウンメニューが開く前のテキスト「すべてのメニュー」 -->
                             <span class="header-item__text header-item__text--open" data-text="すべてのメニュー">
                                 すべてのメニュー</span>
-                            <!-- ドロップダウンメニューが開いた後の閉じる（×）アイコンのテキストを格納 -->
+                            <!-- ドロップダウンメニューが開いた後のテキスト「メニューを閉じる」 -->
                             <span class="header-item__text header-item__text--close" data-text="メニューを閉じる">
                                 メニューを閉じる</span>
                         </button>
-                        <!-- ドロップダウンメニューのコンテンツ全体を格納
-                         hiddenで非表示、JSでクリック表示されるようにするため -->
+
+                        <!------------------------- 
+                        ドロップダウンメニューコンテナ
+                        ---------------------------->
                         <div id="header-dropdown" class="header-dropdown" hidden="" aria-hidden="true">
                             <!-- ドロップダウンコンテンツのコンテナを格納 -->
                             <div class="header-dropdown__container">
-                                <!-- ドロップダウンコンテンツの内容を格納 -->
                                 <div class="header-dropdown__content">
-                                    <!-- モバイル環境でのみ表示されるメニューを格納 -->
-                                    <div class="header-dropdown__menu header-dropdown__menu--mobile-only">
-                                        <!-- ドロップダウンメニューのリストを格納する順不同リスト -->
-                                        <ul class="header-dropdown-list ">
-                                            <!-- リスト内の各メニュー項目を格納するリスト項目 -->
-                                            <li class="header-dropdown-list__item ">
-                                                <!-- 検索ページへのリンクを定義するアンカー要素 -->
-                                                <a class="header-dropdown-list__link" href="/search" data-content="検索">
-                                                    <!-- アイコン付きのリンクテキストを格納 -->
-                                                    <span class="header-dropdown-list__link-text-with-icon">
-                                                        <!-- 検索アイコンを表示 -->
-                                                        <span aria-hidden="true" class="icon icon--20px" role="img">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                height="16" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m16 15.18-5.053-4.924c1.01-1.066 1.6-2.543 1.6-4.102C12.632 2.79 9.768 0 6.316 0 2.863 0 0 2.79 0 6.154s2.779 6.154 6.316 6.154c1.431 0 2.695-.493 3.79-1.231L15.157 16l.842-.82ZM1.263 6.154c0-2.708 2.274-4.923 5.053-4.923s5.052 2.215 5.052 4.923-2.273 4.923-5.052 4.923c-2.78 0-5.053-2.215-5.053-4.923Z">
-                                                                </path>
-                                                            </svg>
-                                                        </span>
-                                                        検索</span>
-                                                    <!-- リンクアイコンを表示 -->
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img">
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- mobile用 -->
                                     <div class="header-dropdown__menu header-dropdown__menu--mobile-only">
                                         <ul class="header-dropdown-list ">
-                                            <li
-                                                class="header-dropdown-list__item header-dropdown-list__item--desktop-only">
+                                            <li class="header-dropdown-list__item header-dropdown-list__item--desktop-only">
                                                 <a class="header-dropdown-list__link" href="/" data-content="ホーム">
                                                     <span class="header-dropdown-list__link-text">
                                                         ホーム</span>
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
+                                                    <!-- 右矢印アイコン -->
+                                                    <span aria-hidden="true" class="icon icon--12px icon--link" role="img">
+                                                        <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
                                                             </path>
@@ -366,9 +311,11 @@
                                                     </span>
                                                 </a>
                                             </li>
+                                            <!-- ドロップダウンメニューコンテナ内の区切り線 -->
                                             <li class="header-dropdown-list__item ">
                                                 <a class="header-dropdown-list__link" href="" data-content="|">
                                                     <span class="header-dropdown-list__link-text">|</span>
+                                                    
                                                     <span aria-hidden="true" class="icon icon--12px icon--link"
                                                         role="img"><svg width="12" height="12" viewBox="0 0 12 12"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -381,14 +328,17 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <!-- モバイル環境で表示されるハンバーガーメニュー（全メニュー）のドロップダウンコンテンツ内で、カラム形式でメニュー項目を表示するためのコンテナを定義 -->
+                                    <!-- 縮小画面で表示されるドロップダウンコンテンツ内で、
+                                     カラム形式でメニュー項目を表示するためのコンテナを定義 -->
                                     <div class="header-dropdown__menu header-dropdown__menu--columns">
                                         <ul class="header-dropdown-list ">
                                             <li class="header-dropdown-list__item ">
                                                 <a class="header-dropdown-list__link" href="/news" data-content="新着・更新">
                                                     <span class="header-dropdown-list__link-text">新着・更新</span>
+                                                    <!-- →アイコン -->
                                                     <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
+                                                        role="img">
+                                                        <svg width="12" height="12" viewBox="0 0 12 12"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
@@ -441,6 +391,7 @@
                                                 aria-controls="language-selector-mobile">
                                                 <span class="language-selector__language-icon">
                                                     <span aria-hidden="true" class="icon icon--px" role="img">
+                                                        <!-- 地球儀のアイコン -->
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             viewBox="0 0 24 24" fill="none">
                                                             <mask id="mask0_9_1880" style="mask-type:alpha"
@@ -456,17 +407,17 @@
                                                         </svg>
                                                     </span>
                                                 </span>
-                                                <!-- モバイル環境で表示されるハンバーガーメニュー（全メニュー）のドロップダウンコンテンツ内の言語選択ドロップダウンボタン内のテキスト -->
+                                                <!-- ドロップダウンが開いている状態のときに表示 -->
                                                 <span class="language-selector__text language-selector__text--open">
                                                     Language</span>
+                                                <!-- ドロップダウンが閉じている状態で表示 -->
                                                 <span class="language-selector__text language-selector__text--close"
                                                     aria-hidden="true">
                                                     Language</span>
-                                                <span
-                                                    class="language-selector__text language-selector__text--close u-visually-hidden">
+                                                <!-- 視覚的には非表示だが、スクリーンリーダーにだけ読ませる -->
+                                                <span class="language-selector__text language-selector__text--close u-visually-hidden">
                                                     Close</span>
-                                                <!-- 矢印アイコンを格納 -->
-                                                <!-- 単純な下向き矢印のグラフィックを定義「V」こういうやつ -->
+                                                <!-- 下向き矢印「V」アイコンを格納 -->
                                                 <span class="language-selector__arrow-icon">
                                                     <span aria-hidden="true" class="icon icon--px" role="img">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -526,8 +477,9 @@
                                                     data-content="サイトポリシー">
                                                     <span class="header-dropdown-list__link-text">
                                                         サイトポリシー</span>
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
+                                                    <span aria-hidden="true" class="icon icon--12px icon--link" role="img">
+
+                                                        <svg width="12" height="12" viewBox="0 0 12 12"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
@@ -597,37 +549,27 @@
 
     <!-- main -->
     <main class="template_main template-default_main" id="mainContainer">
-        <!-- Drupalメッセージのフォールバック用コンテナ  -->
+        <!-- Drupal用の通知表示領域（メッセージ用のバックアップ）  -->
         <div data-drupal-messages-fallback class="hidden"></div>
         <section class="section">
             <header class="section__header">
-                <h2 class="section__title">READE ME</h2>
+                <h2 class="section__title">概要</h2>
             </header>
         </section>
         <ul class="attention">
-            <!-- 重要なお知らせ（直訳で注意書き） -->
+            <!-- サイトの簡単な説明 -->
             <li class="attention-item">
-                <a class="attention-item__link" href="/policies/mynumber/insurance-card">
-                    <span class="attention-item__text--isInformation">
-                        概要</span>
-                </a>
+                <span class="attention-item__text--isInformation">
+                    JS練習用に作成した集計ツールです</span>
             </li>
             <li class="attention-item">
-                <a class="attention-item__link" href="/policies/mynumber/insurance-card">
-                    <span class="attention-item__text--isInformation">
-                        ディレクトリ構成</span>
-                </a>
-            </li>
-            <li class="attention-item">
-                <a class="attention-item__link" href="/policies/mynumber/insurance-card">
-                    <span class="attention-item__text--isInformation">
-                        主な開発フレームワーク</span>
-                </a>
-            </li>
+                <span class="attention-item__text--isInformation">
+                    制約・ルールのもと、集計ができます</span>
+           </li>
         </ul>
         <section class="section">
             <header class="section__header">
-                <h2 class="section__title">メイン</h2>
+                <h2 class="section__title">制約・ルール</h2>
             </header>
         </section>
         <!-- タイムライン（timeline）形式でニュース記事を表示 -->
@@ -1166,7 +1108,17 @@
             </div>
         </div>
     </footer>
-
+    <!-- 画面右下に常にあるトップに戻れるボタン -->
+    <div class="template__pagetop">
+        <button type="button" class="pagetop" aria-label="ページ上部に戻る">
+        <!-- 上矢印のアイコン -->
+        <span aria-hidden="true" class="icon icon--16px" role="img"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16">
+        <path d="M6.75 15.5L6.75 3.37303L1.05383 9.06918L0 7.99998L7.49997 0.5L15 7.99998L13.9461 9.06918L8.24995 3.37303L8.24995 15.5H6.75Z" fill="currentColor"></path>
+      </svg>
+      </span>
+      </button>
+      
+      </div>
 
     <script src="scripts/app.js"></script>
 </body>
