@@ -210,6 +210,12 @@ header {
   text-wrap: nowrap;
 }
 
+.header-item:hover {
+  outline-color: #000;
+  outline-style: dashed;
+  outline-width: 1px;
+}
+
 //  ドロップダウンメニュー「ハンバーガーアイコンとすべてのメニュー」←→「×メニューを閉じる」表示切り替え
 .header-item__toggle[aria-expanded=false] .header-item__icon--close,
 .header-item__toggle[aria-expanded=true] .header-item__icon--open,
@@ -280,6 +286,12 @@ header {
   scrollbar-gutter: stable;
   width: 100%;
 }
+// ドロップダウンコンテナの内側
+.header-dropdown__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
 
 // ドロップダウンコンテナ内の各項目
 .header-dropdown-list__external-link, .header-dropdown-list__item {
@@ -294,8 +306,6 @@ header {
   min-height: 3rem;
   padding: .5rem 1.25rem;
 }
-
-
 
 // ドロップダウンコンテナ内の矢印アイコン
 .header-dropdown-list__link .icon--link {
@@ -315,11 +325,41 @@ header {
   --tw-text-opacity: 1;
   color: rgb(0 17 143 / var(--tw-text-opacity));
 }
+// 矢印アイコンの位置調整
+.header-dropdown-list__external-link .icon svg, 
+.header-dropdown-list__link .icon svg {
+  left: -1px;
+  position: relative;
+  top: -1px;
+}
 
 // ドロップダウンコンテナ内の区切り「|」
 .header-dropdown-list__item [data-content="|"], .header-dropdown-list__item--desktop-only {
   display: none;
 }
+
+// ドロップダウンコンテナ内の右側メニュー
+.header-dropdown__quartary-menu .header-dropdown-list__external-link, 
+.header-dropdown__quartary-menu .header-dropdown-list__link {
+  font-size: .875rem !important;
+  min-height: 2.5rem;
+}
+
+
+// 項目選択時
+.header-dropdown-list__link:hover {
+  color: rgb(0 17 143/ 1) !important;
+  outline-color: rgb(0 17 143/ 1) !important;
+  outline-style: solid;
+  outline-width: 1px;
+  .icon--link {
+    // 囲い円を青に塗る
+    background-color: rgb(0 17 143/ 1) !important;
+    --tw-text-opacity: 1;
+    color: rgb(255, 255, 255) !important;
+  }
+}
+
 
 /* -------------------------------------------------
 メイン
@@ -705,24 +745,49 @@ button, select {
   .header__menu--desktop-only {
     display: block;
   }
-
+  // 親<div>ヘッダードロップダウン 
+  .header-dropdown {
+    border-top-width: 0;
+    // ヘッダーとドロップダウンの間に隙間が空かないように
+    top: 3.7rem;
+  }
+  // ドロップダウンコンテナ
   .header-dropdown__container {
     padding-bottom: 3.5rem;
     padding-top: 2rem;
-}
-// ドロップダウンコンテナの各項目
-.header-dropdown-list {
-  column-gap: 1.625rem;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(4, minmax(0, 1fr));
-}
-// ドロップダウンコンテナの右側に作るサブメニュー項目
-.header-dropdown__menu--divider {
-  border-left-width: 1px;
-  margin-left: 3.5rem;
-  padding-left: 3.5rem;
-}
+  }
+  // ドロップダウンコンテナの内側
+  .header-dropdown__content {
+    display: grid;
+    gap: 0;
+    grid-template-columns: 3fr 1fr;
+  }
+  // ドロップダウンコンテナの各項目
+  .header-dropdown-list {
+    // グリッドの 列同士の間隔
+    column-gap: 1.625rem;
+    // 要素を「マス目」のように配置
+    display: grid;
+    // 横方向に並べる
+    grid-auto-flow: column;
+    // 4行分のスペースを定義し、各行が等間隔
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+  }
+  // ドロップダウンコンテナの「ホーム」「Language」などは画面が1024px以上ならメインメニューに表示
+  .header-dropdown__menu--mobile-only {
+    display: none;
+  }
+  // <div>ドロップダウンコンテナの右側に作るサブメニューコンテナ
+  .header-dropdown__menu--divider {
+    border-left-width: 1px;
+    margin-left: 3.5rem;
+    padding-left: 3.5rem;
+  }
+  // <ul>ドロップダウンコンテナの右側に作るサブメニュー各項目
+  .header-dropdown__quartary-menu .header-dropdown-list__external-link, .header-dropdown__quartary-menu .header-dropdown-list__link {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
 }
 
 // 「画面が80em（約1280px）以上になったら

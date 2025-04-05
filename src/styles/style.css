@@ -209,6 +209,12 @@ header {
   text-wrap: nowrap;
 }
 
+.header-item:hover {
+  outline-color: #000;
+  outline-style: dashed;
+  outline-width: 1px;
+}
+
 .header-item__toggle[aria-expanded=false] .header-item__icon--close,
 .header-item__toggle[aria-expanded=true] .header-item__icon--open,
 .header-item__toggle[aria-expanded=false] .header-item__text--close,
@@ -268,6 +274,17 @@ header {
   width: 100%;
 }
 
+.header-dropdown__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 3rem;
+}
+
 .header-dropdown-list__external-link, .header-dropdown-list__item {
   margin-bottom: 0.5rem;
 }
@@ -313,8 +330,33 @@ header {
   color: rgb(0 17 143/var(--tw-text-opacity));
 }
 
+.header-dropdown-list__external-link .icon svg,
+.header-dropdown-list__link .icon svg {
+  left: -1px;
+  position: relative;
+  top: -1px;
+}
+
 .header-dropdown-list__item [data-content="|"], .header-dropdown-list__item--desktop-only {
   display: none;
+}
+
+.header-dropdown__quartary-menu .header-dropdown-list__external-link,
+.header-dropdown__quartary-menu .header-dropdown-list__link {
+  font-size: 0.875rem !important;
+  min-height: 2.5rem;
+}
+
+.header-dropdown-list__link:hover {
+  color: rgb(0, 17, 143) !important;
+  outline-color: rgb(0, 17, 143) !important;
+  outline-style: solid;
+  outline-width: 1px;
+}
+.header-dropdown-list__link:hover .icon--link {
+  background-color: rgb(0, 17, 143) !important;
+  --tw-text-opacity: 1;
+  color: rgb(255, 255, 255) !important;
 }
 
 /* -------------------------------------------------
@@ -700,9 +742,18 @@ button, select {
   .header__menu--desktop-only {
     display: block;
   }
+  .header-dropdown {
+    border-top-width: 0;
+    top: 3.7rem;
+  }
   .header-dropdown__container {
     padding-bottom: 3.5rem;
     padding-top: 2rem;
+  }
+  .header-dropdown__content {
+    display: grid;
+    gap: 0;
+    grid-template-columns: 3fr 1fr;
   }
   .header-dropdown-list {
     -webkit-column-gap: 1.625rem;
@@ -712,10 +763,17 @@ button, select {
     grid-auto-flow: column;
     grid-template-rows: repeat(4, minmax(0, 1fr));
   }
+  .header-dropdown__menu--mobile-only {
+    display: none;
+  }
   .header-dropdown__menu--divider {
     border-left-width: 1px;
     margin-left: 3.5rem;
     padding-left: 3.5rem;
+  }
+  .header-dropdown__quartary-menu .header-dropdown-list__external-link, .header-dropdown__quartary-menu .header-dropdown-list__link {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 }
 @media (min-width: 80em) {

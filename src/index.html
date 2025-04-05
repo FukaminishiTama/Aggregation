@@ -121,9 +121,9 @@
                 <nav class="header__nav" aria-label="メインナビゲーション">
                     <!-- デスクトップ環境でのみ表示 -->
                     <div class="header__menu--desktop-only">
-                        <!-- ナビゲーションメニューのリストを格納する順不同リスト（<ul>タグ） -->
+                        <!-- ナビゲーションメニューのリストを格納するリスト（<ul>タグ） -->
                         <ul class="header-menu">
-                            <!-- ナビゲーションメニューの項目を表すリストアイテム（<li>タグ） -->
+                            <!-- 「ホーム」のli -->
                             <li class="header-menu__item">
                                 <!-- ナビゲーションメニューのリンク（<a>タグ） 
                                     href="/": ルートURL（トップページ）へのリンク-->
@@ -131,6 +131,16 @@
                                     <!-- ナビゲーションメニューのリンクのテキスト<span> -->
                                     <span class="header-item" data-text="ホーム">
                                         ホーム</span>
+                                </a>
+                            </li>
+                            <!-- 「制約・ルール」のli -->
+                            <li class="header-menu__item">
+                                <!-- ナビゲーションメニューのリンク（<a>タグ） 
+                                    href="/": 制約・ルールへのリンク-->
+                                <a class="header-menu__link" href="/">
+                                    <!-- ナビゲーションメニューのリンクのテキスト<span> -->
+                                    <span class="header-item" data-text="制約・ルール">
+                                        制約・ルール</span>
                                 </a>
                             </li>
                             <!-- 区切り線 -->
@@ -298,9 +308,9 @@
                                             </li>
                                             <li class="header-dropdown-list__item ">
                                                 <a class="header-dropdown-list__link" href="/individual"
-                                                    data-content="やり方">
+                                                    data-content="制約・ルール">
                                                     <span class="header-dropdown-list__link-text">
-                                                        やり方</span>
+                                                        制約・ルール</span>
                                                     <span aria-hidden="true" class="icon icon--12px icon--link"
                                                         role="img"><svg width="12" height="12" viewBox="0 0 12 12"
                                                             xmlns="http://www.w3.org/2000/svg">
