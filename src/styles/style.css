@@ -188,7 +188,7 @@ header {
 }
 
 /* -------------------------------------------------
-ヘッダードロップダウンメニュー
+ヘッダーメニューバー
 ----------------------------------------------------*/
 .header-item {
   -webkit-box-align: center;
@@ -215,150 +215,6 @@ header {
   outline-width: 1px;
 }
 
-.header-item__toggle[aria-expanded=false] .header-item__icon--close,
-.header-item__toggle[aria-expanded=true] .header-item__icon--open,
-.header-item__toggle[aria-expanded=false] .header-item__text--close,
-.header-item__toggle[aria-expanded=true] .header-item__text--open {
-  display: none;
-}
-
-.header-item__icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 1rem;
-  --tw-translate-y: 0.0625rem;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-          transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.header-dropdown {
-  border-top-width: 1px;
-  /* ドロップダウンメニューの左端を、
-     その親要素（position: relative, absolute, fixed のいずれかが設定されている要素）の左端に揃える */
-  left: 0;
-  /* ドロップダウンメニュー絶対配置：
-      通常のドキュメントフローから外れ、最も近い position プロパティが relative, absolute, fixed の
-      いずれかに設定されている祖先要素を基準に配置。基準がない場合は<html>要素を基準に配置 */
-  position: absolute;
-  right: 0;
-  top: 4.5rem;
-  z-index: 1;
-  --tw-border-opacity: 1;
-  background-color: hsla(0, 0%, 100%, 0.88);
-  border-color: rgb(216 216 216/var(--tw-border-opacity));
-  /* 影
-     0: 水平方向のオフセット（影を左右にずらさない）
-     0.25rem: 垂直方向のオフセット（影を下に 0.25rem ずらす）
-     0.25rem: ぼかしの半径（影を 0.25rem ぼかす）
-     0: 広がりの半径（影を広げない）
-     rgba(0, 0, 0, .16): 影の色（黒色で 16% の透明度）*/
-  --tw-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, .16);
-  --tw-shadow-colored: 0 0.25rem 0.25rem 0 var(--tw-shadow-color);
-  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
-          box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
-}
-
-.header-dropdown__container {
-  margin-left: auto;
-  margin-right: auto;
-  /* 高さ calc(): 値を計算 */
-  max-height: calc(100dvh - var(--header-block-size));
-  max-width: 74.375rem;
-  overflow-y: auto;
-  padding: 3rem 1.5rem 4rem;
-  scrollbar-gutter: stable;
-  width: 100%;
-}
-
-.header-dropdown__content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 3rem;
-}
-
-.header-dropdown-list__external-link, .header-dropdown-list__item {
-  margin-bottom: 0.5rem;
-}
-
-.header-dropdown-list__external-link, .header-dropdown-list__link {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border-radius: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: 500;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  min-height: 3rem;
-  padding: 0.5rem 1.25rem;
-}
-
-.header-dropdown-list__link .icon--link {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border-radius: 624.9375rem;
-  border-width: 1px;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-flex: 0;
-      -ms-flex: none;
-          flex: none;
-  height: 1.5rem;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  width: 1.5rem;
-  --tw-border-opacity: 1;
-  border-color: rgb(0 17 143/var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255/var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(0 17 143/var(--tw-text-opacity));
-}
-
-.header-dropdown-list__external-link .icon svg,
-.header-dropdown-list__link .icon svg {
-  left: -1px;
-  position: relative;
-  top: -1px;
-}
-
-.header-dropdown-list__item [data-content="|"], .header-dropdown-list__item--desktop-only {
-  display: none;
-}
-
-.header-dropdown__quartary-menu .header-dropdown-list__external-link,
-.header-dropdown__quartary-menu .header-dropdown-list__link {
-  font-size: 0.875rem !important;
-  min-height: 2.5rem;
-}
-
-.header-dropdown-list__link:hover {
-  color: rgb(0, 17, 143) !important;
-  outline-color: rgb(0, 17, 143) !important;
-  outline-style: solid;
-  outline-width: 1px;
-}
-.header-dropdown-list__link:hover .icon--link {
-  background-color: rgb(0, 17, 143) !important;
-  --tw-text-opacity: 1;
-  color: rgb(255, 255, 255) !important;
-}
-
 /* -------------------------------------------------
 メイン
 ----------------------------------------------------*/
@@ -371,8 +227,7 @@ header {
 }
 
 .section {
-  margin-bottom: 2rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .section:nth-child(2) {
@@ -390,7 +245,7 @@ header {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   z-index: auto;
 }
 
@@ -423,6 +278,9 @@ header {
   text-underline-offset: 0.1875rem;
 }
 
+/* -------------------------------------------------
+カード形式のデザイン
+----------------------------------------------------*/
 .card {
   border-radius: 1.5rem;
   border-width: 1px;
@@ -435,12 +293,20 @@ header {
   background-color: rgb(255 255 255/var(--tw-bg-opacity));
 }
 
+.card__body {
+  padding: 0.5rem;
+}
+
 /* カード内に画像がある場合に、グリッドレイアウトの行のサイズを調整
     1. 最初の行（画像の行など）は、コンテンツの最小サイズで表示されます。
     2. 2番目の行（コンテンツの行）は、残りのスペースをすべて埋めて表示されます。*/
 .card:has(.card__image) {
   grid-template-rows: -webkit-min-content 1fr;
   grid-template-rows: min-content 1fr;
+}
+
+.card__pointtable__title {
+  border-bottom: 1px solid #ddd;
 }
 
 .anchor-card, a.card {
@@ -457,175 +323,85 @@ header {
 }
 
 /* -------------------------------------------------
-スイッチ
+文字カード
 ----------------------------------------------------*/
-.main-button {
-  padding: 10px 15px;
-  margin: 5px;
+.stack {
+  display: grid;
 }
 
-.btn-real-dent {
-  /*周りの凹み*/
-  mix-blend-mode: multiply;
-  display: inline-block;
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: radial-gradient(#FFF 0.1%, #72736f 20%, #bfbfbf 100%);
-  background-size: 400% 400%;
-  background-position: 44% 55%;
-}
-
-.btn-real-dent span {
-  /* ボタン自体 */
-  position: absolute;
-  content: "";
-  width: 70px;
-  height: 70px;
-  left: 15px;
-  top: 15px;
-  border-radius: 50%;
-  background: url("../images/Button/seigaiha.jpg");
-  background-size: 1150%;
-  background-repeat: no-repeat;
-  background-position: center;
-  -webkit-box-shadow: 0 0 0 1px #EADAB6;
-          box-shadow: 0 0 0 1px #EADAB6;
-}
-
-/* マウスオーバーのボタン */
-.btn-real-dent .fa:hover {
-  background: url("../images/Button/seigaiha.jpg");
-  background-size: 1150%;
-  background-repeat: no-repeat;
-  background-position: center;
-  -webkit-box-shadow: 0 0 0 1px #FFFEF7;
-          box-shadow: 0 0 0 1px #FFFEF7;
-}
-
-/* クリック後のボタン */
-.btn-real-dent .fa.clicked {
-  width: 68px;
-  height: 68px;
-  left: 16px;
-  top: 16px;
-  background: radial-gradient(circle, rgba(242, 205, 77, 0.2), rgba(218, 181, 103, 0.2)), url("Aggregation/src/images/Button/seigaiha.jpg"); /* 画像 */
-  background-size: 1111%;
-  background-repeat: no-repeat;
-  background-position: center;
-  -webkit-box-shadow: inset 0 0 0 2.5px rgba(66, 66, 66, 0.25);
-          box-shadow: inset 0 0 0 2.5px rgba(66, 66, 66, 0.25);
+.stack--medium {
+  gap: 1rem;
 }
 
 /* -------------------------------------------------
-名前入力
+ニックネーム
 ----------------------------------------------------*/
-.Form-text {
-  border-top: 1px solid #ddd;
-}
-.Form-text p {
-  margin: 1px;
-  padding-top: 10px;
-  padding-bottom: 0px;
+.form__name-field {
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 5px;
+  padding-bottom: 16px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
-.Form-name {
-  padding-top: 0px;
-  padding-bottom: 24px;
-  width: 100%;
+.form__label {
+  max-width: inherit;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-bottom: 1px solid #ddd;
-}
-
-@media screen and (max-width: 480px) {
-  .Form-name {
-    padding-left: 14px;
-    padding-right: 14px;
-    padding-top: 5px;
-    padding-bottom: 16px;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-  }
-}
-.Form-Item-Label {
-  width: 100%;
-  max-width: 248px;
   letter-spacing: 0.05em;
-  font-weight: bold;
-  font-size: 18px;
+  font-size: 15px;
 }
 
-@media screen and (max-width: 480px) {
-  .Form-Item-Label {
-    max-width: inherit;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    font-size: 15px;
-  }
-}
-.Form-Item-Label-Required {
-  border-radius: 6px;
-  margin-right: 8px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  width: 48px;
-  display: inline-block;
+.form__label-badge {
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  width: 2rem;
   text-align: center;
   background: #5bc8ac;
   color: #fff;
-  font-size: 14px;
+  font-size: 10px;
 }
 
-@media screen and (max-width: 480px) {
-  .Form-Item-Label-Required {
-    border-radius: 4px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    width: 32px;
-    font-size: 10px;
-  }
-}
-.Form-Item-Input {
+.form__input--name {
+  border-radius: 0.5rem;
   border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-left: 10px;
+  margin-left: 1rem;
+  margin-top: 1rem;
   padding-left: 1em;
   padding-right: 1em;
-  height: 48px;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  width: 100%;
-  max-width: 410px;
-  background: #eaedf2;
-  font-size: 18px;
+  height: 40px;
+  -webkit-box-flex: inherit;
+      -ms-flex: inherit;
+          flex: inherit;
+  font-size: 15px;
 }
 
-@media screen and (max-width: 480px) {
-  .Form-Item-Input {
-    margin-left: 0;
-    margin-top: 18px;
-    height: 40px;
-    -webkit-box-flex: inherit;
-        -ms-flex: inherit;
-            flex: inherit;
-    font-size: 15px;
-  }
-}
 /* -------------------------------------------------
 数字ボタン
 ----------------------------------------------------*/
 button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+
+.number-buttons h2 {
+  padding: 10px;
+  margin: 10px;
+}
+
+.number-button {
   padding: 10px 15px;
   margin: 5px;
   border: none;
@@ -641,28 +417,76 @@ button:hover {
   outline-width: 1px;
 }
 
-.number-button {
+/* -------------------------------------------------
+投票ボタン
+----------------------------------------------------*/
+.vote-button {
   padding: 10px 15px;
   margin: 5px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007BFF;
-  color: white;
-  cursor: pointer;
-}
-
-.number-buttons h2 {
-  padding: 20px -10px 0px;
-  margin: 20px -10px 0px;
-}
-
-.number-button.selected {
-  background-color: #0056b3;
-}
-
-.submit-button {
   text-align: center;
   margin-top: 20px;
+}
+
+.vote-button__dent {
+  mix-blend-mode: multiply;
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(#FFF 0.1%, #72736f 20%, #bfbfbf 100%);
+  background-size: 400% 400%;
+  background-position: 44% 55%;
+}
+
+.vote-button__action {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+.vote-button__surface {
+  position: absolute;
+  content: "";
+  width: 70px;
+  height: 70px;
+  left: 15px;
+  top: 15px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4941176471);
+  background-image: url("../images/Button/vote.png");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 0 0 1px #EADAB6;
+          box-shadow: 0 0 0 1px #EADAB6;
+}
+
+.vote-button__surface:hover {
+  background-color: #fff;
+  background-image: url("../images/Button/vote.png");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 0 0 1px #FFFEF7;
+          box-shadow: 0 0 0 1px #FFFEF7;
+}
+
+.vote-button__surface--clicked {
+  width: 68px;
+  height: 68px;
+  left: 16px;
+  top: 16px;
+  background: radial-gradient(circle, rgba(242, 205, 77, 0.2), rgba(218, 181, 103, 0.2));
+  background-color: #fff;
+  background-image: url("../images/Button/vote.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: inset 0 0 0 2.5px rgba(66, 66, 66, 0.25);
+          box-shadow: inset 0 0 0 2.5px rgba(66, 66, 66, 0.25);
 }
 
 /* -------------------------------------------------
@@ -681,49 +505,6 @@ button:hover {
 }
 
 /* ---------------------------------------------
-リセットCSS
-
-参考
-*:      すべての<html>要素だけでなく、<body>、<div>、<p>など、ウェブページ内のすべての要素が対象
-        すべての要素のボックスモデルをborder-boxに変更したり、マージンやパディングをリセットしたりする場合に使用
-after:  疑似要素（要素の最後に追加される内容）
-before: 疑似要素（要素の最初に追加される内容）
-where:  セレクタリストを受け取り、その中のいずれかのセレクタに一致する要素を選択
-        セレクタの特異度が 0 になるため、後から別のセレクタでスタイルを定義した場合に、特異度による競合が発生しにくくなる
-------------------------------------------------- */
-/* ボーダーおよびボックスの統一 */
-*, :after, :before {
-  /*  0:       ボーダーを非表示
-      solid:   実線
-      #e5e7eb: 薄い灰色
-      すべての要素からデフォルトのボーダーを削除し、必要に応じて後から追加 */
-  border: 0 solid #e5e7eb;
-  /* border-box
-  要素の幅と高さにパディングとボーダーが含まれるため計算しやすい。
-  そのため、パディングやボーダーを追加しても、要素のサイズは変わらない
-  レスポンシブデザインに対応しやすい
-   */
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-/* ボタンのデザインをリセット */
-button, input:where([type=button]), input:where([type=reset]), input:where([type=submit]) {
-  -webkit-appearance: button;
-  -moz-appearance: button;
-       appearance: button;
-  background-color: initial;
-  background-image: none;
-}
-
-/* 大文字小文字の変換をリセット
-ブラウザによっては"TEST BUTTON"が大文字で表示されてしまったり、
-"Test Option"の最初の文字だけが大文字で表示されてしまう可能性があるため */
-button, select {
-  text-transform: none;
-}
-
-/* ---------------------------------------------
 レスポンシブデザイン
 ------------------------------------------------- */
 @media (min-width: 48em) {
@@ -731,7 +512,53 @@ button, select {
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  .form__name-field {
+    padding-top: 0px;
+    padding-bottom: 24px;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    border-bottom: 1px solid #ddd;
+  }
+  .form__label {
+    width: 100%;
+    max-width: 248px;
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .form__label-badge {
+    border-radius: 6px;
+    margin-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 48px;
+    display: inline-block;
+    text-align: center;
+    background: #5bc8ac;
+    color: #fff;
+    font-size: 14px;
+  }
+  .form__input--name {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-left: 10px;
+    padding-left: 1em;
+    padding-right: 1em;
+    height: 48px;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    width: 100%;
+    max-width: 410px;
+    background: #eaedf2;
+    font-size: 18px;
   }
 }
 @media (min-width: 64em) {
@@ -771,7 +598,8 @@ button, select {
     margin-left: 3.5rem;
     padding-left: 3.5rem;
   }
-  .header-dropdown__quartary-menu .header-dropdown-list__external-link, .header-dropdown__quartary-menu .header-dropdown-list__link {
+  .header-dropdown__quartary-menu .header-dropdown-list__external-link,
+  .header-dropdown__quartary-menu .header-dropdown-list__link {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
   }
@@ -875,6 +703,15 @@ a {
   text-decoration: inherit;
 }
 
+article .mdcontainer-card__thumb,
+div.preview .mdcontainer-card__thumb,
+div.preview-block .mdcontainer-card__thumb {
+  border-bottom-width: 1px;
+  overflow: hidden;
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(0 0 0/var(--tw-border-opacity));
+}
+
 /* ---------------------------------------------
 アクセシビリティ対応
 ------------------------------------------------- */
@@ -892,4 +729,47 @@ a {
   clip: rect(0, 0, 0, 0);
   border-width: 0;
   white-space: nowrap;
+}
+
+/* ---------------------------------------------
+リセットCSS
+
+参考
+*:      すべての<html>要素だけでなく、<body>、<div>、<p>など、ウェブページ内のすべての要素が対象
+        すべての要素のボックスモデルをborder-boxに変更したり、マージンやパディングをリセットしたりする場合に使用
+after:  疑似要素（要素の最後に追加される内容）
+before: 疑似要素（要素の最初に追加される内容）
+where:  セレクタリストを受け取り、その中のいずれかのセレクタに一致する要素を選択
+        セレクタの特異度が 0 になるため、後から別のセレクタでスタイルを定義した場合に、特異度による競合が発生しにくくなる
+------------------------------------------------- */
+/* ボーダーおよびボックスの統一 */
+*, :after, :before {
+  /*  0:       ボーダーを非表示
+      solid:   実線
+      #e5e7eb: 薄い灰色
+      すべての要素からデフォルトのボーダーを削除し、必要に応じて後から追加 */
+  border: 0 solid #e5e7eb;
+  /* border-box
+  要素の幅と高さにパディングとボーダーが含まれるため計算しやすい。
+  そのため、パディングやボーダーを追加しても、要素のサイズは変わらない
+  レスポンシブデザインに対応しやすい
+   */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* ボタンのデザインをリセット */
+button, input:where([type=button]), input:where([type=reset]), input:where([type=submit]) {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+       appearance: button;
+  background-color: initial;
+  background-image: none;
+}
+
+/* 大文字小文字の変換をリセット
+ブラウザによっては"TEST BUTTON"が大文字で表示されてしまったり、
+"Test Option"の最初の文字だけが大文字で表示されてしまう可能性があるため */
+button, select {
+  text-transform: none;
 }/*# sourceMappingURL=style.css.map */

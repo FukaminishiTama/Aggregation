@@ -62,7 +62,7 @@
        -->
     <link rel="canonical" href="#">
     <!-- 作成者 -->
-    <meta name="author" content="近藤俊">
+    <meta name="author" content="con">
     <meta property="og:site_name" content="集計ツール">
     <meta property="og:url" content="#" />
     <meta property="og:type" content="WebApp" />
@@ -133,16 +133,6 @@
                                         ホーム</span>
                                 </a>
                             </li>
-                            <!-- 「制約・ルール」のli -->
-                            <li class="header-menu__item">
-                                <!-- ナビゲーションメニューのリンク（<a>タグ） 
-                                    href="/": 制約・ルールへのリンク-->
-                                <a class="header-menu__link" href="/">
-                                    <!-- ナビゲーションメニューのリンクのテキスト<span> -->
-                                    <span class="header-item" data-text="制約・ルール">
-                                        制約・ルール</span>
-                                </a>
-                            </li>
                             <!-- 区切り線 -->
                             <li aria-hidden="true" class="header-menu__item header-menu__item--divider">
                                 <!-- 区切り線の要素 -->
@@ -157,7 +147,6 @@
                         </ul>
                     </div>
                     <!-- 言語選択(Launguage)のドロップダウンメニュー -->
-                    <div class="header__menu--desktop-only">
                         <!-- JavaScriptで制御されるドロップダウンメニューを格納するdiv要素
                          language-selector:言語選択ドロップダウン
                          data-dropdown-close-on-outside: ドロップダウンの外側をクリックしたときに閉じる設定
@@ -246,314 +235,8 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>                
-
-                    <!-- JavaScriptで制御されるドロップダウンメニューを格納するdiv要素 -->
-                    <div class="js-dropdown" data-dropdown-id="header-dropdown" data-dropdown-close-on-outside=""
-                        data-dropdown-close-on-escape="" data-dropdown-disable-scroll="" data-dropdown-trap-focus=""
-                        data-dropdown-reset-focus="header-dropdown-toggle">
-                        <!-- ドロップダウンメニューのトグルボタンを定義するbutton要素 
-                         aria-expanded="false": 初期状態では閉じている-->
-                        <button id="header-dropdown-toggle" class="header-item header-item__toggle" type="button"
-                            data-dropdown-toggle="header-dropdown" aria-expanded="false"
-                            aria-controls="header-dropdown">
-                            <!-- ドロップダウンメニューのハンバーガーアイコン -->
-                            <span class="header-item__icon header-item__icon--open">
-                                <span aria-hidden="true" class="icon icon--24px" role="img">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path d="M3 6v1h18V6Zm0 5v1h18v-1Zm0 5v1h18v-1Z"></path>
-                                        </svg>
-                                </span>
-                            </span>
-                            <!-- ドロップダウンメニューが開いた後の閉じる（×）アイコン -->
-                            <span class="header-item__icon header-item__icon--close">
-                                <span aria-hidden="true" class="icon icon--24px" role="img">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path
-                                            d="m18.029 5.07-5.87 5.87-5.797-5.8-1.06 1.06 5.797 5.8-5.798 5.798 1.06 1.06 5.799-5.797 5.869 5.869 1.06-1.061L13.22 12l5.87-5.869-1.061-1.06Z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </span>
-                            <!-- ドロップダウンメニューが開く前のテキスト「すべてのメニュー」 -->
-                            <span class="header-item__text header-item__text--open" data-text="すべてのメニュー">
-                                すべてのメニュー</span>
-                            <!-- ドロップダウンメニューが開いた後のテキスト「メニューを閉じる」 -->
-                            <span class="header-item__text header-item__text--close" data-text="メニューを閉じる">
-                                メニューを閉じる</span>
-                        </button>
-
-                        <!------------------------- 
-                        ドロップダウンメニューコンテナ
-                        ---------------------------->
-                        <div id="header-dropdown" class="header-dropdown" hidden="" aria-hidden="true">
-                            <!-- ドロップダウンコンテンツのコンテナを格納 -->
-                            <div class="header-dropdown__container">
-                                <div class="header-dropdown__content">
-                                    <div class="header-dropdown__menu header-dropdown__menu--mobile-only">
-                                        <ul class="header-dropdown-list ">
-                                            <li class="header-dropdown-list__item header-dropdown-list__item--desktop-only">
-                                                <a class="header-dropdown-list__link" href="/" data-content="ホーム">
-                                                    <span class="header-dropdown-list__link-text">
-                                                        ホーム</span>
-                                                    <!-- 右矢印アイコン -->
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link" role="img">
-                                                        <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="header-dropdown-list__item ">
-                                                <a class="header-dropdown-list__link" href="/individual"
-                                                    data-content="制約・ルール">
-                                                    <span class="header-dropdown-list__link-text">
-                                                        制約・ルール</span>
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <!-- ドロップダウンメニューコンテナ内の区切り線 -->
-                                            <li class="header-dropdown-list__item ">
-                                                <a class="header-dropdown-list__link" href="" data-content="|">
-                                                    <span class="header-dropdown-list__link-text">|</span>
-                                                    
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- 縮小画面で表示されるドロップダウンコンテンツ内で、
-                                     カラム形式でメニュー項目を表示するためのコンテナを定義 -->
-                                    <div class="header-dropdown__menu header-dropdown__menu--columns">
-                                        <ul class="header-dropdown-list ">
-                                            <li class="header-dropdown-list__item ">
-                                                <a class="header-dropdown-list__link" href="/news" data-content="新着・更新">
-                                                    <span class="header-dropdown-list__link-text">新着・更新</span>
-                                                    <!-- →アイコン -->
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img">
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="header-dropdown-list__item ">
-                                                <a class="header-dropdown-list__link" href="/councils"
-                                                    data-content="会議">
-                                                    <span class="header-dropdown-list__link-text">会議</span>
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="header-dropdown-list__item ">
-                                                <a class="header-dropdown-list__link" href="/resources"
-                                                    data-content="資料">
-                                                    <span class="header-dropdown-list__link-text">資料</span>
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- mobaile用 -->
-                                    <div class="header-dropdown__menu header-dropdown__menu--mobile-only">
-                                        <!-- 言語設定 -->
-                                        <div class="js-dropdown language-selector"
-                                            data-dropdown-id="language-selector-mobile"
-                                            data-dropdown-close-on-outside="" data-dropdown-close-on-escape=""
-                                            data-dropdown-trap-focus=""
-                                            data-dropdown-reset-focus="language-selector-toggle-mobile">
-                                            <button id="language-selector-toggle-mobile"
-                                                class="language-selector__button" type="button"
-                                                data-dropdown-toggle="language-selector-mobile" aria-expanded="false"
-                                                aria-controls="language-selector-mobile">
-                                                <span class="language-selector__language-icon">
-                                                    <span aria-hidden="true" class="icon icon--px" role="img">
-                                                        <!-- 地球儀のアイコン -->
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none">
-                                                            <mask id="mask0_9_1880" style="mask-type:alpha"
-                                                                maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                                                                height="24">
-                                                                <rect width="24" height="24" fill="#D9D9D9"></rect>
-                                                            </mask>
-                                                            <g mask="url(#mask0_9_1880)">
-                                                                <path
-                                                                    d="M12 21.5C10.6974 21.5 9.46825 21.2503 8.3125 20.7509C7.15673 20.2516 6.14872 19.5718 5.28845 18.7115C4.4282 17.8512 3.7484 16.8432 3.24905 15.6875C2.74968 14.5317 2.5 13.3025 2.5 12C2.5 10.6872 2.74968 9.45543 3.24905 8.3048C3.7484 7.15417 4.4282 6.14872 5.28845 5.28845C6.14872 4.4282 7.15673 3.7484 8.3125 3.24905C9.46825 2.74968 10.6974 2.5 12 2.5C13.3128 2.5 14.5445 2.74968 15.6952 3.24905C16.8458 3.7484 17.8512 4.4282 18.7115 5.28845C19.5718 6.14872 20.2516 7.15417 20.7509 8.3048C21.2503 9.45543 21.5 10.6872 21.5 12C21.5 13.3025 21.2503 14.5317 20.7509 15.6875C20.2516 16.8432 19.5718 17.8512 18.7115 18.7115C17.8512 19.5718 16.8458 20.2516 15.6952 20.7509C14.5445 21.2503 13.3128 21.5 12 21.5ZM12 19.9788C12.5102 19.3019 12.9397 18.6192 13.2885 17.9307C13.6372 17.2423 13.9211 16.4897 14.1404 15.673H9.85958C10.0916 16.5153 10.3788 17.2807 10.7211 17.9692C11.0634 18.6577 11.4897 19.3275 12 19.9788ZM10.0635 19.7038C9.68014 19.1538 9.33591 18.5285 9.03078 17.8279C8.72564 17.1272 8.48846 16.4089 8.31922 15.673H4.92688C5.45509 16.7115 6.16343 17.584 7.0519 18.2904C7.94038 18.9968 8.94424 19.4679 10.0635 19.7038ZM13.9365 19.7038C15.0557 19.4679 16.0596 18.9968 16.9481 18.2904C17.8365 17.584 18.5449 16.7115 19.0731 15.673H15.6807C15.4794 16.4153 15.2262 17.1368 14.9211 17.8375C14.616 18.5381 14.2878 19.1602 13.9365 19.7038ZM4.29805 14.1731H8.01538C7.95256 13.8013 7.90705 13.4369 7.87885 13.0798C7.85065 12.7227 7.83655 12.3628 7.83655 12C7.83655 11.6372 7.85065 11.2772 7.87885 10.9202C7.90705 10.5631 7.95256 10.1987 8.01538 9.82688H4.29805C4.2019 10.1666 4.12818 10.5198 4.0769 10.8865C4.02562 11.2532 3.99998 11.6243 3.99998 12C3.99998 12.3756 4.02562 12.7468 4.0769 13.1135C4.12818 13.4801 4.2019 13.8333 4.29805 14.1731ZM9.51535 14.1731H14.4846C14.5474 13.8013 14.5929 13.4401 14.6212 13.0894C14.6494 12.7388 14.6635 12.3756 14.6635 12C14.6635 11.6243 14.6494 11.2612 14.6212 10.9106C14.5929 10.5599 14.5474 10.1987 14.4846 9.82688H9.51535C9.45253 10.1987 9.40702 10.5599 9.3788 10.9106C9.3506 11.2612 9.3365 11.6243 9.3365 12C9.3365 12.3756 9.3506 12.7388 9.3788 13.0894C9.40702 13.4401 9.45253 13.8013 9.51535 14.1731ZM15.9846 14.1731H19.7019C19.7981 13.8333 19.8718 13.4801 19.9231 13.1135C19.9743 12.7468 20 12.3756 20 12C20 11.6243 19.9743 11.2532 19.9231 10.8865C19.8718 10.5198 19.7981 10.1666 19.7019 9.82688H15.9846C16.0474 10.1987 16.0929 10.5631 16.1211 10.9202C16.1493 11.2772 16.1634 11.6372 16.1634 12C16.1634 12.3628 16.1493 12.7227 16.1211 13.0798C16.0929 13.4369 16.0474 13.8013 15.9846 14.1731ZM15.6807 8.32693H19.0731C18.5384 7.27563 17.8349 6.40318 16.9625 5.70958C16.09 5.01599 15.0814 4.54163 13.9365 4.2865C14.3198 4.86855 14.6608 5.50509 14.9596 6.19613C15.2583 6.88716 15.4987 7.59743 15.6807 8.32693ZM9.85958 8.32693H14.1404C13.9083 7.49103 13.6163 6.72083 13.2644 6.01633C12.9125 5.31184 12.491 4.64678 12 4.02113C11.5089 4.64678 11.0875 5.31184 10.7356 6.01633C10.3836 6.72083 10.0916 7.49103 9.85958 8.32693ZM4.92688 8.32693H8.31922C8.50128 7.59743 8.74167 6.88716 9.0404 6.19613C9.33912 5.50509 9.68014 4.86855 10.0635 4.2865C8.91219 4.54163 7.90193 5.0176 7.03268 5.7144C6.16344 6.4112 5.46151 7.28204 4.92688 8.32693Z"
-                                                                    fill="#1A1A1A"></path>
-                                                            </g>
-                                                        </svg>
-                                                    </span>
-                                                </span>
-                                                <!-- ドロップダウンが開いている状態のときに表示 -->
-                                                <span class="language-selector__text language-selector__text--open">
-                                                    Language</span>
-                                                <!-- ドロップダウンが閉じている状態で表示 -->
-                                                <span class="language-selector__text language-selector__text--close"
-                                                    aria-hidden="true">
-                                                    Language</span>
-                                                <!-- 視覚的には非表示だが、スクリーンリーダーにだけ読ませる -->
-                                                <span class="language-selector__text language-selector__text--close u-visually-hidden">
-                                                    Close</span>
-                                                <!-- 下向き矢印「V」アイコンを格納 -->
-                                                <span class="language-selector__arrow-icon">
-                                                    <span aria-hidden="true" class="icon icon--px" role="img">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24">
-                                                            <path
-                                                                d="M5 8.67L5.67 8L12 14.33L18.33 8L19 8.67L12 15.67L5 8.67Z"
-                                                                style="fill:inherit;"></path>
-                                                        </svg>
-                                                    </span>
-                                                </span>
-                                            </button>
-
-                                            <ul id="language-selector-mobile" class="language-selector__list"
-                                                aria-hidden="true" hidden="">
-                                                <li class="language-selector__item">
-                                                    <a lang="ja" href="/" class="language-selector__link is-active"
-                                                        aria-current="true">
-                                                        <!-- チェックマークアイコンを格納 -->
-                                                        <span class="language-selector__check-icon">
-                                                            <span aria-hidden="true" class="icon icon--px" role="img">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="21"
-                                                                    height="20" viewBox="0 0 21 20" fill="none">
-                                                                    <mask id="mask0_329_310" style="mask-type:alpha"
-                                                                        maskUnits="userSpaceOnUse" x="0" y="-1"
-                                                                        width="21" height="21">
-                                                                        <rect x="0.615723" y="-0.293945" width="20"
-                                                                            height="20" fill="#D9D9D9"></rect>
-                                                                    </mask>
-                                                                    <!-- kという謎テキストが直接SVG内に記述 -->
-                                                                    <g mask="url(#mask0_329_310)">
-                                                                        k
-                                                                        <path
-                                                                            d="M8.57441 14.4169L4.12891 9.9714L5.01993 9.0804L8.57441 12.6349L16.2122 4.99707L17.1032 5.88807L8.57441 14.4169Z"
-                                                                            fill="#00118F"></path>
-                                                                    </g>
-                                                                </svg>
-                                                            </span>
-                                                        </span>
-                                                        日本語
-                                                    </a>
-                                                </li>
-
-                                                <li class="language-selector__item">
-                                                    <a lang="en" href="/en" class="language-selector__link ">
-                                                        <span class="language-selector__check-icon"></span>
-                                                        English
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!--  -->
-                                    <div class="header-dropdown__menu header-dropdown__menu--divider">
-                                        <ul class="header-dropdown-list header-dropdown__quartary-menu">
-                                            <li class="header-dropdown-list__item ">
-                                                <a class="header-dropdown-list__link" href="/site-policy"
-                                                    data-content="サイトポリシー">
-                                                    <span class="header-dropdown-list__link-text">
-                                                        サイトポリシー</span>
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link" role="img">
-
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="header-dropdown-list__item ">
-                                                <a class="header-dropdown-list__link" href="/social-media-policy"
-                                                    data-content="SNSポリシー">
-                                                    <span class="header-dropdown-list__link-text">
-                                                        SNSポリシー</span>
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="header-dropdown-list__item ">
-                                                <a class="header-dropdown-list__link" href="/contact"
-                                                    data-content="ご意見・ご要望">
-                                                    <span class="header-dropdown-list__link-text">
-                                                        ご意見・ご要望</span>
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="header-dropdown-list__item ">
-                                                <a class="header-dropdown-list__link" href="/sitemap"
-                                                    data-content="サイトマップ">
-                                                    <span class="header-dropdown-list__link-text">
-                                                        サイトマップ</span>
-                                                    <span aria-hidden="true" class="icon icon--12px icon--link"
-                                                        role="img"><svg width="12" height="12" viewBox="0 0 12 12"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ドロップダウンメニューが開いたときにページの背景を暗くするオーバーレイを定義 -->
-                            <div class="header-dropdown__overlay" data-dropdown-overlay="header-dropdown"
-                                aria-hidden="true"></div>
-                        </div>
-                    </div>
                 </nav>
-            </div>
+            </div>                
         </div>
     </header>
 
@@ -574,373 +257,240 @@
             </li>
             <li class="attention-item">
                 <span class="attention-item__text--isInformation">
-                    制約・ルールのもと、集計ができます</span>
+                    手順・ルールにそった集計ができます</span>
            </li>
         </ul>
-        <section class="section">
-            <header class="section__header">
-                <h2 class="section__title">制約・ルール</h2>
-            </header>
-        </section>
-        <!-- タイムライン（timeline）形式でニュース記事を表示 -->
-        <div class="timeline">
-            <!-- カラム形式で表示する -->
-            <ul class="columns">
-                <li>
-                    <!-- ニュース記事のURL -->
-                    <a class="card" href="/news/5d280978-bf16-4441-bb06-a5a285f329de">
-                        <div class="card__image card__image--aspect-extra-wide">
-                            <!-- <img loading="lazy" -->
-                                src="./images/Main/2018JC_AlmondEye_2m20s6ms.jpg"
-                                width="704" height="512"
-                                alt="2018年ジャパンカップ。東京2400メートルでおこなわれたレースは世界に衝撃を与えた。走破タイムは2分20秒6。紛れもなく世界レコードであった。という画像">
-                        </div>
-                        <!-- カードの本文 -->
-                        <div class="card__body">
-                            <h3 class="card__title">
-                                アーモンドアイ
-                            </h3>
-                            <!-- カードのメタ情報（日付など）を表示 -->
-                            <div class="card__meta "></div>
-                            <span aria-hidden="true" class="icon icon--16px icon--link" role="img">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8.162 3.077 13.14 8l-4.978 4.923L7.239 12l3.4-3.4H2.86V7.4h7.779L7.239 4Z">
-                                    </path>
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="card" href="/news/5d280978-bf16-4441-bb06-a5a285f329de">
-                        <div class="card__image card__image--aspect-extra-wide">
-                            <img loading="lazy"
-                                src="./images/Main/Barrel_Seats.png"
-                                width="320" height="500" alt="樽席予約開始の画像">
-                        </div>
-                        <div class="card__body">
-                            <h3 class="card__title">
-                                樽席予約開始！
-                            </h3>
-                            <div class="card__meta "></div>
-                            <span aria-hidden="true" class="icon icon--16px icon--link" role="img">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8.162 3.077 13.14 8l-4.978 4.923L7.239 12l3.4-3.4H2.86V7.4h7.779L7.239 4Z">
-                                    </path>
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <!-- 手順・ルールのヘッダー -->
         <section class="section">
             <header class="section__header">
                 <h2 class="section__title">
-                    新着・更新
+                    手順・ルール
                 </h2>
-                <a href="/news" class="section__link" aria-label="新着・更新一覧を見る">
-                    一覧を見る
-                    <span aria-hidden="true" class="icon icon--12px icon--link" role="img">
-                        <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                            </path>
-                        </svg>
-                    </span>
-                </a>
             </header>
         </section>
+        <!-- 手順・ルールの中身 -->
         <div>
             <ul class="stack stack--medium">
                 <li>
-                    <a class="card" href="/news/5d280978-bf16-4441-bb06-a5a285f329de">
+                    <a class="card">
                         <div class="card__body">
                             <p class="card__title">
                                 <span>
-                                    あれはじいちゃんのドラゴンダイブ！
+                                    ニックネームを入力します（同じ名前なら再投票扱いになります）
                                 </span>
                             </p>
-                            <div class="card__meta ">
-                                <span class="card__news-category">
-                                    法令
-                                </span>
-                                <time class="card__news-date" datetime="2025-03-07">
-                                    2025年3月7日
-                                </time>
-                            </div>
-                            <span aria-hidden="true" class="icon icon--16px icon--link" role="img">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8.162 3.077 13.14 8l-4.978 4.923L7.239 12l3.4-3.4H2.86V7.4h7.779L7.239 4Z">
-                                    </path>
-                                </svg>
-                            </span>
                         </div>
                     </a>
                 </li>
                 <li>
-                    <a class="card" href="/laws/7b1e0007-1051-42fc-b079-b80621e67eac">
+                    <a class="card">
                         <div class="card__body">
                             <p class="card__title">
                                 <span>
-                                    おかげさまで、極、たまに、おもしろいです
+                                    ５回にわけて数字を選べます
                                 </span>
                             </p>
-                            <div class="card__meta ">
-                                <span class="card__news-category">
-                                    法令
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="card">
+                        <div class="card__body">
+                            <p class="card__title">
+                                <span>
+                                    1～20までの数字を選べます（選べる数字は1回につき4つまでです）
                                 </span>
-                                <time class="card__news-date" datetime="2025-03-07">
-                                    2025年3月7日
-                                </time>
-                            </div>
-                            <span aria-hidden="true" class="icon icon--16px icon--link" role="img">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8.162 3.077 13.14 8l-4.978 4.923L7.239 12l3.4-3.4H2.86V7.4h7.779L7.239 4Z">
-                                    </path>
-                                </svg>
-                            </span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="card">
+                        <div class="card__body">
+                            <p  class="card__pointtable__title">
+                                上位選択の数字はポイントが高いです
+                            </p>
+                            <p class="card__title">
+                                <span>
+                                    ポイント表
+                                </span>
+                            </p>
+                            <p class="card__sub">
+                                <span>1位：4pt</span>
+                            </p>
+                            <p class="card__sub">
+                                <span>2位：3pt</span>
+                            </p>
+                            <p class="card__sub">
+                                <span>3位：2.5pt</span>
+                            </p>
+                            <p class="card__sub">
+                                <span>4位：2pt</span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="card">
+                        <div class="card__body">
+                            <p class="card__title">
+                                <span>
+                                    選択が終わったら、投票ボタンをクリックします
+                                </span>
+                            </p>
                         </div>
                     </a>
                 </li>
             </ul>
         </div>
+        <!-- ニックネーム入力 -->
         <section class="section">
-            <header class="section__header">
-                <h2 class="section__title">日本画</h2>
-                <!--  ボタンによって切り替わる -->
-                <img src="/"
-                    alt="日本画の画像" class="section__image">
-                <a href="/resources/govdashboard" class="section__link" aria-label="日本画の一覧を見る">
-                    一覧を見る
-                    <span aria-hidden="true" class="icon icon--12px icon--link" role="img">
-                        <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                            </path>
-                        </svg>
-                    </span>
-                </a>
-            </header>
-            <article class="article">
-                <!-- カード形式のリストを表示する要素 -->
-                <ul class="mdcontainer-card-grid mdcontainer-list mdcontainer-col-3">
-                    <!-- リストの各項目（カード）を定義 -->
-                    <li class="mdcontainer-card">
-                        <a target="_self" href="/resources/govdashboard#administrative-procedures"
-                            class="mdcontainer-card-inner">
-                            <div class="mdcontainer-card__thumb">
-                                <img alt="富嶽三十六景 神奈川沖浪裏"
-                                    src="./images/NIPPON_Painting_img/Fugaku36_Kanagawaokinamiura.jpg">
-                            </div>
-                            <div class="mdcontainer-card__body" style="height: 334px;">
-                                <span class="mdcontainer-card__title inner">
-                                    葛飾北斎 </span>
-                                <span class="mdcontainer-card__desc">
-                                    富嶽三十六景 神奈川沖浪裏 </span>
-                                <div class="mdcontainer-card__meta"></div>
-                                <!-- ボタン -->
-                                <div class="main-button">
-                                    <a href="#" class="btn-real-dent">
-                                        <span class="fa"></span>
-                                    </a>
-                                </div>
-                                <span class="icon--arrow-rightwards-wrapper">
-                                    <svg aria-hidden="true" role="img" class="icon icon--12px icon--arrow-rightwards">
-                                        <path
-                                            d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="mdcontainer-card">
-                        <a target="_self" href="/resources/govdashboard#semi-public-dx" class="mdcontainer-card-inner">
-                            <div class="mdcontainer-card__thumb">
-                                <img alt=""
-                                    src="/assets/contents/block/withlink/field_ref_images/02508828-c3f0-4835-9701-3e86659ba8a0/d38f88d0/image%202.png">
-                            </div>
-                            <div class="mdcontainer-card__body">
-                                <span class="mdcontainer-card__title inner">
-                                    歌川国芳</span>
-                                <span class="mdcontainer-card__desc">
-                                    相馬の古内裏 (善知安方忠義伝)</span>
-                                <div class="mdcontainer-card__meta"></div>
-                                <span class="icon--arrow-rightwards-wrapper">
-                                    <svg aria-hidden="true" role="img" class="icon icon--12px icon--arrow-rightwards">
-                                        <path
-                                            d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="mdcontainer-card">
-                        <a target="_self" href="/resources/govdashboard#semi-public-dx" class="mdcontainer-card-inner">
-                            <div class="mdcontainer-card__thumb">
-                                <img alt=""
-                                    src="/assets/contents/block/withlink/field_ref_images/02508828-c3f0-4835-9701-3e86659ba8a0/d38f88d0/image%202.png">
-                            </div>
-                            <div class="mdcontainer-card__body">
-                                <span class="mdcontainer-card__title inner">
-                                    東洲斎写楽</span>
-                                <span class="mdcontainer-card__desc">
-                                    三代目大谷鬼次の川島治部五郎と初代市川男女蔵の富田兵太郎</span>
-                                <div class="mdcontainer-card__meta"></div>
-                                <span class="icon--arrow-rightwards-wrapper">
-                                    <svg aria-hidden="true" role="img" class="icon icon--12px icon--arrow-rightwards">
-                                        <path
-                                            d="M7.3813 1.67358L12.3591 6.59668L7.3813 11.5198L6.4582 10.5967L9.85825 7.19663H2.08008V5.99663H9.85816L6.4582 2.59668L7.3813 1.67358Z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-
-                </ul>
-            </article>
+            <div class="form__name-field">
+                <p class="form__label">
+                    <span class="form__label-badge">必須</span>
+                    ニックネーム
+                </p>
+                <!-- テキストを入力 -->
+                <input type="text" class="form__input--name" placeholder="例）ランフランコ">
+            </div>
         </section>
-
-
-        <div class="Form-text">
-            <p>名前を入力（同じ名前で再投票可能）</p>
-        </div>
-        <div class="Form-name">
-            <p class="Form-Item-Label">
-                <span class="Form-Item-Label-Required">必須</span>
-                氏名
-            </p>
-            <input type="text" class="Form-Item-Input" placeholder="例）ランフランコ・デットーリ">
-        </div>
-
-        <div class="instructions2">
-            <p>各レースの数字を選択。</p>
-            <p>各レースの数字は0～4つまで選択。</p>
-            <p>上位の印だとポイントが高い。</p>
-        </div>
 
         <form id="number-form">
             <div class="number-buttons">
-                <h2>選択：１レース目</h2>
-                <button type="button" class="number-button" value="1">1</button>
-                <button type="button" class="number-button" value="2">2</button>
-                <button type="button" class="number-button" value="3">3</button>
-                <button type="button" class="number-button" value="4">4</button>
-                <button type="button" class="number-button" value="5">5</button>
-                <button type="button" class="number-button" value="6">6</button>
-                <button type="button" class="number-button" value="7">7</button>
-                <button type="button" class="number-button" value="8">8</button>
-                <button type="button" class="number-button" value="9">9</button>
-                <button type="button" class="number-button" value="10">10</button>
-                <button type="button" class="number-button" value="11">11</button>
-                <button type="button" class="number-button" value="12">12</button>
-                <button type="button" class="number-button" value="13">13</button>
-                <button type="button" class="number-button" value="14">14</button>
-                <button type="button" class="number-button" value="15">15</button>
-                <button type="button" class="number-button" value="16">16</button>
-                <button type="button" class="number-button" value="17">17</button>
-                <button type="button" class="number-button" value="18">18</button>
+                <section class="section">
+                    <h2 class="section__title">選択：1回目</h2>
+                </section>
+                <button id="button" class="number-button" value="1">1</button>
+                <button id="button" class="number-button" value="2">2</button>
+                <button id="button" class="number-button" value="3">3</button>
+                <button id="button" class="number-button" value="4">4</button>
+                <button id="button" class="number-button" value="5">5</button>
+                <button id="button" class="number-button" value="6">6</button>
+                <button id="button" class="number-button" value="7">7</button>
+                <button id="button" class="number-button" value="8">8</button>
+                <button id="button" class="number-button" value="9">9</button>
+                <button id="button" class="number-button" value="10">10</button>
+                <button id="button" class="number-button" value="11">11</button>
+                <button id="button" class="number-button" value="12">12</button>
+                <button id="button" class="number-button" value="13">13</button>
+                <button id="button" class="number-button" value="14">14</button>
+                <button id="button" class="number-button" value="15">15</button>
+                <button id="button" class="number-button" value="16">16</button>
+                <button id="button" class="number-button" value="17">17</button>
+                <button id="button" class="number-button" value="18">18</button>
+                <button id="button" class="number-button" value="17">17</button>
+                <button id="button" class="number-button" value="18">18</button>
+                <button id="button" class="number-button" value="17">19</button>
+                <button id="button" class="number-button" value="18">20</button>
             </div>
-
             <div class="number-buttons">
-                <h2>選択：２レース目</h2>
-                <button type="button" class="number-button" value="1">1</button>
-                <button type="button" class="number-button" value="2">2</button>
-                <button type="button" class="number-button" value="3">3</button>
-                <button type="button" class="number-button" value="4">4</button>
-                <button type="button" class="number-button" value="5">5</button>
-                <button type="button" class="number-button" value="6">6</button>
-                <button type="button" class="number-button" value="7">7</button>
-                <button type="button" class="number-button" value="8">8</button>
-                <button type="button" class="number-button" value="9">9</button>
-                <button type="button" class="number-button" value="10">10</button>
-                <button type="button" class="number-button" value="11">11</button>
-                <button type="button" class="number-button" value="12">12</button>
-                <button type="button" class="number-button" value="13">13</button>
-                <button type="button" class="number-button" value="14">14</button>
-                <button type="button" class="number-button" value="15">15</button>
-                <button type="button" class="number-button" value="16">16</button>
-                <button type="button" class="number-button" value="17">17</button>
-                <button type="button" class="number-button" value="18">18</button>
+                <section class="section">
+                <h2 class="section__title">選択：2回目</h2>
+                </section>
+                <button id="button" class="number-button" value="1">1</button>
+                <button id="button" class="number-button" value="2">2</button>
+                <button id="button" class="number-button" value="3">3</button>
+                <button id="button" class="number-button" value="4">4</button>
+                <button id="button" class="number-button" value="5">5</button>
+                <button id="button" class="number-button" value="6">6</button>
+                <button id="button" class="number-button" value="7">7</button>
+                <button id="button" class="number-button" value="8">8</button>
+                <button id="button" class="number-button" value="9">9</button>
+                <button id="button" class="number-button" value="10">10</button>
+                <button id="button" class="number-button" value="11">11</button>
+                <button id="button" class="number-button" value="12">12</button>
+                <button id="button" class="number-button" value="13">13</button>
+                <button id="button" class="number-button" value="14">14</button>
+                <button id="button" class="number-button" value="15">15</button>
+                <button id="button" class="number-button" value="16">16</button>
+                <button id="button" class="number-button" value="17">17</button>
+                <button id="button" class="number-button" value="18">18</button>
+                <button id="button" class="number-button" value="17">19</button>
+                <button id="button" class="number-button" value="18">20</button>
             </div>
-
             <div class="number-buttons">
-                <h2>選択：３レース目</h2>
-                <button type="button" class="number-button" value="1">1</button>
-                <button type="button" class="number-button" value="2">2</button>
-                <button type="button" class="number-button" value="3">3</button>
-                <button type="button" class="number-button" value="4">4</button>
-                <button type="button" class="number-button" value="5">5</button>
-                <button type="button" class="number-button" value="6">6</button>
-                <button type="button" class="number-button" value="7">7</button>
-                <button type="button" class="number-button" value="8">8</button>
-                <button type="button" class="number-button" value="9">9</button>
-                <button type="button" class="number-button" value="10">10</button>
-                <button type="button" class="number-button" value="11">11</button>
-                <button type="button" class="number-button" value="12">12</button>
-                <button type="button" class="number-button" value="13">13</button>
-                <button type="button" class="number-button" value="14">14</button>
-                <button type="button" class="number-button" value="15">15</button>
-                <button type="button" class="number-button" value="16">16</button>
-                <button type="button" class="number-button" value="17">17</button>
-                <button type="button" class="number-button" value="18">18</button>
+                <section class="section">
+                <h2 class="section__title">選択：3回目</h2>
+                </section>
+                <button id="button" class="number-button" value="1">1</button>
+                <button id="button" class="number-button" value="2">2</button>
+                <button id="button" class="number-button" value="3">3</button>
+                <button id="button" class="number-button" value="4">4</button>
+                <button id="button" class="number-button" value="5">5</button>
+                <button id="button" class="number-button" value="6">6</button>
+                <button id="button" class="number-button" value="7">7</button>
+                <button id="button" class="number-button" value="8">8</button>
+                <button id="button" class="number-button" value="9">9</button>
+                <button id="button" class="number-button" value="10">10</button>
+                <button id="button" class="number-button" value="11">11</button>
+                <button id="button" class="number-button" value="12">12</button>
+                <button id="button" class="number-button" value="13">13</button>
+                <button id="button" class="number-button" value="14">14</button>
+                <button id="button" class="number-button" value="15">15</button>
+                <button id="button" class="number-button" value="16">16</button>
+                <button id="button" class="number-button" value="17">17</button>
+                <button id="button" class="number-button" value="18">18</button>
+                <button id="button" class="number-button" value="17">19</button>
+                <button id="button" class="number-button" value="18">20</button>
             </div>
-
             <div class="number-buttons">
-                <h2>選択：４レース目</h2>
-                <button type="button" class="number-button" value="1">1</button>
-                <button type="button" class="number-button" value="2">2</button>
-                <button type="button" class="number-button" value="3">3</button>
-                <button type="button" class="number-button" value="4">4</button>
-                <button type="button" class="number-button" value="5">5</button>
-                <button type="button" class="number-button" value="6">6</button>
-                <button type="button" class="number-button" value="7">7</button>
-                <button type="button" class="number-button" value="8">8</button>
-                <button type="button" class="number-button" value="9">9</button>
-                <button type="button" class="number-button" value="10">10</button>
-                <button type="button" class="number-button" value="11">11</button>
-                <button type="button" class="number-button" value="12">12</button>
-                <button type="button" class="number-button" value="13">13</button>
-                <button type="button" class="number-button" value="14">14</button>
-                <button type="button" class="number-button" value="15">15</button>
-                <button type="button" class="number-button" value="16">16</button>
-                <button type="button" class="number-button" value="17">17</button>
-                <button type="button" class="number-button" value="18">18</button>
+                <section class="section">
+                <h2 class="section__title">選択：4回目</h2>
+                </section>
+                <button id="button" class="number-button" value="1">1</button>
+                <button id="button" class="number-button" value="2">2</button>
+                <button id="button" class="number-button" value="3">3</button>
+                <button id="button" class="number-button" value="4">4</button>
+                <button id="button" class="number-button" value="5">5</button>
+                <button id="button" class="number-button" value="6">6</button>
+                <button id="button" class="number-button" value="7">7</button>
+                <button id="button" class="number-button" value="8">8</button>
+                <button id="button" class="number-button" value="9">9</button>
+                <button id="button" class="number-button" value="10">10</button>
+                <button id="button" class="number-button" value="11">11</button>
+                <button id="button" class="number-button" value="12">12</button>
+                <button id="button" class="number-button" value="13">13</button>
+                <button id="button" class="number-button" value="14">14</button>
+                <button id="button" class="number-button" value="15">15</button>
+                <button id="button" class="number-button" value="16">16</button>
+                <button id="button" class="number-button" value="17">17</button>
+                <button id="button" class="number-button" value="18">18</button>
+                <button id="button" class="number-button" value="17">19</button>
+                <button id="button" class="number-button" value="18">20</button>
             </div>
-
             <div class="number-buttons">
-                <h2>選択：５レース目</h2>
-                <button type="button" class="number-button" value="1">1</button>
-                <button type="button" class="number-button" value="2">2</button>
-                <button type="button" class="number-button" value="3">3</button>
-                <button type="button" class="number-button" value="4">4</button>
-                <button type="button" class="number-button" value="5">5</button>
-                <button type="button" class="number-button" value="6">6</button>
-                <button type="button" class="number-button" value="7">7</button>
-                <button type="button" class="number-button" value="8">8</button>
-                <button type="button" class="number-button" value="9">9</button>
-                <button type="button" class="number-button" value="10">10</button>
-                <button type="button" class="number-button" value="11">11</button>
-                <button type="button" class="number-button" value="12">12</button>
-                <button type="button" class="number-button" value="13">13</button>
-                <button type="button" class="number-button" value="14">14</button>
-                <button type="button" class="number-button" value="15">15</button>
-                <button type="button" class="number-button" value="16">16</button>
-                <button type="button" class="number-button" value="17">17</button>
-                <button type="button" class="number-button" value="18">18</button>
+                <section class="section">
+                <h2 class="section__title">選択：5回目</h2>
+                </section>
+                <button id="button" class="number-button" value="1">1</button>
+                <button id="button" class="number-button" value="2">2</button>
+                <button id="button" class="number-button" value="3">3</button>
+                <button id="button" class="number-button" value="4">4</button>
+                <button id="button" class="number-button" value="5">5</button>
+                <button id="button" class="number-button" value="6">6</button>
+                <button id="button" class="number-button" value="7">7</button>
+                <button id="button" class="number-button" value="8">8</button>
+                <button id="button" class="number-button" value="9">9</button>
+                <button id="button" class="number-button" value="10">10</button>
+                <button id="button" class="number-button" value="11">11</button>
+                <button id="button" class="number-button" value="12">12</button>
+                <button id="button" class="number-button" value="13">13</button>
+                <button id="button" class="number-button" value="14">14</button>
+                <button id="button" class="number-button" value="15">15</button>
+                <button id="button" class="number-button" value="16">16</button>
+                <button id="button" class="number-button" value="17">17</button>
+                <button id="button" class="number-button" value="18">18</button>
+                <button id="button" class="number-button" value="17">19</button>
+                <button id="button" class="number-button" value="18">20</button>
             </div>
-
-            <div class="instructions1">
-                <p>選択が終わったら、投票ボタンをクリック</p>
+            <div id="voting" class="vote-button">
+                <div class="vote-button__dent">
+                  <button type="submit" class="vote-button__action">
+                    <span class="vote-button__surface">
+                    </span>
+                  </button>
+                 </div>
             </div>
-            <button type="submit" class="submit-button">送信</button>
         </form>
 
     </main>
@@ -949,21 +499,11 @@
             <div class="footer__content">
                 <div class="footer__logo">
                     <a class="footer-logo" href="/">
-                        <img class="footer-logo__image" src="/themes/custom/gov_theme_da_2023/logo.svg" alt="デジタル庁">
+                        集計ツール
                         <span class="u-visually-hidden">ホーム</span>
                     </a>
                 </div>
-                <div class="footer__address">
-                    <section class="address">
-                        <address class="address__text">
-                            <span>〒183-0024</span>
-                            <span>東京都府中市日吉町１−１</span>
-                            <span>東京競馬場 樽席</span>
-                        </address>
-                        <p class="address__number footer__phone-number">電話番号：(042)363-3141</p>
-                        <p class="address__number footer__corporate-number">席番号：３</p>
-                    </section>
-                </div>
+ 
                 <div class="footer__nav">
                     <nav class="footer-nav" aria-label="">
                         <ul class="footer-nav__list">
@@ -985,21 +525,6 @@
                             <li class="footer-nav__item">
                                 <a class="footer-nav__link" href="/accessibility-statement">
                                     ウェブアクセシビリティ
-                                </a>
-                            </li>
-                            <li class="footer-nav__item">
-                                <a class="footer-nav__link" href="/contact">
-                                    ご意見・ご要望
-                                </a>
-                            </li>
-                            <li class="footer-nav__item">
-                                <a class="footer-nav__link" href="/sitemap">
-                                    サイトマップ
-                                </a>
-                            </li>
-                            <li class="footer-nav__item">
-                                <a class="footer-nav__link" href="/rss">
-                                    RSS配信
                                 </a>
                             </li>
                         </ul>
@@ -1026,83 +551,17 @@
                                 </a>
                             </li>
                             <li class="sns__item">
-                                <!-- YouTubeへのリンクを定義 -->
-                                <a class="snsButton snsButton--youtube"
-                                    href="https://www.youtube.com/channel/UCKmJk25wcPwCecf7nV9HwCw"
+                                <!-- Qiitaへのリンクを定義 
+                                 rel="noreferrer noopener": セキュリティとパフォーマンスを向上-->
+                                <a class="snsButton snsButton--twitter" href="https://x.com/digital_jpn"
                                     rel="noreferrer noopener" target="_blank">
-                                    <span aria-label="Youtube" class="icon icon--32px" role="img">
-                                        <svg width="33" height="32" viewBox="0 0 33 32" fill="none">
-                                            <!-- クリップパス
-                                             画像や他の要素の表示領域を特定の形状に制限 -->
-                                            <g clip-path="url(#clip0_719_2538)">
-                                                <!-- 赤いパス -->
-                                                <path
-                                                    d="M30.718 8.89366C30.3814 7.62366 29.3864 6.62366 28.1247 6.28366C25.8364 5.66699 16.6647 5.66699 16.6647 5.66699C16.6647 5.66699 7.49138 5.66699 5.20471 6.28366C3.94305 6.62366 2.94805 7.62366 2.61138 8.89366C1.99805 11.1953 1.99805 16.0003 1.99805 16.0003C1.99805 16.0003 1.99805 20.8037 2.61138 23.107C2.94805 24.377 3.94305 25.377 5.20471 25.717C7.49305 26.3337 16.6647 26.3337 16.6647 26.3337C16.6647 26.3337 25.838 26.3337 28.1247 25.717C29.3864 25.377 30.3814 24.377 30.718 23.107C31.3314 20.8053 31.3314 16.0003 31.3314 16.0003C31.3314 16.0003 31.3314 11.197 30.718 8.89366Z"
-                                                    fill="#FF0000"></path>
-                                                <!-- 白いパス -->
-                                                <path d="M13.6641 20.362L21.3307 16.0003L13.6641 11.6387V20.362Z"
-                                                    fill="white"></path>
-                                            </g>
-                                            <!-- SVGの定義を格納 -->
-                                            <defs>
-                                                <clipPath id="clip0_719_2538">
-                                                    <!-- 白い矩形 -->
-                                                    <rect width="32" height="32" fill="white"
-                                                        transform="translate(0.664062)"></rect>
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="sns__item">
-                                <!-- noteのデジタル庁アカウントへのURL -->
-                                <a class="snsButton snsButton--note" href="https://digital-gov.note.jp/"
-                                    rel="noreferrer noopener" target="_blank">
-                                    <span aria-label="Note" class="icon icon--32px" role="img">
-                                        <svg width="33" height="32" viewBox="0 0 33 32" fill="none">
-                                            <rect x="1.16406" y="0.5" width="31" height="31" rx="15.5" fill="white">
-                                            </rect>
+                                    <span aria-label="X" class="icon icon--32px" role="img">
+                                        <!-- SVG形式のQiitaアイコンを定義 -->
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"></svg>
+                                            <circle cx="16" cy="16" r="16" fill="black"></circle>
                                             <path
-                                                d="M9.06445 8.40446C11.9921 8.40446 16.0014 8.25591 18.88 8.33054C22.7422 8.42934 24.1936 10.1117 24.2427 14.2675C24.2917 16.6172 24.2427 23.346 24.2427 23.346H20.0641C20.0641 17.4588 20.089 16.4872 20.0641 14.6321C20.0151 12.9995 19.5488 12.2212 18.2943 12.0727C16.9659 11.9241 13.243 12.0478 13.243 12.0478V23.346H9.06445V8.40446Z"
-                                                fill="#1A1A1C"></path>
-                                            <rect x="1.16406" y="0.5" width="31" height="31" rx="15.5" stroke="#D8D8DB">
-                                            </rect>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="sns__item">
-                                <!-- LinkedInのアイコンを表示 -->
-                                <a class="snsButton snsButton--linkedin"
-                                    href="https://www.linkedin.com/company/digital-agency-of-japan/"
-                                    rel="noreferrer noopener" target="_blank">
-                                    <span aria-label="LinkedIn" class="icon icon--32px" role="img">
-                                        <svg height="32" id="LinkedIn_32px" viewBox="0 0 635 540" width="32" x="0px"
-                                            xml:space="preserve" y="0px">
-                                            <!-- LinkedInのロゴを描画 -->
-                                            <path
-                                                d=" M1.000001,507.000000   C1.000000,348.642578 1.000000,190.285187 1.348588,31.352690   C4.564389,25.584520 6.927793,20.020687 10.414048,15.283136   C15.978903,7.720929 24.168917,3.711784 33.000000,1.000000   C190.357407,1.000000 347.714813,1.000000 505.688812,1.355003   C523.205139,4.767903 538.002197,20.733511 538.001770,41.211578   C537.998413,189.194855 538.012512,337.178131 537.957764,485.161377   C537.955383,491.587067 537.544067,498.031616 536.961487,504.434418   C535.458313,520.953064 517.744446,536.992798 501.135498,536.993896   C346.819611,537.004211 192.503677,537.046509 38.187893,536.918701   C24.657312,536.907532 14.719544,529.579407 7.367126,518.683228   C4.897429,515.023132 3.103041,510.907440 1.000001,507.000000  M211.000000,298.500000   C211.000000,351.243866 211.000000,403.987762 211.000000,456.618713   C237.389938,456.618713 263.107971,456.618713 289.000000,456.618713   C289.000000,454.413818 289.000000,452.588379 289.000000,450.762939   C289.000000,409.774048 288.822021,368.783813 289.137543,327.797363   C289.207733,318.676605 290.368042,309.438843 292.172058,300.485809   C294.986298,286.519287 301.474487,274.819916 315.537842,268.844177   C324.577118,265.003204 334.074249,264.207947 343.564392,265.137299   C356.147491,266.369476 366.181671,272.177826 372.014618,284.013855   C376.881439,293.889496 378.806305,304.548615 378.875885,315.299072   C379.169189,360.618225 379.000000,405.940369 379.000000,451.261414   C379.000000,453.040497 379.000000,454.819580 379.000000,456.688171   C405.249634,456.688171 430.966797,456.688171 456.852753,456.688171   C456.911743,455.577332 456.984497,454.768250 456.993378,453.958466   C457.332520,423.034271 458.021912,392.108459 457.887207,361.186249   C457.779663,336.492828 456.674957,311.803650 455.998688,287.112946   C455.647064,274.274841 452.841431,261.842224 448.844269,249.756958   C441.218353,226.700226 426.356140,209.993652 403.047546,202.276459   C393.878387,199.240677 383.917267,198.536072 374.282990,196.979172   C357.148224,194.210175 340.698700,196.693329 325.001282,204.017532   C310.581665,210.745544 298.706879,220.446777 290.274994,234.131271   C289.494812,235.397461 288.103027,236.286789 285.909729,238.394058   C285.909729,225.602203 285.909729,214.506760 285.909729,203.305954   C260.762634,203.305954 236.045319,203.305954 211.000000,203.305954   C211.000000,234.907166 211.000000,266.203583 211.000000,298.500000  M160.000000,358.500000   C160.000000,306.751709 160.000000,255.003387 160.000000,203.390869   C133.594727,203.390869 107.874557,203.390869 82.253281,203.390869   C82.253281,288.043274 82.253281,372.304565 82.253281,456.697510   C108.226631,456.697510 133.945740,456.697510 160.000000,456.697510   C160.000000,424.097473 160.000000,391.798737 160.000000,358.500000  M158.533234,96.005035   C158.246353,95.421082 158.068634,94.742569 157.656631,94.267006   C147.654816,82.721817 135.893463,75.383247 119.741920,75.823837   C107.109276,76.168427 96.488388,80.894791 88.329269,89.581093   C79.126968,99.377998 74.298935,111.399048 75.848320,125.607254   C77.001335,136.180664 81.036758,145.269318 88.263046,152.516434   C98.296486,162.578781 110.480629,167.687897 125.244064,166.127625   C136.504684,164.937546 146.270462,160.622925 153.671173,152.563828   C167.958847,137.005020 170.926636,115.154762 158.533234,96.005035  z"
-                                                fill="#2867B2" id="path9" opacity="1.000000" stroke="none"></path>
-                                            <path
-                                                d=" M592.463196,541.000000   C586.315430,538.157471 580.390381,535.704590 575.003174,532.380188   C567.137024,527.526123 563.767456,519.488281 562.052795,510.842377   C557.901978,489.912506 571.411316,470.752350 591.511780,467.360840   C610.225708,464.203217 628.415527,473.403992 634.034912,493.554871   C634.338806,494.644592 634.876343,495.669159 635.652588,496.862000   C636.000000,501.689240 636.000000,506.378510 635.649170,511.647217   C634.872559,512.900024 634.257019,513.520020 634.050354,514.254944   C631.980042,521.617920 628.364624,528.163940 621.944824,532.350769   C616.662842,535.795471 610.675049,538.157959 605.000000,541.000000   C600.975464,541.000000 596.950928,541.000000 592.463196,541.000000  M575.487793,525.990173   C583.894043,533.099731 593.027527,537.614746 604.536682,535.036804   C618.387512,531.934204 627.795349,522.463806 629.801758,509.160156   C633.518738,484.514984 611.311707,467.664429 590.581909,472.955811   C577.437134,476.311035 567.277283,489.021362 566.901978,502.507568   C566.655457,511.365387 569.559021,518.775330 575.487793,525.990173  z"
-                                                fill="#2867B2" id="path13" opacity="1.000000" stroke="none"></path>
-                                            <path
-                                                d=" M211.000000,298.000000   C211.000000,266.203583 211.000000,234.907166 211.000000,203.305954   C236.045319,203.305954 260.762634,203.305954 285.909729,203.305954   C285.909729,214.506760 285.909729,225.602203 285.909729,238.394058   C288.103027,236.286789 289.494812,235.397461 290.274994,234.131271   C298.706879,220.446777 310.581665,210.745544 325.001282,204.017532   C340.698700,196.693329 357.148224,194.210175 374.282990,196.979172   C383.917267,198.536072 393.878387,199.240677 403.047546,202.276459   C426.356140,209.993652 441.218353,226.700226 448.844269,249.756958   C452.841431,261.842224 455.647064,274.274841 455.998688,287.112946   C456.674957,311.803650 457.779663,336.492828 457.887207,361.186249   C458.021912,392.108459 457.332520,423.034271 456.993378,453.958466   C456.984497,454.768250 456.911743,455.577332 456.852753,456.688171   C430.966797,456.688171 405.249634,456.688171 379.000000,456.688171   C379.000000,454.819580 379.000000,453.040497 379.000000,451.261414   C379.000000,405.940369 379.169189,360.618225 378.875885,315.299072   C378.806305,304.548615 376.881439,293.889496 372.014618,284.013855   C366.181671,272.177826 356.147491,266.369476 343.564392,265.137299   C334.074249,264.207947 324.577118,265.003204 315.537842,268.844177   C301.474487,274.819916 294.986298,286.519287 292.172058,300.485809   C290.368042,309.438843 289.207733,318.676605 289.137543,327.797363   C288.822021,368.783813 289.000000,409.774048 289.000000,450.762939   C289.000000,452.588379 289.000000,454.413818 289.000000,456.618713   C263.107971,456.618713 237.389938,456.618713 211.000000,456.618713   C211.000000,403.987762 211.000000,351.243866 211.000000,298.000000  z"
-                                                fill="#FFFFFF" id="path19" opacity="1.000000" stroke="none">
-                                            </path>
-                                            <path
-                                                d=" M160.000000,359.000000   C160.000000,391.798737 160.000000,424.097473 160.000000,456.697510   C133.945740,456.697510 108.226631,456.697510 82.253281,456.697510   C82.253281,372.304565 82.253281,288.043274 82.253281,203.390869   C107.874557,203.390869 133.594727,203.390869 160.000000,203.390869   C160.000000,255.003387 160.000000,306.751709 160.000000,359.000000  z"
-                                                fill="#FFFFFF" id="path21" opacity="1.000000" stroke="none">
-                                            </path>
-                                            <path
-                                                d=" M158.784271,96.278015   C170.926636,115.154762 167.958847,137.005020 153.671173,152.563828   C146.270462,160.622925 136.504684,164.937546 125.244064,166.127625   C110.480629,167.687897 98.296486,162.578781 88.263046,152.516434   C81.036758,145.269318 77.001335,136.180664 75.848320,125.607254   C74.298935,111.399048 79.126968,99.377998 88.329269,89.581093   C96.488388,80.894791 107.109276,76.168427 119.741920,75.823837   C135.893463,75.383247 147.654816,82.721817 157.656631,94.267006   C158.068634,94.742569 158.246353,95.421082 158.784271,96.278015  z"
-                                                fill="#FFFFFF" id="path23" opacity="1.000000" stroke="none">
-                                            </path>
-                                            <path
-                                                d=" M591.056030,508.391235   C591.015015,513.660461 591.015015,518.468750 591.015015,523.751343   C589.071838,523.846497 587.349243,523.930847 585.305542,524.030884   C585.305542,510.711731 585.305542,497.660339 585.305542,484.025757   C592.075439,484.025757 599.034912,483.011505 605.531616,484.310852   C612.037292,485.612000 614.589600,487.302979 614.030457,497.353668   C613.762390,502.170349 610.281921,505.616730 604.357056,506.386292   C607.990051,511.975616 611.594421,517.520996 615.429871,523.421753   C610.607666,524.797302 607.414917,524.001099 605.260254,519.732971   C603.583496,516.411621 601.458313,513.317688 599.551514,510.111328   C597.448975,506.575836 594.636475,505.861084 591.056030,508.391235  M604.785217,490.315704   C600.340515,489.735748 595.895813,489.155762 591.328125,488.559753   C591.328125,493.307526 591.328125,497.020691 591.328125,500.999603   C594.619019,500.999603 597.691650,501.476044 600.522827,500.853729   C602.926514,500.325378 605.782471,499.011383 607.032837,497.117218   C607.816040,495.930725 605.998352,493.027313 604.785217,490.315704  z"
-                                                fill="#2867B2" id="path27" opacity="1.000000" stroke="none">
-                                            </path>
+                                                d="M17.5646 14.8417L22.9915 8.53333H21.7055L16.9934 14.0108L13.2298 8.53333H8.88889L14.5802 16.8162L8.88889 23.4315H10.175L15.1511 17.6471L19.1258 23.4315H23.4667L17.5643 14.8417H17.5646ZM15.8032 16.8892L15.2265 16.0644L10.6384 9.50147H12.6137L16.3164 14.7979L16.8931 15.6227L21.7062 22.5073H19.7308L15.8032 16.8895V16.8892Z"
+                                                fill="white"></path>
                                         </svg>
                                     </span>
                                 </a>
@@ -1110,9 +569,8 @@
                         </ul>
                     </div>
                     <!-- 著作権情報 -->
-                    <p class="footer__copyright">© Hukata
+                    <p class="footer__copyright">© Hukatama 2025
                         <span class="footer__line-break"></span> 
-                        Japan 
                     </p>
                 </div>
             </div>

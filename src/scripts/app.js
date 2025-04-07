@@ -74,41 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleDropdown(languageButton, languageMenu);
       }
     });
-
-
-  // 「すべてのメニュー」ドロップダウンの外部クリック
-  const OtherMenuButton = document.getElementById('header-dropdown-toggle');
-  console.log(OtherMenuButton);
-  const OtherMenu = document.getElementById('header-dropdown');
-  console.log(OtherMenu);
-
-  if (OtherMenuButton && OtherMenu) {
-    // クリックしたとき
-    document.addEventListener('click', (event) => {
-      if (
-        // クリックされた要素が、言語選択ボタン内に含まれていないAND
-        !OtherMenuButton.contains(event.target) &&
-        // クリックされた要素が、言語選択メニュー内に含まれていないAND
-        !OtherMenu.contains(event.target) &&
-        // 現在言語選択ドロップダウンが開いている（aria-expanded が 'true'）
-        OtherMenuButton.getAttribute('aria-expanded') === 'true'
-      ) {
-        // ドロップダウン開閉関数を実行
-        toggleDropdown(OtherMenuButton, OtherMenu);
-      }
-    });
-  }
-
-    // Escキーによる閉じる処理
-    // ドキュメント全体に対してキーダウンイベントリスナーを登録
-    document.addEventListener('keydown', (event) => {
-      // 押されたキーが「Esc」AND、ドロップダウンが開いている
-      if (event.key === 'Escape' && 
-        (OtherMenuButton.getAttribute('aria-expanded') === 'true')) {
-        // ドロップダウン開閉関数を実行
-        toggleDropdown(OtherMenuButton, OtherMenu);
-      }
-    });
   }
 });
 
