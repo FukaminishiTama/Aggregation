@@ -91,7 +91,7 @@
     <link rel="alternate" hreflang="en" href="#/en">
 
     <!-- ページのタブやウィンドウの上部（タイトルバー）に表示されるもの -->
-    <title>集計ツール</title>
+    <title>条件付き集計</title>
     
     <!-- CSS -->
     <!-- media="all" パソコン、スマートフォン、タブレット、プリンターなど、あらゆるデバイスでCSSが使用可能 -->
@@ -111,7 +111,7 @@
             <div class="header__content">
                 <!-- サイトロゴを表示する見出し -->
                 <h1 class="header-title">
-                    集計ツール
+                    条件付き集計
                     <!-- サイトロゴの画像 -->
                     <!-- <img class="header-logo__image" src="./images/Main/logo.svg" alt="集計ツール"> -->
                 </h1>
@@ -123,7 +123,7 @@
                     <div class="header__menu--desktop-only">
                         <!-- ナビゲーションメニューのリストを格納するリスト（<ul>タグ） -->
                         <ul class="header-menu">
-                            <!-- 「ホーム」のli -->
+                            <!-- リスト「ホーム」 -->
                             <li class="header-menu__item">
                                 <!-- ナビゲーションメニューのリンク（<a>タグ） 
                                     href="/": ルートURL（トップページ）へのリンク-->
@@ -156,7 +156,7 @@
                         <div class="js-dropdown language-selector" data-dropdown-id="language-selector-desktop"
                             data-dropdown-close-on-outside data-dropdown-close-on-escape data-dropdown-trap-focus
                             data-dropdown-reset-focus="language-selector-toggle-desktop">
-                            <!-- ドロップダウンメニューのトグル-->
+                            <!-- ドロップダウンメニューのボタントグル-->
                             <button id="language-selector-toggle-desktop" class="language-selector__button"
                                 type="button" data-dropdown-toggle="language-selector-desktop" aria-expanded="false"
                                 aria-controls="language-selector-desktop">
@@ -257,22 +257,22 @@
             </li>
             <li class="attention-item">
                 <span class="attention-item__text--isInformation">
-                    手順・ルールにそった集計ができます</span>
+                    条件・ルールのもと集計ができます</span>
            </li>
         </ul>
-        <!-- 手順・ルールのヘッダー -->
+        <!-- 条件・ルールのヘッダー -->
         <section class="section">
             <header class="section__header">
                 <h2 class="section__title">
-                    手順・ルール
+                    条件・ルール
                 </h2>
             </header>
         </section>
-        <!-- 手順・ルールの中身 -->
+        <!-- 条件・ルールの中身 -->
         <div>
             <ul class="stack stack--medium">
                 <li>
-                    <a class="card">
+                    <div class="card">
                         <div class="card__body">
                             <p class="card__title">
                                 <span>
@@ -280,10 +280,10 @@
                                 </span>
                             </p>
                         </div>
-                    </a>
+                    </div>
                 </li>
                 <li>
-                    <a class="card">
+                    <div class="card">
                         <div class="card__body">
                             <p class="card__title">
                                 <span>
@@ -291,10 +291,10 @@
                                 </span>
                             </p>
                         </div>
-                    </a>
+                    </div>
                 </li>
                 <li>
-                    <a class="card">
+                    <div class="card">
                         <div class="card__body">
                             <p class="card__title">
                                 <span>
@@ -302,10 +302,10 @@
                                 </span>
                             </p>
                         </div>
-                    </a>
+                    </div>
                 </li>
                 <li>
-                    <a class="card">
+                    <div class="card">
                         <div class="card__body">
                             <p  class="card__pointtable__title">
                                 上位選択の数字はポイントが高いです
@@ -316,22 +316,22 @@
                                 </span>
                             </p>
                             <p class="card__sub">
-                                <span>1位：4pt</span>
+                                <span>1位：3pt</span>
                             </p>
                             <p class="card__sub">
-                                <span>2位：3pt</span>
+                                <span>2位：2pt</span>
                             </p>
                             <p class="card__sub">
-                                <span>3位：2.5pt</span>
+                                <span>3位：1.5pt</span>
                             </p>
                             <p class="card__sub">
-                                <span>4位：2pt</span>
+                                <span>4位：1pt</span>
                             </p>
                         </div>
-                    </a>
+                    </div>
                 </li>
                 <li>
-                    <a class="card">
+                    <div class="card">
                         <div class="card__body">
                             <p class="card__title">
                                 <span>
@@ -339,7 +339,7 @@
                                 </span>
                             </p>
                         </div>
-                    </a>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -351,138 +351,157 @@
                     ニックネーム
                 </p>
                 <!-- テキストを入力 -->
-                <input type="text" class="form__input--name" placeholder="例）ランフランコ">
+                <input id="form__input" type="text" class="form__input--name" placeholder="例）ランフランコ">
             </div>
         </section>
 
-        <form id="number-form">
-            <div class="number-buttons">
-                <section class="section">
-                    <h2 class="section__title">選択：1回目</h2>
-                </section>
-                <button id="button" class="number-button" value="1">1</button>
-                <button id="button" class="number-button" value="2">2</button>
-                <button id="button" class="number-button" value="3">3</button>
-                <button id="button" class="number-button" value="4">4</button>
-                <button id="button" class="number-button" value="5">5</button>
-                <button id="button" class="number-button" value="6">6</button>
-                <button id="button" class="number-button" value="7">7</button>
-                <button id="button" class="number-button" value="8">8</button>
-                <button id="button" class="number-button" value="9">9</button>
-                <button id="button" class="number-button" value="10">10</button>
-                <button id="button" class="number-button" value="11">11</button>
-                <button id="button" class="number-button" value="12">12</button>
-                <button id="button" class="number-button" value="13">13</button>
-                <button id="button" class="number-button" value="14">14</button>
-                <button id="button" class="number-button" value="15">15</button>
-                <button id="button" class="number-button" value="16">16</button>
-                <button id="button" class="number-button" value="17">17</button>
-                <button id="button" class="number-button" value="18">18</button>
-                <button id="button" class="number-button" value="17">17</button>
-                <button id="button" class="number-button" value="18">18</button>
-                <button id="button" class="number-button" value="17">19</button>
-                <button id="button" class="number-button" value="18">20</button>
+        <form id="form">
+            <div class="number-buttons" select-number="1">
+                <h2 class="section__number-title">
+                選択 : 1 回目
+                    <button class="reset-button" type="button" aria-expanded="false">
+                    リセット
+                    </button>
+                </h2>
+                <p><span class="selected-ranking"></span></p>                
+                <button class="number-button" type="button" value="1">1</button>
+                <button class="number-button" type="button" value="2">2</button>
+                <button class="number-button" type="button" value="3">3</button>
+                <button class="number-button" type="button" value="4">4</button>
+                <button class="number-button" type="button" value="5">5</button>
+                <button class="number-button" type="button" value="6">6</button>
+                <button class="number-button" type="button" value="7">7</button>
+                <button class="number-button" type="button" value="8">8</button>
+                <button class="number-button" type="button" value="9">9</button>
+                <button class="number-button" type="button" value="10">10</button>
+                <button class="number-button" type="button" value="11">11</button>
+                <button class="number-button" type="button" value="12">12</button>
+                <button class="number-button" type="button" value="13">13</button>
+                <button class="number-button" type="button" value="14">14</button>
+                <button class="number-button" type="button" value="15">15</button>
+                <button class="number-button" type="button" value="16">16</button>
+                <button class="number-button" type="button" value="17">17</button>
+                <button class="number-button" type="button" value="18">18</button>
+                <button class="number-button" type="button" value="19">19</button>
+                <button class="number-button" type="button" value="20">20</button>
             </div>
-            <div class="number-buttons">
-                <section class="section">
-                <h2 class="section__title">選択：2回目</h2>
-                </section>
-                <button id="button" class="number-button" value="1">1</button>
-                <button id="button" class="number-button" value="2">2</button>
-                <button id="button" class="number-button" value="3">3</button>
-                <button id="button" class="number-button" value="4">4</button>
-                <button id="button" class="number-button" value="5">5</button>
-                <button id="button" class="number-button" value="6">6</button>
-                <button id="button" class="number-button" value="7">7</button>
-                <button id="button" class="number-button" value="8">8</button>
-                <button id="button" class="number-button" value="9">9</button>
-                <button id="button" class="number-button" value="10">10</button>
-                <button id="button" class="number-button" value="11">11</button>
-                <button id="button" class="number-button" value="12">12</button>
-                <button id="button" class="number-button" value="13">13</button>
-                <button id="button" class="number-button" value="14">14</button>
-                <button id="button" class="number-button" value="15">15</button>
-                <button id="button" class="number-button" value="16">16</button>
-                <button id="button" class="number-button" value="17">17</button>
-                <button id="button" class="number-button" value="18">18</button>
-                <button id="button" class="number-button" value="17">19</button>
-                <button id="button" class="number-button" value="18">20</button>
+            <div class="number-buttons" select-number="2">
+                <h2 class="section__number-title">
+                選択 : 2 回目
+                    <button class="reset-button" type="button" aria-expanded="false">
+                    リセット
+                    </button>
+                </h2>
+                <p><span class="selected-ranking"></span></p>
+                <button class="number-button" type="button" value="1">1</button>
+                <button class="number-button" type="button" value="2">2</button>
+                <button class="number-button" type="button" value="3">3</button>
+                <button class="number-button" type="button" value="4">4</button>
+                <button class="number-button" type="button" value="5">5</button>
+                <button class="number-button" type="button" value="6">6</button>
+                <button class="number-button" type="button" value="7">7</button>
+                <button class="number-button" type="button" value="8">8</button>
+                <button class="number-button" type="button" value="9">9</button>
+                <button class="number-button" type="button" value="10">10</button>
+                <button class="number-button" type="button" value="11">11</button>
+                <button class="number-button" type="button" value="12">12</button>
+                <button class="number-button" type="button" value="13">13</button>
+                <button class="number-button" type="button" value="14">14</button>
+                <button class="number-button" type="button" value="15">15</button>
+                <button class="number-button" type="button" value="16">16</button>
+                <button class="number-button" type="button" value="17">17</button>
+                <button class="number-button" type="button" value="18">18</button>
+                <button class="number-button" type="button" value="19">19</button>
+                <button class="number-button" type="button" value="20">20</button>
             </div>
-            <div class="number-buttons">
-                <section class="section">
-                <h2 class="section__title">選択：3回目</h2>
-                </section>
-                <button id="button" class="number-button" value="1">1</button>
-                <button id="button" class="number-button" value="2">2</button>
-                <button id="button" class="number-button" value="3">3</button>
-                <button id="button" class="number-button" value="4">4</button>
-                <button id="button" class="number-button" value="5">5</button>
-                <button id="button" class="number-button" value="6">6</button>
-                <button id="button" class="number-button" value="7">7</button>
-                <button id="button" class="number-button" value="8">8</button>
-                <button id="button" class="number-button" value="9">9</button>
-                <button id="button" class="number-button" value="10">10</button>
-                <button id="button" class="number-button" value="11">11</button>
-                <button id="button" class="number-button" value="12">12</button>
-                <button id="button" class="number-button" value="13">13</button>
-                <button id="button" class="number-button" value="14">14</button>
-                <button id="button" class="number-button" value="15">15</button>
-                <button id="button" class="number-button" value="16">16</button>
-                <button id="button" class="number-button" value="17">17</button>
-                <button id="button" class="number-button" value="18">18</button>
-                <button id="button" class="number-button" value="17">19</button>
-                <button id="button" class="number-button" value="18">20</button>
+            <div class="number-buttons" select-number="3">
+                <h2 class="section__number-title">
+                選択 : 3 回目
+                    <button class="reset-button" type="button" aria-expanded="false">
+                    リセット
+                    </button>
+                </h2>
+                <p><span class="selected-ranking"></span></p>
+                <button class="number-button" type="button" value="1">1</button>
+                <button class="number-button" type="button" value="2">2</button>
+                <button class="number-button" type="button" value="3">3</button>
+                <button class="number-button" type="button" value="4">4</button>
+                <button class="number-button" type="button" value="5">5</button>
+                <button class="number-button" type="button" value="6">6</button>
+                <button class="number-button" type="button" value="7">7</button>
+                <button class="number-button" type="button" value="8">8</button>
+                <button class="number-button" type="button" value="9">9</button>
+                <button class="number-button" type="button" value="10">10</button>
+                <button class="number-button" type="button" value="11">11</button>
+                <button class="number-button" type="button" value="12">12</button>
+                <button class="number-button" type="button" value="13">13</button>
+                <button class="number-button" type="button" value="14">14</button>
+                <button class="number-button" type="button" value="15">15</button>
+                <button class="number-button" type="button" value="16">16</button>
+                <button class="number-button" type="button" value="17">17</button>
+                <button class="number-button" type="button" value="18">18</button>
+                <button class="number-button" type="button" value="19">19</button>
+                <button class="number-button" type="button" value="20">20</button>
             </div>
-            <div class="number-buttons">
-                <section class="section">
-                <h2 class="section__title">選択：4回目</h2>
-                </section>
-                <button id="button" class="number-button" value="1">1</button>
-                <button id="button" class="number-button" value="2">2</button>
-                <button id="button" class="number-button" value="3">3</button>
-                <button id="button" class="number-button" value="4">4</button>
-                <button id="button" class="number-button" value="5">5</button>
-                <button id="button" class="number-button" value="6">6</button>
-                <button id="button" class="number-button" value="7">7</button>
-                <button id="button" class="number-button" value="8">8</button>
-                <button id="button" class="number-button" value="9">9</button>
-                <button id="button" class="number-button" value="10">10</button>
-                <button id="button" class="number-button" value="11">11</button>
-                <button id="button" class="number-button" value="12">12</button>
-                <button id="button" class="number-button" value="13">13</button>
-                <button id="button" class="number-button" value="14">14</button>
-                <button id="button" class="number-button" value="15">15</button>
-                <button id="button" class="number-button" value="16">16</button>
-                <button id="button" class="number-button" value="17">17</button>
-                <button id="button" class="number-button" value="18">18</button>
-                <button id="button" class="number-button" value="17">19</button>
-                <button id="button" class="number-button" value="18">20</button>
+            <div class="number-buttons" select-number="4">
+                <h2 class="section__number-title">
+                選択 : 4 回目
+                    <button class="reset-button" type="button" aria-expanded="false">
+                    リセット
+                    </button>
+                </h2>
+                <p><span class="selected-ranking"></span></p> 
+                <button class="number-button" type="button" value="1">1</button>
+                <button class="number-button" type="button" value="2">2</button>
+                <button class="number-button" type="button" value="3">3</button>
+                <button class="number-button" type="button" value="4">4</button>
+                <button class="number-button" type="button" value="5">5</button>
+                <button class="number-button" type="button" value="6">6</button>
+                <button class="number-button" type="button" value="7">7</button>
+                <button class="number-button" type="button" value="8">8</button>
+                <button class="number-button" type="button" value="9">9</button>
+                <button class="number-button" type="button" value="10">10</button>
+                <button class="number-button" type="button" value="11">11</button>
+                <button class="number-button" type="button" value="12">12</button>
+                <button class="number-button" type="button" value="13">13</button>
+                <button class="number-button" type="button" value="14">14</button>
+                <button class="number-button" type="button" value="15">15</button>
+                <button class="number-button" type="button" value="16">16</button>
+                <button class="number-button" type="button" value="17">17</button>
+                <button class="number-button" type="button" value="18">18</button>
+                <button class="number-button" type="button" value="19">19</button>
+                <button class="number-button" type="button" value="20">20</button>
             </div>
-            <div class="number-buttons">
-                <section class="section">
-                <h2 class="section__title">選択：5回目</h2>
-                </section>
-                <button id="button" class="number-button" value="1">1</button>
-                <button id="button" class="number-button" value="2">2</button>
-                <button id="button" class="number-button" value="3">3</button>
-                <button id="button" class="number-button" value="4">4</button>
-                <button id="button" class="number-button" value="5">5</button>
-                <button id="button" class="number-button" value="6">6</button>
-                <button id="button" class="number-button" value="7">7</button>
-                <button id="button" class="number-button" value="8">8</button>
-                <button id="button" class="number-button" value="9">9</button>
-                <button id="button" class="number-button" value="10">10</button>
-                <button id="button" class="number-button" value="11">11</button>
-                <button id="button" class="number-button" value="12">12</button>
-                <button id="button" class="number-button" value="13">13</button>
-                <button id="button" class="number-button" value="14">14</button>
-                <button id="button" class="number-button" value="15">15</button>
-                <button id="button" class="number-button" value="16">16</button>
-                <button id="button" class="number-button" value="17">17</button>
-                <button id="button" class="number-button" value="18">18</button>
-                <button id="button" class="number-button" value="17">19</button>
-                <button id="button" class="number-button" value="18">20</button>
+            <div class="number-buttons"  select-number="5">
+                <h2 class="section__number-title">
+                選択 : 5 回目
+                    <button class="reset-button" type="button" aria-expanded="false">
+                    リセット
+                    </button>
+                </h2>
+                <p><span class="selected-ranking"></span></p>
+                <button class="number-button" type="button" value="1">1</button>
+                <button class="number-button" type="button" value="2">2</button>
+                <button class="number-button" type="button" value="3">3</button>
+                <button class="number-button" type="button" value="4">4</button>
+                <button class="number-button" type="button" value="5">5</button>
+                <button class="number-button" type="button" value="6">6</button>
+                <button class="number-button" type="button" value="7">7</button>
+                <button class="number-button" type="button" value="8">8</button>
+                <button class="number-button" type="button" value="9">9</button>
+                <button class="number-button" type="button" value="10">10</button>
+                <button class="number-button" type="button" value="11">11</button>
+                <button class="number-button" type="button" value="12">12</button>
+                <button class="number-button" type="button" value="13">13</button>
+                <button class="number-button" type="button" value="14">14</button>
+                <button class="number-button" type="button" value="15">15</button>
+                <button class="number-button" type="button" value="16">16</button>
+                <button class="number-button" type="button" value="17">17</button>
+                <button class="number-button" type="button" value="18">18</button>
+                <button class="number-button" type="button" value="19">19</button>
+                <button class="number-button" type="button" value="20">20</button>
             </div>
+            <!-- 投票 -->
             <div id="voting" class="vote-button">
                 <div class="vote-button__dent">
                   <button type="submit" class="vote-button__action">
@@ -569,7 +588,7 @@
                         </ul>
                     </div>
                     <!-- 著作権情報 -->
-                    <p class="footer__copyright">© Hukatama 2025
+                    <p class="footer__copyright">© 2025 Fukatama
                         <span class="footer__line-break"></span> 
                     </p>
                 </div>

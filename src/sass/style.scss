@@ -217,8 +217,6 @@ header {
   outline-width: 1px;
 }
 
-
-
 /* -------------------------------------------------
 メイン
 ----------------------------------------------------*/
@@ -292,7 +290,7 @@ header {
 ----------------------------------------------------*/
 .card {
   // カードの角を丸
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   // カードの枠線の幅を1ピクセル
   border-width: 1px;
   display: grid;
@@ -374,13 +372,13 @@ header {
 .form__label-badge {
     border-radius: 0.25rem;
     margin-right: 0.5rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    width: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    width: 2.5rem;
     text-align: center;
     background: #5bc8ac;
     color: #fff;
-    font-size: 10px;
+    font-size: 0.8rem;
   }
 
 // ニックネーム入力
@@ -397,23 +395,49 @@ header {
   }
 
 /* -------------------------------------------------
-数字ボタン
+数字選択
 ----------------------------------------------------*/
+// 選択n回目 
+.section__number-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    line-height: 1;
+    margin-top: 2rem;
+}
+
+// 選択ランク表示 
+.selected-ranking {
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+// リセットボタン
+.reset-button {
+  border-radius: 0.25rem;
+  margin-left: 6rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 5rem;
+  text-align: center;
+  background: #c85b5b;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+// 数字が選択されていない場合は、リセットボタンを非表示
+.reset-button[aria-expanded="false"] {
+  display: none;
+}
+
 button {
   padding: 10px 15px;
   margin: 5px;
   border: none;
   border-radius: 4px;
-  background-color: #007BFF;
-  color: white;
+  background-color: #5b62c8;
+  color: #ffffff;
   cursor: pointer;
-}
-
-
-// 数字ボタンのヘッダータイトル（選択：n回目）
-.number-buttons h2 {
-  padding: 10px;
-  margin: 10px;
 }
 
   // 数字ボタン
@@ -422,14 +446,17 @@ button {
   margin: 5px; 
   border: none; 
   border-radius: 4px; 
-  background-color: #007BFF; 
-  color: white; cursor: pointer; }
+  background-color: #5b62c8; 
+  color: #ffffff; cursor: pointer; }
 
+.number-button:hover {
+  background-color: #c8a55b;  
+}
 
-button:hover {
-  outline-color: #000;
-  outline-style: dashed;
-  outline-width: 1px;
+.number-button.selected {
+  background-color: #c8a55bc9 !important;
+  color: #fff !important;
+  border: 1px solid #5b62c8;
 }
 
 /* -------------------------------------------------
@@ -475,7 +502,7 @@ button:hover {
   left: 15px;
   top: 15px;
   border-radius: 50%;
-  background-color: #ffffff7e;
+  background-color: #ffffff80;
   background-image: url("../images/Button/vote.png");
   background-size: 70%;
   background-repeat: no-repeat;
@@ -485,7 +512,7 @@ button:hover {
 
 // ホバー時の装飾
 .vote-button__surface:hover {
-  background-color: #fff;
+  background-color: #ffffff62;
   background-image: url("../images/Button/vote.png");
   background-size: 70%;
   background-repeat: no-repeat;
@@ -494,7 +521,7 @@ button:hover {
 }
 
 // クリック時の状態変更
-.vote-button__surface--clicked {
+.vote-button__surface:active {
   width: 68px;
   height: 68px;
   left: 16px;
@@ -502,13 +529,63 @@ button:hover {
   // 半透明の黄色
   background:
   radial-gradient(circle, rgb(242, 205, 77,0.2), rgb(218, 181, 103, 0.2));
-    background-color: #fff;
+    background-color: #ffffffc0;
     background-image: url("../images/Button/vote.png");
-    background-size: 50%;
+    background-size: 65%;
     background-repeat: no-repeat;
     background-position: center;
     box-shadow: inset 0 0 0 2.5px rgba(66, 66, 66, 0.25); 
 }
+
+/* -------------------------------------------------
+フッター
+----------------------------------------------------*/
+
+// フッター全体のコンテナ周り
+.footer__inner {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 77.375rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  width: 100%;
+}
+
+// フッター全体のコンテナ
+.footer__content {
+  display: grid;
+  gap: 2rem;
+  width: 100%;
+}
+
+// フッターの各項目全体
+.footer__nav {
+  width: 100%;
+}
+
+// フッターの各項目のリスト
+.footer-nav__list {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .02em;
+  line-height: 1.7;
+}
+
+// フッターの各項目
+.footer-nav__item {
+  margin-bottom: 1rem;
+}
+
+// サイトポリシーなどのフッターのリンク
+.footer-nav__link {
+  margin-left: -.125rem;
+  margin-right: -.125rem;
+  padding-left: .125rem;
+  padding-right: .125rem;
+  text-decoration-line: underline;
+  text-underline-offset: .1875rem;
+}
+
 
 /* -------------------------------------------------
 画面前面にある要素
@@ -582,6 +659,20 @@ button:hover {
     background: #eaedf2;
     font-size: 18px;
   }
+  // フッターのコンテナ
+  .footer__content {
+    grid-template-columns: min-content 1fr;
+    justify-items: start;
+}
+  // フッターの各項目のリスト
+  .footer-nav__list {
+    column-count: 2;
+    font-size: .875rem;
+    font-weight: 400;
+    gap: 2.25rem;
+    letter-spacing: .02em;
+    line-height: 1;
+}
 }
 
 // 画面が「64em（約1024px）」以上
@@ -638,6 +729,15 @@ button:hover {
     padding-left: .75rem;
     padding-right: .75rem;
   }
+  // フッターのコンテナ
+  .footer__content {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    min-height: 8.5rem;
+}
+  // フッターの各項目の全体
+  .footer__nav {
+    grid-column: span 4 / span 4;
+}
 }
 
 // 画面が「80em（約1280px）」以上
