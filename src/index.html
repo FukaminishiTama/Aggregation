@@ -505,7 +505,7 @@
             <div id="voting" class="vote-button">
                 <div class="vote-button__dent">
                   <button type="submit" class="vote-button__action">
-                    <span class="vote-button__surface">
+                    <span class="vote-button__surface" href="\results.html">
                     </span>
                   </button>
                  </div>
@@ -553,36 +553,10 @@
                     <div class="sns footer__sns">
                         <ul aria-label="ソーシャルメディア" class="sns__list">
                             <li class="sns__item">
-                                <!-- X（旧Twitter）へのリンクを定義 
-                                 rel="noreferrer noopener": セキュリティとパフォーマンスを向上-->
-                                <a class="snsButton snsButton--twitter" href="https://x.com/digital_jpn"
-                                    rel="noreferrer noopener" target="_blank">
-                                    <span aria-label="X" class="icon icon--32px" role="img">
-                                        <!-- SVG形式のX（旧Twitter）アイコンを定義 -->
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <!-- 黒い円 -->
-                                            <circle cx="16" cy="16" r="16" fill="black"></circle>
-                                            <path
-                                                d="M17.5646 14.8417L22.9915 8.53333H21.7055L16.9934 14.0108L13.2298 8.53333H8.88889L14.5802 16.8162L8.88889 23.4315H10.175L15.1511 17.6471L19.1258 23.4315H23.4667L17.5643 14.8417H17.5646ZM15.8032 16.8892L15.2265 16.0644L10.6384 9.50147H12.6137L16.3164 14.7979L16.8931 15.6227L21.7062 22.5073H19.7308L15.8032 16.8895V16.8892Z"
-                                                fill="white"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="sns__item">
                                 <!-- Qiitaへのリンクを定義 
                                  rel="noreferrer noopener": セキュリティとパフォーマンスを向上-->
-                                <a class="snsButton snsButton--twitter" href="https://x.com/digital_jpn"
-                                    rel="noreferrer noopener" target="_blank">
-                                    <span aria-label="X" class="icon icon--32px" role="img">
-                                        <!-- SVG形式のQiitaアイコンを定義 -->
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"></svg>
-                                            <circle cx="16" cy="16" r="16" fill="black"></circle>
-                                            <path
-                                                d="M17.5646 14.8417L22.9915 8.53333H21.7055L16.9934 14.0108L13.2298 8.53333H8.88889L14.5802 16.8162L8.88889 23.4315H10.175L15.1511 17.6471L19.1258 23.4315H23.4667L17.5643 14.8417H17.5646ZM15.8032 16.8892L15.2265 16.0644L10.6384 9.50147H12.6137L16.3164 14.7979L16.8931 15.6227L21.7062 22.5073H19.7308L15.8032 16.8895V16.8892Z"
-                                                fill="white"></path>
-                                        </svg>
-                                    </span>
+                                <a class="snsButton snsButton--twitter" href="https://qiita.com/FukaminishiTama" rel="noreferrer noopener" target="_blank">
+                                    <img src="images\SNS\qiita-icon.png" alt="Qiitaアイコン" class="sns--img" role="img">
                                 </a>
                             </li>
                         </ul>
@@ -598,14 +572,14 @@
     <!-- 画面右下に常にあるトップに戻れるボタン -->
     <div class="template__pagetop">
         <button type="button" class="pagetop" aria-label="ページ上部に戻る">
-        <!-- 上矢印のアイコン -->
-        <span aria-hidden="true" class="icon icon--16px" role="img"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16">
-        <path d="M6.75 15.5L6.75 3.37303L1.05383 9.06918L0 7.99998L7.49997 0.5L15 7.99998L13.9461 9.06918L8.24995 3.37303L8.24995 15.5H6.75Z" fill="currentColor"></path>
-      </svg>
-      </span>
+            <!-- 上矢印のアイコン -->
+            <span aria-hidden="true" class="icon icon--16px" role="img">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16">
+                    <path d="M6.75 15.5L6.75 3.37303L1.05383 9.06918L0 7.99998L7.49997 0.5L15 7.99998L13.9461 9.06918L8.24995 3.37303L8.24995 15.5H6.75Z" fill="currentColor"></path>
+                </svg>
+            </span>
       </button>
-      
-      </div>
+    </div>
 
     <script src="scripts/app.js"></script>
 </body>

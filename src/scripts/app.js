@@ -141,8 +141,42 @@ document.addEventListener('DOMContentLoaded', () => {
       renderSelections();
     });
   });
+
+// Enter や Space キーを押す、またはマウスでクリックした場合、ページの先頭へスムーズにスクロール
+// a.u-visually-hidden にフォーカスを移す（スクリーンリーダー用リンク）
+// <main class="template_main template-default_main" id="mainContainer">に移動
+  const focusNavigationLink = () => {
+      document.querySelector("a.u-visually-hidden").focus();
+  };
+  const pagetopElement = document.querySelector(".pagetop");
+  // 特定のキーが押されたときの処理
+  pagetopElement.addEventListener("keydown", (event) => {
+      // Enterキーが押されたら
+      if (event.key === "Enter")
+          // mainに移動
+          focusNavigationLink();
+      // Spaceキーが押されたら
+      if (event.code === "Space") {
+          // スペースキーを押すと、ページがスクロールしてしまうので、それを止める
+          event.preventDefault();
+          // ページを一番上までスクロール
+          window.scrollTo({
+              // 一番上にスクロール
+              top: 0,
+              // アニメーション付きでなめらかにスクロール
+              behavior: "smooth"
+          });
+          // mainに移動
+          focusNavigationLink();
+      }
+  });
+  // クリックしたら
+  pagetopElement.addEventListener("click", () => {
+      //mainに移動 
+      focusNavigationLink();
+  });
+
+
+
+
 });
-
-
-
-

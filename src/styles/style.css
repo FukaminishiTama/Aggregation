@@ -559,6 +559,11 @@ button {
   text-underline-offset: 0.1875rem;
 }
 
+.sns--img {
+  height: 2rem;
+  width: 2rem;
+}
+
 /* -------------------------------------------------
 画面前面にある要素
 ----------------------------------------------------*/
@@ -571,7 +576,45 @@ button {
           justify-content: flex-end;
   padding-right: 1.25rem;
   pointer-events: none;
-  width: 100vw;
+}
+
+.pagetop, .pagetop:hover {
+  --tw-border-opacity: 1;
+  --tw-bg-opacity: 1;
+  --tw-text-opacity: 1;
+}
+
+.pagetop {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+  border-color: rgb(0 23 193/var(--tw-border-opacity));
+  border-radius: 624.9375rem;
+  border-width: 1px;
+  border-style: solid;
+  bottom: 1.25rem;
+  color: rgb(0 23 193/var(--tw-text-opacity));
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 4rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  pointer-events: auto;
+  position: fixed;
+  width: 4rem;
+}
+
+.pagetop:hover {
+  background-color: rgba(91, 98, 200, 0.3490196078);
+}
+
+.icon--16px {
+  height: 1rem;
+  width: 1rem;
 }
 
 /* ---------------------------------------------
@@ -806,6 +849,8 @@ div.preview-block .mdcontainer-card__thumb {
 
 /* ---------------------------------------------
 アクセシビリティ対応
+視覚的には非表示でも、
+スクリーンリーダーでは読み上げ対象になる要素にフォーカス
 ------------------------------------------------- */
 [hidden] {
   display: none;
