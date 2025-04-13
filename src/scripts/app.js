@@ -78,19 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ニックネーム未入力アラート
-    const form = document.getElementById('form');
-    const nicknameInput = document.getElementById('form__input');
-  
-    // form配下のsubmit（投票）がクリックされたらアラートを表示
-    form.addEventListener('submit', (event) => {
-      if (!nicknameInput.value.trim()) {
-        alert('ニックネームを入力してください');
-        // サーバーに送信しないようにストップ（フォームのデフォルトの送信動作を止める）
-        event.preventDefault();
-      }
-    });
-
 // 4つまでの数字ボタン選択と表示、リセットボタンの表示
   // 各セクションのリセットボタンと選択結果表示エリアを取得
   const sections = document.querySelectorAll('.number-buttons');
@@ -107,9 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // リストに順位と選んだ数字を格納
     const renderSelections = () => {
       display.innerHTML = selectedNumbers.map((num, i) => 
-        // 右にマージンをつけて、「1位：数字」形式を空白で繋げて文字列表示
-        `<span style="margin-right: 1rem;">${i + 1}位：${num}</span>`).join(' ');
-    };
+        // 繋げた文字列を表示する要素を追加
+        `<span class="selected-ranking__text" rank=${i + 1} number=${num}>${i + 1}位：${num}</span>`).join('');
+      };
   
     // どれか数字をクリックしたときの処理
     numberButtons.forEach(button => {
@@ -121,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
         // 配列に追加
         selectedNumbers.push(value);
-        // 選ばれたボタンにclass付与（CSS装飾）
+        // 選ばれたボタンにCSS装飾（class="number-button selected"に変更）
         button.classList.add('selected');
         // リセットボタン表示
         resetBtn.setAttribute('aria-expanded', String('true'));
@@ -176,7 +163,63 @@ document.addEventListener('DOMContentLoaded', () => {
       focusNavigationLink();
   });
 
+  // 非同期の順番を待つ（前行の処理を待つ）ためにasyncを使用
+  document.querySelector('.vote-button__action').addEventListener('click', async () => {
+    // 入力欄 #form__input から名前を取得（空白は除去）
+    const nickname = document.getElementById('form__input').value.trim();
+    // 返り値が空（null）なら、アラートを表示して終了
+    if (!nickname) return alert('ニックネームを入力してください');
+  
+    const selections = [];
 
-
+    // 各ラウンドを表す要素（.number-buttons）をすべて取得
+    document.querySelectorAll('.number-buttons').forEach(section => {
+      
+      // 1. タイトル部分の取得
+      // .section__number-title 内のspanタグのテキストを抽出
+      const titleElement = section.querySelector('.section__number-title span');
+      let roundTitle = titleElement ? titleElement.textContent.trim() : '';
+      // "選択 : " などの不要な部分を取り除いて、"1 回目" のような文字列を得る
+      roundTitle = roundTitle.replace(/^選択\s*:\s*/, '');
+      
+      // 2. ランキング情報の取得
+      // ラウンド内で選択された要素(.selected-ranking__text)を取得
+      const selectedSpans = section.querySelectorAll('.selected-ranking__text');
+      const rankings = [];
+      
+      if(selectedSpans.length > 0) {
+        // 各選択要素について、rankとnumber属性の値を取り出す
+        selectedSpans.forEach(span => {
+          const rank = span.getAttribute('rank');    // 例： "1"
+          const number = span.getAttribute('number');  // 例： "7"
+          // 数値として扱いたい場合は Number() で変換（ここでは数値に変換しています）
+          rankings.push([Number(rank), Number(number)]);
+        });
+      } else {
+        // もし選択されている要素がなければ、ランキング情報がないことを示すために [null] とする例
+        rankings.push([null]);
+      }
+      
+      // 3. ラウンドタイトルとランキング情報の配列を selections に追加する
+      selections.push([roundTitle, rankings]);
+    });    
+  
+    const payload = { nickname, selections };
+  
+    // Web API など外部のサービスと非同期通信する（await:非同期の順番を待つ）
+    // fetch 関数が返す Promise が解決されるまで処理が一時停止（POST リクエストが完了し、サーバーからレスポンスを受け取るまで次のコードに進まないようにする）
+    // HTTP リクエストを発行する関数(/api/vote というエンドポイントに POST リクエストを送信)
+    await fetch('/api/vote', {
+      // メソッドとしてPOST（サーバーにデータを送信）を指定
+      method: 'POST',
+      // リクエストのデータ形式などの追加情報をサーバーに伝える（ここではJSON形式）
+      headers: { 'Content-Type': 'application/json' },
+      // サーバーに送信するデータ本体（payload を JSON 形式の文字列に変換）
+      body: JSON.stringify(payload)
+    });
+  
+    // 投票（fetch）完了後、結果ページに遷移
+    window.location.href = 'result.html';
+  });
 
 });

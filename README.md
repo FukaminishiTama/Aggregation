@@ -1,5 +1,35 @@
 ### README
 
+# フロー
+Node.js + JSONファイルベースでローカルサーバー構築
+
+投票ボタン（.vote-button__action） がクリックされたとき：
+1. データを収集する
+	A.<input id="form__input" type="text" class="form__input--name" placeholder="例）ランフランコ">のユーザ入力値
+	B.<h2 class="section__number-title">のテキストノード
+	C.Bごとの<span style="margin-right: 1rem;"></span>のテキストノード
+
+2. 収集したデータをサーバ等に保存します。（他ユーザと共有する）
+保存したデータをresult.htmlに表示したいです。
+例えば以下のような表示です。
+Aさん
+選択 : 2 回目
+1位：6 2位：8
+
+選択 : 4 回目
+1位：1 2位：16 3位：17 4位：18
+
+3. すでに他ユーザ（文字列が違うA）が投票をしていた場合
+自分のデータと他ユーザのデータを集計して、ポイント計算をします。
+ポイントのルールは以下の通りです。
+1位：3pt
+2位：2pt
+3位：1.5pt
+4位：1pt
+
+4. 集計した結果を表示してください。
+
+
 # 集計ツール
 
 このアプリは、ユーザーが名前を入力し、1から18までの数字を選択して送信できるウェブアプリケーションです。
@@ -31,17 +61,23 @@ style.scss → style.css → HTMLに読み込ませる
 
 ```
 Aggregation/
- ├── node_modules/       
+ ├── data/
+ │    └── votes.json
+ ├── node_modules/
  ├── src/
  │    ├── index.html
+ │    ├── results.html
  │    ├── images/
  │    ├── sass/
  │    │    └── style.scss      
  │    ├── scripts/
- │    │    └── app.js
+ │    │    ├── app.js
+ │    │    └── results.js
  │    └── styles/
  │         ├── style.css
  │         └── style.css.map
+ ├── server.js
+ ├── README.md
  ├── package.json        
  └── package-lock.json  
 ```
