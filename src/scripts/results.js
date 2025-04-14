@@ -19,7 +19,6 @@ fetch('/api/results')
 
     for (const [nickname, allRounds] of Object.entries(data)) {
       voteHtml += `<h2>${nickname}さん</h2>`;
-      aggregateHtml += `<h2>${nickname}さん</h2>`;
 
       // 例 : round = ["1回目", [ [1, 6], [2, 2] ]]
       allRounds.forEach((round) => {
@@ -27,41 +26,49 @@ fetch('/api/results')
         const [roundTitle, rankings] = round;
 
         // 投票結果
-        // 例：「第1回投票」などのタイトル表示
-        voteHtml += `<div class="round">${roundTitle}<br>`;
+        // 例：「1回目」
+        voteHtml += `<div class="round">${roundTitle}</div>`;
         // 例：「1,6」なら「1位：6」などを追加、[0,0]なら「投票なし」と表示
         if (rankings[0][0] === null) {
-          voteHtml += `投票なし</div>`;
+          voteHtml += `<div class="round__rankings"><p>投票なし</p></div>`;
         // 投票がある場合、順位（rank）と番号（number）を1つずつ取り出して整形
         } else {
+          voteHtml += `<div class="round__rankings"><p>`;
           voteHtml += rankings.map(([rank, number]) => 
             // 例 : 「1位：6」
             `${rank}位：${number}`).join(', ');
-          voteHtml += `</div>`;
+          voteHtml += `</p></div>`;
         }
 
         // 現時点のポイント
-        aggregateHtml += `<div class="points">${roundTitle}<br>`;
+        aggregateHtml += `<div class="points">${roundTitle}</div>`;
         // ポイント集計用
         const roundPointMap = {};
         // 例：「1,6」なら「1位：6」などを追加、[0,0]なら「投票なし」と表示
         if (rankings[0][0] === null) {
-          aggregateHtml += `投票なし</div>`;
+          aggregateHtml += `<div class="points__rankings"><p>投票なし</p></div>`;
         // 投票がある場合、順位（rank）と番号（number）を1つずつ取り出して整形
         } else {
           rankings.forEach(([rank, number]) => {
-            // pointValuesリストからrankに応じたポイントを抽出
-            // もしくは「null / undefined / 0 / false / NaN / 空文字列」なら0を代入
             const points = pointValues[rank - 1] || 0;
-            // 現時点の合計点に加算する
             roundPointMap[number] = (roundPointMap[number] || 0) + points;
           });
           
-          // 例 : 「6 : 3pt」
-          const formattedPoints = Object.entries(roundPointMap)
-          .map(([num, pt]) => `${num} : ${pt}pt`).join(', ');
-        
-          aggregateHtml += `${formattedPoints}</div>`;
+          // ポイントを降順でソート
+          const sortedPoints = Object.entries(roundPointMap)
+            .sort(([, pointsA], [, pointsB]) => pointsB - pointsA);
+          
+          // トップ3に色を付けてフォーマット
+          const formattedPoints = sortedPoints.map(([num, pt], index) => {
+            let colorClass = '';
+            if (index === 0) colorClass = 'highlight-yellow'; // 1位: 黄色
+            else if (index === 1) colorClass = 'highlight-blue'; // 2位: 青色
+            else if (index === 2) colorClass = 'highlight-brown'; // 3位: 茶色
+          
+            return `<span class="${colorClass}">${num} : ${pt}pt</span>`;
+          }).join(', ');
+          
+          aggregateHtml += `<div class="points__rankings"><p>${formattedPoints}</p></div>`;
         }
       });
     }

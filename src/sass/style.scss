@@ -646,22 +646,45 @@ button {
 /* ---------------------------------------------
 投票結果
 ------------------------------------------------- */
-// h1 {
-//   color: #000000;
-// }
-.round {
+.round, .points {
   font-size: 1.375rem;
   font-weight: 700;
   letter-spacing: .02em;
-  line-height: 1;
-  margin-top: 2rem;
+  line-height: 2rem;
+  margin-top: 0.5rem;
 }
-.points {
-  font-size: 1.375rem;
-  font-weight: 700;
-  letter-spacing: .02em;
-  line-height: 1;
-  margin-top: 2rem;
+.round__rankings, .points__rankings {
+  display: grid;
+  gap: 1rem;
+  // カードの角を丸
+  border-radius: 0.5rem;
+  // カードの枠線の幅を1ピクセル
+  border-width: 1px;
+  display: grid;
+  height: 100%;
+  // カードのコンテンツがカードの領域を超えた場合に、超えた部分を非表示
+  overflow: hidden;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.highlight-yellow {
+  color: #c8b45b;
+  font-weight: bold;
+}
+
+.highlight-blue {
+  color: #5b62c8;
+  font-weight: bold;
+}
+
+.highlight-brown {
+  color: #c87a5b;
+  font-weight: bold;
 }
 
 /* ---------------------------------------------

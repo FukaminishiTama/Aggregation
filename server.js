@@ -14,9 +14,9 @@ const app = express();
 const DATA_PATH = path.join(__dirname, 'data', 'votes.json');
 
 
-// publicフォルダ内のHTML・CSS・JSファイルを公開
-app.use(express.static('public'));
-// JSON形式のリクエスト（POST時）を自動的に読み取れるようにする
+// srcフォルダ内のHTML・CSS・JSファイルを公開
+app.use(express.static('src'));
+// POSTリクエスト時にJSON形式を自動的に読み取れるようにする
 app.use(express.json());
 
 // フロントエンドから送られた投票データを JSON ファイルに保存（POST）
@@ -24,16 +24,22 @@ app.post('/api/vote', (req, res) => {
   // フロントから送られてきた {nickname, selections}を受け取る
   const vote = req.body;
 
-  //   
+  // 受け取ったデータを votes.json に保存するための準備
   let votes = {};
   if (fs.existsSync(DATA_PATH)) {
-    votes = JSON.parse(fs.readFileSync(DATA_PATH));
-  }
+    // エンコーディングと空白除去
+    const content = fs.readFileSync(DATA_PATH, 'utf8').trim();
+    // if文(条件 ? 真のときの値 : 偽のときの値)
+    // content があれば JSON.parse(content) をして votes に代入。なければ {} を代入する。
+    votes = content ? JSON.parse(content) : {};
+  }  
 
   // 同じニックネームがある場合は上書き
   votes[vote.nickname] = vote.selections;
-
-  fs.writeFileSync(DATA_PATH, JSON.stringify(votes, null, 2));
+  // 書き込むときの文字コード
+  const jsonString = JSON.stringify(votes, null, 2);
+  fs.writeFileSync(DATA_PATH, jsonString, 'utf-8');
+  // 書き込み完了後、フロントエンドに成功レスポンスを返す
   res.status(200).send({ success: true });
 });
 
