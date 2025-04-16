@@ -17,18 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // HTML内のすべてのdata-dropdown-toggle属性を持つ要素（通常ボタン）を選択して、dropdownTogglesにNodeListとして格納
   const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
-  console.log(dropdownToggles);
   
   // 各ドロップダウンボタンに対して順番に処理
   dropdownToggles.forEach(button => {
     // ボタンに書かれているdata-dropdown-toggle属性から「このボタンがどの要素を開閉対象にしているか」のIDを取得
     // getAttributeメソッド：「data-dropdown-toggle="xxxxx"」のxxxxx部分を取得
     const targetId = button.getAttribute('data-dropdown-toggle');
-    console.log(targetId);
     // 上記で取得したIDに該当する要素（例えば<ul>以下全部）をdocument.getElementById()で取得
     const target = document.getElementById(targetId);
-    console.log(target);
-    console.log(button);
 
     // targetが存在しない場合(none)は処理を終了
     if (!target) return;
@@ -45,9 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 言語選択ドロップダウンの外部クリック
   const languageButton = document.getElementById('language-selector-toggle-desktop');
-  console.log(languageButton);
   const languageMenu = document.getElementById('language-selector-desktop');
-  console.log(languageMenu);
 
   // 両方の要素が正しく取得できた場合のみ処理を実行(イベントリスナー登録)
   if (languageButton && languageMenu) {
@@ -165,13 +159,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 非同期の順番を待つ（前行の処理を待つ）ためにasyncを使用
   document.querySelector('.vote-button__action').addEventListener('click', async () => {
+    // フォーム送信を防ぐ
+    event.preventDefault();
     // 入力欄 #form__input から名前を取得（空白は除去）
     const nickname = document.getElementById('form__input').value.trim();
     // 返り値が空（null）なら、アラートを表示して終了
-    if (!nickname) return alert('ニックネームを入力してください');
+    if (!nickname) {
+      alert('ニックネームを入力してください');
+      return; // 処理を終了
+    }
   
-    const selections = [];
+  // ポイント表の値を取得
+  const pointInputs = document.querySelectorAll('.card__sub input[type="number"]');
+  const pointValues = Array.from(pointInputs).map(input => parseFloat(input.value) || 0);
 
+  // 配列が空かどうかをチェック
+  if (pointValues.length === 0) {
+    alert('ポイントの入力値がありません');
+    return; // ここで処理を終了（関数内ならreturn、または処理を打ち切る）
+  }
+    // 各ラウンドのデータ[n回目,[順位,番号]]を収集
+    const selections = [];
     // 各ラウンドを表す要素（.number-buttons）をすべて取得
     document.querySelectorAll('.number-buttons').forEach(section => {
       
@@ -204,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       selections.push([roundTitle, rankings]);
     });    
   
-    const payload = { nickname, selections };
+    const payload = { pointValues, nickname, selections };
   
     // Web API など外部のサービスと非同期通信する（await:非同期の順番を待つ）
     // fetch 関数が返す Promise が解決されるまで処理が一時停止（POST リクエストが完了し、サーバーからレスポンスを受け取るまで次のコードに進まないようにする）
@@ -219,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
     // 投票（fetch）完了後、結果ページに遷移
-    window.location.href = 'result.html';
+    window.location.href = 'results.html';
   });
 
 });

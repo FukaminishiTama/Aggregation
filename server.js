@@ -21,7 +21,7 @@ app.use(express.json());
 
 // フロントエンドから送られた投票データを JSON ファイルに保存（POST）
 app.post('/api/vote', (req, res) => {
-  // フロントから送られてきた {nickname, selections}を受け取る
+  // フロントから送られてきた {pointValues,nickname, selections}を受け取る
   const vote = req.body;
 
   // 受け取ったデータを votes.json に保存するための準備
@@ -34,11 +34,23 @@ app.post('/api/vote', (req, res) => {
     votes = content ? JSON.parse(content) : {};
   }  
 
-  // 同じニックネームがある場合は上書き
-  votes[vote.nickname] = vote.selections;
+  console.log('Received vote data:', vote);
+  
+  // まず pointValues を保存
+  if (vote.pointValues) {
+    votes.pointValues = vote.pointValues;
+  }
+  // その後、nickname と selections を保存
+  if (vote.nickname) {
+    votes[vote.nickname] = {
+      selections: vote.selections || []
+    };
+  }
+
   // 書き込むときの文字コード
   const jsonString = JSON.stringify(votes, null, 2);
   fs.writeFileSync(DATA_PATH, jsonString, 'utf-8');
+
   // 書き込み完了後、フロントエンドに成功レスポンスを返す
   res.status(200).send({ success: true });
 });
