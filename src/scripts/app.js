@@ -169,15 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return; // 処理を終了
     }
   
-  // ポイント表の値を取得
-  const pointInputs = document.querySelectorAll('.card__sub input[type="number"]');
-  const pointValues = Array.from(pointInputs).map(input => parseFloat(input.value) || 0);
-
-  // 配列が空かどうかをチェック
-  if (pointValues.length === 0) {
-    alert('ポイントの入力値がありません');
-    return; // ここで処理を終了（関数内ならreturn、または処理を打ち切る）
-  }
     // 各ラウンドのデータ[n回目,[順位,番号]]を収集
     const selections = [];
     // 各ラウンドを表す要素（.number-buttons）をすべて取得
@@ -212,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
       selections.push([roundTitle, rankings]);
     });    
   
-    const payload = { pointValues, nickname, selections };
+    const payload = { nickname, selections };
   
     // Web API など外部のサービスと非同期通信する（await:非同期の順番を待つ）
     // fetch 関数が返す Promise が解決されるまで処理が一時停止（POST リクエストが完了し、サーバーからレスポンスを受け取るまで次のコードに進まないようにする）

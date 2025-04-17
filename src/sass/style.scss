@@ -457,7 +457,9 @@ button {
   border: none; 
   border-radius: 4px; 
   background-color: #5b62c8; 
-  color: #ffffff; cursor: pointer; }
+  color: #ffffff;
+  cursor: pointer;
+}
 
 .number-button:hover {
   background-color: #c8a55b;  
@@ -691,8 +693,34 @@ button {
   margin-bottom: 2rem;
 }
 
-.points-table {
-  font-size: 0.7125rem;
+.point-text {
+  font-size: 0.875rem;
+}
+
+.point__card {
+  // カードの角を丸
+  border-radius: 0.5rem;
+  // カードの枠線の幅を1ピクセル
+  border-width: 1px;
+  display: grid;
+  height: 100%;
+  // カードのコンテンツがカードの領域を超えた場合に、超えた部分を非表示
+  overflow: hidden;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.point-confirm-button {
+  padding: 0.275rem; 
+  margin: 0.5rem; 
+  margin-left: 5rem;
+  border: none; 
+  border-radius: 4px; 
+  background-color: #5b62c8; 
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .highlight-yellow {
@@ -710,7 +738,7 @@ button {
   font-weight: bold;
 }
 .sns__line {  
-  font-size: 0.875rem;
+  font-size: 1rem;
   display: inline-flex; /* テキストとSVGを横並びにする */
   align-items: center; /* テキストとSVGを縦方向に中央揃え */
 }

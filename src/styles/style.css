@@ -666,8 +666,31 @@ button {
   margin-bottom: 2rem;
 }
 
-.points-table {
-  font-size: 0.7125rem;
+.point-text {
+  font-size: 0.875rem;
+}
+
+.point__card {
+  border-radius: 0.5rem;
+  border-width: 1px;
+  display: grid;
+  height: 100%;
+  overflow: hidden;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0/var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+}
+
+.point-confirm-button {
+  padding: 0.275rem;
+  margin: 0.5rem;
+  margin-left: 5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #5b62c8;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .highlight-yellow {
@@ -686,7 +709,7 @@ button {
 }
 
 .sns__line {
-  font-size: 0.875rem;
+  font-size: 1rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex; /* テキストとSVGを横並びにする */

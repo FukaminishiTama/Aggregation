@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', () => {
 fetch('/api/results')
   .then(res => res.json())
   // (data => {"pointValues":[pt,pt,pt,pt],ニックネーム:[n回目:[順番,番号]]})
@@ -7,81 +8,87 @@ fetch('/api/results')
     const voteResults = document.getElementById('vote__results');
     voteResults.innerHTML = ''; // 初期化
 
-      // "pointValues"以外のキーだけ抽出（ニックネーム一覧）
-      const userKeys = Object.keys(data).filter(key => key !== 'pointValues');
-      // 最新（最後）のニックネームを取得（例："あぼかど"）
-      const latestUser = userKeys.at(-1);  // または userKeys[userKeys.length - 1]
+    // 最新のニックネームだけ取得
+    const nicknames = Object.keys(data);
+    const latestNickname = nicknames[nicknames.length - 1];
+    const selections = data[latestNickname];
 
-      // そのユーザーの選択データを取得
-      const allRounds = data[latestUser].selections;
-      // <h2>を作成
-      const userHeading = document.createElement('h2');
-      // ニックネームの文字列取得
-      userHeading.textContent = `${latestUser}さん`;
-      // <h2>ニックネーム</h2>をvoteResultsに追加
-      voteResults.appendChild(userHeading);
+    // 見出し表示
+    const userHeading = document.createElement('h2');
+    userHeading.textContent = `${latestNickname}さん`;
+    voteResults.appendChild(userHeading);
 
-      allRounds.forEach(([roundTitle, rankings]) => {
-        // <div>
-        const roundTitleDiv = document.createElement('div');
-        // class='round'を指定
-        roundTitleDiv.className = 'round';
-        // n回目 
-        roundTitleDiv.textContent = roundTitle;
-        // <div class="round">n回目</div>をvoteResultsに追加
-        voteResults.appendChild(roundTitleDiv);
+    selections.forEach(([roundTitle, rankings]) => {
+      // <div>
+      const roundTitleDiv = document.createElement('div');
+      // class='round'を指定
+      roundTitleDiv.className = 'round';
+      // n回目 
+      roundTitleDiv.textContent = roundTitle;
+      // <div class="round">n回目</div>をvoteResultsに追加
+      voteResults.appendChild(roundTitleDiv);
 
-        const voteBlock = document.createElement('div');
-        voteBlock.className = 'round__rankings';
-        const voteText = document.createElement('p');
+      const voteBlock = document.createElement('div');
+      voteBlock.className = 'round__rankings';
+      const voteText = document.createElement('p');
 
-        // rankingsがnullなら投票なし
-        if (rankings[0][0] === null) {
-          voteText.textContent = '投票なし';
-        } else {
-        // 存在すれば、例:1位【9】
-          voteText.textContent = rankings.map(([rank, number]) =>
-            `${rank}位【${number}】`
-          ).join('-  ');
-        }
+      // rankingsがnullなら投票なし
+      if (rankings[0][0] === null) {
+        voteText.textContent = '投票なし';
+      } else {
+      // 存在すれば、例:1位【9】
+        voteText.textContent = rankings.map(([rank, number]) =>
+          `${rank}位【${number}】`
+        ).join('-  ');
+      }
 
-        // <p>順位【番号】- 順位【番号】</p>をvoteBlockに追加
-        voteBlock.appendChild(voteText);
-        // 上記に更に<div class="round__rankings">をvoteBlockに追加
-        voteResults.appendChild(voteBlock);
+      // <p>順位【番号】- 順位【番号】</p>をvoteBlockに追加
+      voteBlock.appendChild(voteText);
+      // 上記に更に<div class="round__rankings">をvoteBlockに追加
+      voteResults.appendChild(voteBlock);
 
-      });
+    });
 
   // ----- 集計結果エリア -----
+  const pointConfirmButton = document.getElementById('point-confirm-button');
+  const aggregateResultsContainer = document.getElementById('aggregate-results__container');
+  const pointInputs = document.querySelectorAll('.card__sub input[type="number"]');
+
+  // 非同期の順番を待つ（前行の処理を待つ）ためにasyncを使用
+  pointConfirmButton.addEventListener('click', async () => {
     //ポイントの入力値を取得、pointValuesリストで保持（例:[3,2,1.5,1]）
-    const pointValues =  data.pointValues || [];
-    
+    const inputPointValues = Array.from(pointInputs).map(input => parseFloat(input.value) || 0);
+
+    // 配列が空かどうかをチェック
+    if (inputPointValues.length === 0) {
+      alert('ポイントの入力値がありません');
+      return; // ここで処理を終了（関数内ならreturn、または処理を打ち切る）
+  }
+
     // 表示用の文字列を作成
-    const pointText = pointValues.map((pt, index) => `${index + 1}位:${pt}pt`).join('   ');
+    const pointText = inputPointValues.map((pt, index) => `${index + 1}位:${pt}pt`).join('   ');
     // 表示エリアを取得
-    const aggregateResultsSection = document.getElementById('aggregate__results-text');
-    // 表示用の要素を作成
-    const pointDisplay = document.createElement('div');
-    // class='point-table'を指定
-    pointDisplay.className = 'points-table';
-    pointDisplay.textContent = pointText;
-    // 表示エリアに追加
-    aggregateResultsSection.appendChild(pointDisplay);
+    const pointTextDisplay = document.getElementById('point-text');
 
+    // 結果を更新
+    pointTextDisplay.textContent = pointText;
+    // pt結果表示
+    aggregateResultsContainer.setAttribute('aria-expanded', String('true'));
 
+    // hidden属性をfalseにして「LINE共有を表示」
+    aggregateResultsContainer.hidden = false;
+
+    // 順位による入力ptデータ取得
+    const pointValues =  inputPointValues;
+    
     // 集計結果エリアの初期化
     const aggregateResults = document.getElementById('aggregate__results');
     aggregateResults.innerHTML = ''; // 初期化
     const totalRoundPoints = {}; // 各ラウンドの合計ポイントを保持
 
-      // "pointValues"以外のキー（ユーザー名）だけを抽出
-      const pointUserKeys = Object.keys(data).filter(key => key !== 'pointValues');
-
       // 全ユーザーが対象
-      pointUserKeys.forEach(user => {
+      Object.values(data).forEach(selections => {
       // 各ユーザーの選択データ（例:["1回目", [ [1, 3], [2, 7] ]],）を取得
-        const selections = data[user].selections;
-      
         // 1回目から順番に処理
         selections.forEach(([roundTitle, rankings]) => {
           // 各回用の{}を作成
@@ -108,9 +115,7 @@ fetch('/api/results')
     totalRoundPoints = {
       "1回目": { 7: 3, 2: 2, ... },
       "2回目": { 6: 3, 12: 2, ... },
-    
     */
-
     Object.entries(totalRoundPoints).forEach(([roundTitle, roundPointMap]) => {
       // ラウンドタイトルを表示
       const pointsTitleDiv = document.createElement('div');
@@ -121,8 +126,6 @@ fetch('/api/results')
       const pointBlock = document.createElement('div');
       pointBlock.className = 'points__rankings';
       const pointText = document.createElement('p');
-
-      console.log(Object(roundPointMap));
 
         // roundPointMapが{}なら投票なし
         if (Object.keys(roundPointMap).length === 0) {
@@ -194,5 +197,6 @@ fetch('/api/results')
         const lineUrl = `https://social-plugins.line.me/lineit/share?text=${encodedText}`;
         window.open(lineUrl, '_blank');
       });
-
+    });
+  });
 });
