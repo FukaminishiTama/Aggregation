@@ -1,19 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
- 
 fetch('/api/results')
   .then(res => res.json())
+  // (data => {"pointValues":[pt,pt,pt,pt],ニックネーム:[n回目:[順番,番号]]})
   .then(data => {
 
     // ----- 投票結果エリア -----
     const voteResults = document.getElementById('vote__results');
     voteResults.innerHTML = ''; // 初期化
 
-    // 最新のニックネームを取得(data => {ニックネーム:[n回目:[順番,番号]]})
-    const latestNickname = Object.keys(data).pop(); // 最後のキーを取得
-    const allRounds = data[latestNickname];
+      // "pointValues"以外のキーだけ抽出（ニックネーム一覧）
+      const userKeys = Object.keys(data).filter(key => key !== 'pointValues');
+      // 最新（最後）のニックネームを取得（例："あぼかど"）
+      const latestUser = userKeys.at(-1);  // または userKeys[userKeys.length - 1]
+
+      // そのユーザーの選択データを取得
+      const allRounds = data[latestUser].selections;
+      // <h2>を作成
       const userHeading = document.createElement('h2');
       // ニックネームの文字列取得
-      userHeading.textContent = `${latestNickname}さん`;
+      userHeading.textContent = `${latestUser}さん`;
       // <h2>ニックネーム</h2>をvoteResultsに追加
       voteResults.appendChild(userHeading);
 
@@ -31,7 +35,7 @@ fetch('/api/results')
         voteBlock.className = 'round__rankings';
         const voteText = document.createElement('p');
 
-        // rankingsが0なら投票なし
+        // rankingsがnullなら投票なし
         if (rankings[0][0] === null) {
           voteText.textContent = '投票なし';
         } else {
@@ -49,55 +53,64 @@ fetch('/api/results')
       });
 
   // ----- 集計結果エリア -----
-  //ポイントの入力値を取得、pointValuesリストで保持（例:[3,2,1.5,1]）
-  const updatePointValues = () => {
-    const inputs = document.querySelectorAll('.card__sub input[type="number"]');
-    console.log('Inputs:', inputs); // デバッグ用
-    const newPointValues = Array.from(inputs).map(input => parseFloat(input.value) || 0);
-    console.log('Point Values:', newPointValues); // デバッグ用
-    return newPointValues;
-  };
-  
-  // 投票ボタンが押されたタイミングでポイントを更新
-  document.getElementById('form').addEventListener('submit', (event) => {
-    event.preventDefault(); // フォームのデフォルト動作を防止
-    const pointValues = updatePointValues();
+    //ポイントの入力値を取得、pointValuesリストで保持（例:[3,2,1.5,1]）
+    const pointValues =  data.pointValues || [];
+    
+    // 表示用の文字列を作成
+    const pointText = pointValues.map((pt, index) => `${index + 1}位:${pt}pt`).join('   ');
+    // 表示エリアを取得
+    const aggregateResultsSection = document.getElementById('aggregate__results-text');
+    // 表示用の要素を作成
+    const pointDisplay = document.createElement('div');
+    // class='point-table'を指定
+    pointDisplay.className = 'points-table';
+    pointDisplay.textContent = pointText;
+    // 表示エリアに追加
+    aggregateResultsSection.appendChild(pointDisplay);
+
 
     // 集計結果エリアの初期化
     const aggregateResults = document.getElementById('aggregate__results');
     aggregateResults.innerHTML = ''; // 初期化
     const totalRoundPoints = {}; // 各ラウンドの合計ポイントを保持
 
-    // 全てのニックネームの番号データを取得(data => {ニックネーム:[n回目:[順番,番号]]})
-    for (const allRounds of Object.values(data)) {
-      // [n回目:[順番,番号]]の配列を取得
-      allRounds.forEach(([roundTitle, rankings]) => {
-        // そのラウンドタイトル（例: "1回目"）がまだ初期化されていなければ
-        if (!totalRoundPoints[roundTitle]) {
-          // ラウンドごとのポイントを初期化（「この回」の集計用オブジェクトを作る）
-          totalRoundPoints[roundTitle] = {};
-        }
+      // "pointValues"以外のキー（ユーザー名）だけを抽出
+      const pointUserKeys = Object.keys(data).filter(key => key !== 'pointValues');
 
-        // [順番,番号]が0でなければ
-        if (rankings[0][0] !== null) {
-          // 各順位のポイントを計算して合算
-          rankings.forEach(([rank, number]) => {
-            const points = pointValues[rank - 1] || 0;
-            totalRoundPoints[roundTitle][number] =
-              (totalRoundPoints[roundTitle][number] || 0) + points;
-          });
-        }
-      });
-    }
+      // 全ユーザーが対象
+      pointUserKeys.forEach(user => {
+      // 各ユーザーの選択データ（例:["1回目", [ [1, 3], [2, 7] ]],）を取得
+        const selections = data[user].selections;
+      
+        // 1回目から順番に処理
+        selections.forEach(([roundTitle, rankings]) => {
+          // 各回用の{}を作成
+          if (!totalRoundPoints[roundTitle]) {
+            totalRoundPoints[roundTitle] = {};
+          }
+
+          // [順番,番号]が0でなければ
+          if (rankings[0][0] !== null) {
+            // 各順位のポイントを計算して合算
+            rankings.forEach(([rank, number]) => {
+              // 順位に応じてポイントリストから取得
+              const points = pointValues[rank - 1] || 0;
+              // 番号と準じたポイント（例:"1回目": {"3": 1.5,"7": 2}）
+              totalRoundPoints[roundTitle][number] =
+                (totalRoundPoints[roundTitle][number] || 0) + points;
+            });
+          }
+        });
+    });
 
     /*
-    合算したラウンドごとのポイントを表示するための処理
+    ポイントのを表示するための辞書型(Object)の処理（計算や、ソートなど）
     totalRoundPoints = {
       "1回目": { 7: 3, 2: 2, ... },
       "2回目": { 6: 3, 12: 2, ... },
-      ...
-    }
+    
     */
+
     Object.entries(totalRoundPoints).forEach(([roundTitle, roundPointMap]) => {
       // ラウンドタイトルを表示
       const pointsTitleDiv = document.createElement('div');
@@ -109,10 +122,15 @@ fetch('/api/results')
       pointBlock.className = 'points__rankings';
       const pointText = document.createElement('p');
 
-      if (Object.keys(roundPointMap).length === 0) {
-        // 投票がない場合
+      console.log(Object(roundPointMap));
+
+        // roundPointMapが{}なら投票なし
+        if (Object.keys(roundPointMap).length === 0) {
         pointText.textContent = '投票なし';
-      } else {
+        // ここでappend
+        pointBlock.appendChild(pointText);
+        aggregateResults.appendChild(pointBlock);
+        } else {
         // 例:[[番号,pt],[番号,pt]]の配列を作成
         const sortedPoints = Object.entries(roundPointMap)
         // [,pt]を抜き出し、高pt→低ptで降順ソート
@@ -168,7 +186,7 @@ fetch('/api/results')
         aggregateResults.appendChild(pointBlock);
         }
       });
-    });
+
       // LINE共有ボタンの処理
       document.getElementById('shareToLineBtn').addEventListener('click', () => {
         const resultsText = document.getElementById('aggregate__results').innerText;
@@ -176,6 +194,5 @@ fetch('/api/results')
         const lineUrl = `https://social-plugins.line.me/lineit/share?text=${encodedText}`;
         window.open(lineUrl, '_blank');
       });
-});
 
 });

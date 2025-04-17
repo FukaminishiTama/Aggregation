@@ -324,6 +324,17 @@ header {
   border-bottom: 1px solid #ddd;
 }
 
+// ポイント入力枠
+.point-input {
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  padding-left: 0.5rem;
+  width: 5rem;
+  -webkit-box-flex: inherit;
+  -ms-flex: inherit;
+  flex: inherit;
+}
+
 .anchor-card, a.card {
   --tw-text-opacity: 1;
   color: rgb(51 51 51 / var(--tw-text-opacity));
@@ -365,7 +376,6 @@ header {
     display: flex;
     align-items: center;
     letter-spacing: 0.05em;
-    font-size: 15px;
   }
 
 // 必須ラベル
@@ -679,6 +689,10 @@ button {
 
 .vote__section {
   margin-bottom: 2rem;
+}
+
+.points-table {
+  font-size: 0.7125rem;
 }
 
 .highlight-yellow {

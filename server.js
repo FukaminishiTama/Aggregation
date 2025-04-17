@@ -34,8 +34,6 @@ app.post('/api/vote', (req, res) => {
     votes = content ? JSON.parse(content) : {};
   }  
 
-  console.log('Received vote data:', vote);
-  
   // まず pointValues を保存
   if (vote.pointValues) {
     votes.pointValues = vote.pointValues;
