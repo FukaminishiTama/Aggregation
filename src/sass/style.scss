@@ -218,7 +218,109 @@ header {
 }
 
 /* -------------------------------------------------
-メイン
+入力（ニックネーム、プロジェクト名）
+----------------------------------------------------*/
+// 入力
+.form__input-field {
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 5px;
+  padding-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+// [必須][入力枠]まとめたボックス
+.form__label {
+  max-width: inherit;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.05em;
+}
+
+// 必須ラベル
+.form__label-badge {
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 2.5rem;
+  text-align: center;
+  background: #5bc8ac;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+// 入力枠
+.form__input--name {
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  padding-left: 1em;
+  padding-right: 1em;
+  height: 40px;
+  flex: inherit;
+  font-size: 15px;
+}
+
+// 作成ボタン
+.create-button {
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 2.5rem;
+  text-align: center;
+  background-color: #5b62c8; 
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.create-button:hover {
+  background-color: #c8a55b;  
+}
+
+/* -------------------------------------------------
+管理画面
+----------------------------------------------------*/
+// 生成されたリンク
+.section__projectLinks {
+margin-bottom: 1rem;
+}
+
+// URL表示
+.voteUrl, .adminUrl {
+  border-radius: 0.25rem;
+  border: 1px solid #ddd;
+  margin-left: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 15rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+// リセットボタン
+.button__reset-project {
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 5rem;
+  text-align: center;
+  background-color: #5b62c8; 
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.button__reset-project:hover {
+  background-color: #c8a55b;  
+}
+
+/* -------------------------------------------------
+投票画面
 ----------------------------------------------------*/
 .template__main {
   margin: 3rem auto 9rem;
@@ -359,52 +461,6 @@ header {
 }
 
 /* -------------------------------------------------
-ニックネーム
-----------------------------------------------------*/
-// 名前入力のdiv
-.form__name-field {
-    padding-left: 14px;
-    padding-right: 14px;
-    padding-top: 5px;
-    padding-bottom: 16px;
-    flex-wrap: wrap;
-  }
-
-// [必須][ニックネーム]まとめたボックス
-.form__label {
-    max-width: inherit;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.05em;
-  }
-
-// 必須ラベル
-.form__label-badge {
-    border-radius: 0.25rem;
-    margin-right: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    width: 2.5rem;
-    text-align: center;
-    background: #5bc8ac;
-    color: #fff;
-    font-size: 0.8rem;
-  }
-
-// ニックネーム入力
-.form__input--name {
-    border-radius: 0.5rem;
-    border: 1px solid #ddd;
-    margin-left: 1rem;
-    margin-top: 1rem;
-    padding-left: 1em;
-    padding-right: 1em;
-    height: 40px;
-    flex: inherit;
-    font-size: 15px;
-  }
-
-/* -------------------------------------------------
 数字選択
 ----------------------------------------------------*/
 // 選択n回目 
@@ -450,7 +506,7 @@ button {
   cursor: pointer;
 }
 
-  // 数字ボタン
+// 数字ボタン
 .number-button {
   padding: 10px 15px; 
   margin: 5px; 

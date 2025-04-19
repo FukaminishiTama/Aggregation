@@ -216,7 +216,108 @@ header {
 }
 
 /* -------------------------------------------------
-メイン
+入力（ニックネーム、プロジェクト名）
+----------------------------------------------------*/
+.form__input-field {
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 5px;
+  padding-bottom: 16px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.form__label {
+  max-width: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  letter-spacing: 0.05em;
+}
+
+.form__label-badge {
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 2.5rem;
+  text-align: center;
+  background: #5bc8ac;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.form__input--name {
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  padding-left: 1em;
+  padding-right: 1em;
+  height: 40px;
+  -webkit-box-flex: inherit;
+      -ms-flex: inherit;
+          flex: inherit;
+  font-size: 15px;
+}
+
+.create-button {
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 2.5rem;
+  text-align: center;
+  background-color: #5b62c8;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.create-button:hover {
+  background-color: #c8a55b;
+}
+
+/* -------------------------------------------------
+管理画面
+----------------------------------------------------*/
+.section__projectLinks {
+  margin-bottom: 1rem;
+}
+
+.voteUrl, .adminUrl {
+  border-radius: 0.25rem;
+  border: 1px solid #ddd;
+  margin-left: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 15rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.button__reset-project {
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 5rem;
+  text-align: center;
+  background-color: #5b62c8;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.button__reset-project:hover {
+  background-color: #c8a55b;
+}
+
+/* -------------------------------------------------
+投票画面
 ----------------------------------------------------*/
 .template__main {
   margin: 3rem auto 9rem;
@@ -341,55 +442,6 @@ header {
 
 .stack--medium {
   gap: 1rem;
-}
-
-/* -------------------------------------------------
-ニックネーム
-----------------------------------------------------*/
-.form__name-field {
-  padding-left: 14px;
-  padding-right: 14px;
-  padding-top: 5px;
-  padding-bottom: 16px;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
-.form__label {
-  max-width: inherit;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  letter-spacing: 0.05em;
-}
-
-.form__label-badge {
-  border-radius: 0.25rem;
-  margin-right: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  width: 2.5rem;
-  text-align: center;
-  background: #5bc8ac;
-  color: #fff;
-  font-size: 0.8rem;
-}
-
-.form__input--name {
-  border-radius: 0.5rem;
-  border: 1px solid #ddd;
-  margin-left: 1rem;
-  margin-top: 1rem;
-  padding-left: 1em;
-  padding-right: 1em;
-  height: 40px;
-  -webkit-box-flex: inherit;
-      -ms-flex: inherit;
-          flex: inherit;
-  font-size: 15px;
 }
 
 /* -------------------------------------------------

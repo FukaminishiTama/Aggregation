@@ -1,0 +1,14 @@
+# 機密ファイル
+.env
+
+# nodeの依存群
+node_modules/
+
+# ログファイル
+*.log
+
+# ビルド済みフォルダ
+dist/
+
+# votes.jsonを扱うためのJSコード
+server_js.txt
