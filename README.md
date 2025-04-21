@@ -1,60 +1,96 @@
-# 集計ツール
+---
 
-このアプリケーションは、ユーザーが名前を入力し、1から18までの数字を選択して送信できるウェブアプリケーションです。複数のユーザーからのデータを集計し、ポイント計算を行い、結果を表示することを目的としています。
+# 集計ツール - README
+
+## 概要
+
+このプロジェクトは、ユーザーが投票を行い、その結果をリアルタイムで集計・表示するためのWebアプリケーションです。投票データはMongoDBに保存され、管理画面から簡単に操作できます。また、LINE共有機能を通じて、結果を他のユーザーと簡単に共有することができます。
+
+---
 
 ## 主な機能
 
-1. **投票機能**  
+1. **投票機能**
    - ユーザーは名前を入力し、複数回に分けて数字を選択できます。
    - 同じ名前で再投票を行うと、既存のデータが上書きされます。
 
-2. **ポイント計算**
-   - ポイントを入力して決定ボタンを押します（例: 1位=3pt, 2位=2pt, 3位=1.5pt, 4位=1pt）
-   - これまで投票した他のユーザーのデータと集計し、総合ポイントを算出します。
+2. **リアルタイム集計**
+   - 投票データをリアルタイムで集計し、ポイント計算を行います。
+   - ポイントはカスタマイズ可能で、順位ごとに異なる値を設定できます。
 
-3. **結果表示**  
+3. **結果表示と共有**
    - 投票結果をリアルタイムで表示します。
    - 集計結果をLINEで共有する機能を提供します。
 
-## 使用方法
+4. **管理画面**
+   - プロジェクトごとに投票データを管理できます。
+   - 投票データのリセットや、投票済みユーザーの一覧表示が可能です。
 
-1. 名前を入力します。
-2. 1から18までの数字をボタンで選択します。
-3. 選択が終わったら、送信ボタンを押します。
-4. 投票結果と集計結果が表示されます。
-
-## 制作ディレクトリ構成
-
-```
-Aggregation/
- ├── data/
- │    └── votes.json
- ├── node_modules/
- ├── src/
- │    ├── index.html
- │    ├── results.html
- │    ├── images/
- │    ├── sass/
- │    │    └── style.scss      
- │    ├── scripts/
- │    │    ├── app.js
- │    │    └── results.js
- │    └── styles/
- │         ├── style.css
- │         └── style.css.map
- ├── .env
- ├── server.js
- ├── README.md
- ├── package.json        
- └── package-lock.json  
-```
+---
 
 ## 技術スタック
 
-- **HTML/CSS/JavaScript**: フロントエンドの構築
-- **Sass**: CSSの効率化
-- **Node.js**: サーバーサイドの処理
-- **MongoDB**: データの保存と管理
+- **フロントエンド**: HTML, CSS, JavaScript
+- **バックエンド**: Node.js, Express
+- **データベース**: MongoDB
+- **スタイリング**: Sass
+
+---
+
+## 使用方法
+
+1. **プロジェクトの作成**
+   - スタート画面でプロジェクト名を入力し、「作成」ボタンを押します。
+   - 管理画面と投票画面のURLが生成されます。
+
+2. **投票**
+   - 投票画面で名前を入力し、数字を選択します。
+   - 「送信」ボタンを押すと、投票データが保存されます。
+
+3. **結果の確認**
+   - 結果画面で投票結果と集計結果を確認できます。
+   - LINE共有ボタンを押して、結果を他のユーザーと共有できます。
+
+4. **管理画面の操作**
+   - 管理画面で投票データのリセットや、投票済みユーザーの確認が可能です。
+
+---
+
+---
+
+## 主な開発構成
+
+```
+Aggregation
+├── README.md
+├── package.json
+├── prettier.config.js
+├── server.js
+├── eslint.config.mjs
+├── models
+│   └── Project.js
+└── src
+	   ├── admin.html
+	   ├── index.html
+	   ├── main.html
+	   ├── results.html
+	   ├── images
+	   │   ├── Button
+	   │   ├── Main
+	   │   └── SNS
+	   ├── sass
+	   │   └── style.scss
+	   ├── scripts
+	   │   ├── app.js
+	   │   ├── header.js
+	   │   ├── results.js
+	   │   └── startup_screen.js
+	   └── styles
+	        ├── style.css.map
+	        └── style.css
+```
+
+---
 
 ## 開発環境のセットアップ
 
@@ -62,14 +98,82 @@ Aggregation/
    ```bash
    npm install
    ```
+
 2. Sassをコンパイルします。
    ```bash
    npm run sass
    ```
+
 3. ローカルサーバーを起動します。
    ```bash
    node server.js
    ```
+
+4. ブラウザで以下のURLにアクセスします。
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## APIエンドポイント
+
+- **POST /api/vote**
+  - 投票データを保存します。
+  - リクエストボディ:
+    ```json
+    {
+      "projectId": "プロジェクトID",
+      "nickname": "ユーザー名",
+      "selections": [["1回目", [[1, 3], [2, 6]]], ...]
+    }
+    ```
+
+- **GET /api/results**
+  - 指定されたプロジェクトIDの投票結果を取得します。
+  - クエリパラメータ:
+    ```
+    ?projectId=プロジェクトID
+    ```
+
+- **DELETE /api/admin/reset**
+  - 指定されたプロジェクトIDの投票データをリセットします。
+
+---
+
+## index.html（スタート画面）のフロー
+↓  [作成] ボタン押下
+  - projectId を生成
+  - main.html にクエリ付きで遷移（?project=プロジェクトID）
+
+## main.html（投票画面）のフロー
+↓ [投票]
+  - ユーザーが nickname と selections を入力
+↓ [決定] ボタン押下
+  - POST /api/vote
+    例 : payload: {
+         projectId: "生姜焼きGP2025",
+         nickname: "たま",
+         selections: [["1回目", [[1, 3], [2, 6]]], ...]
+         }
+↓
+results.html に遷移（?project=〇〇）
+
+## results.html（結果画面）のフロー
+window.location.search で projectId を取得
+↓
+fetch(`/api/results?projectId=xxx`)
+↓
+MongoDB (Project モデル) からその projectId の votes を取得
+↓
+JSONデータ（{ ニックネーム: [ [ラウンド, ランキング[]], ... ] }）を受け取る
+↓
+自分のニックネームを localStorage から取得して data[nickname]
+↓
+forEach で画面に描画
+↓
+集計用に全ユーザー分のデータを再利用
+
 
 ## 今後の改善点
 

@@ -89,7 +89,7 @@
       <link rel="alternate" hreflang="en" href="#/en">
   
       <!-- ページのタブやウィンドウの上部（タイトルバー）に表示されるもの -->
-      <title>条件付き集計</title>
+      <title>条件付き集計-投票</title>
       
       <!-- CSS -->
       <!-- media="all" パソコン、スマートフォン、タブレット、プリンターなど、あらゆるデバイスでCSSが使用可能 -->
@@ -242,23 +242,14 @@
       <main class="template_main template-default_main" id="mainContainer">
           <!-- Drupal用の通知表示領域（メッセージ用のバックアップ）  -->
           <div data-drupal-messages-fallback class="hidden"></div>
-          
+    
           <section class="section">
-              <header class="section__header">
-                  <h2 class="section__title">概要</h2>
-              </header>
+            <header class="section__header">
+                <h2 id="section__main-title" class="section__title">
+                    投票画面
+                </h2>
+            </header>
           </section>
-          <ul class="attention">
-              <!-- サイトの簡単な説明 -->
-              <li class="attention-item">
-                  <span class="attention-item__text--isInformation">
-                      JS練習用に作成した集計ツールです</span>
-              </li>
-              <li class="attention-item">
-                  <span class="attention-item__text--isInformation">
-                      条件・ルールのもと集計ができます</span>
-             </li>
-          </ul>
           <!-- 条件・ルールのヘッダー -->
           <section class="section">
               <header class="section__header">
@@ -508,6 +499,7 @@
     </div>
   
       <script src="scripts/app.js"></script>
+      <script src="scripts/header.js"></script>
   </body>
   
   </html>

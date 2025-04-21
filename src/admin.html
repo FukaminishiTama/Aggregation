@@ -88,7 +88,7 @@
         <link rel="alternate" hreflang="en" href="#/en">
     
         <!-- ページのタブやウィンドウの上部（タイトルバー）に表示されるもの -->
-        <title>条件付き集計</title>
+        <title>条件付き集計-管理</title>
         
         <!-- CSS -->
         <!-- media="all" パソコン、スマートフォン、タブレット、プリンターなど、あらゆるデバイスでCSSが使用可能 -->
@@ -242,30 +242,39 @@
             <!-- Drupal用の通知表示領域（メッセージ用のバックアップ）  -->
             <div data-drupal-messages-fallback class="hidden"></div>
 
-            <section id="projectLinks" class="section__projectLinks">
-                <h2 class="section__title">
-                    生成されたリンク
-                </h2>
+            <section class="section">
+                <header class="section__header">
+                    <h2 id="section__admin-title" class="section__title">
+                        管理画面
+                    </h2>
+                </header>
+            </section>
+            <section id="projectLinks" class="section__header">
+                <header class="section__header">
+                    <h2 class="section__title">
+                        生成されたリンク
+                    </h2>
+                </header>
             </section>
             <ul class="stack stack--medium">
                 <li>
                     <div class="card">
-                        <div class="card__body">
-                            <p class="card__title">
+                        <div class="card__body-URL">
+                            <p class="card__title-URL">
                                 <span>投票用URL:</span>
                                 <input type="text" id="voteUrl" class="voteUrl" readonly />
-                                <button id="button__text-voteUrlCopy" type="button" onclick="copyToClipboard('voteUrl')">コピー</button>
+                                <button id="button__text-voteUrlCopy" class="button__text-voteUrlCopy" type="button" onclick="copyToClipboard('voteUrl')">コピー</button>
                             </p>
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="card">
-                        <div class="card__body">
-                            <p class="card__title">
+                        <div class="card__body-URL">
+                            <p class="card__title-URL">
                                 <label>管理画面URL:</label>
                                 <input type="text" id="adminUrl"  class="adminUrl"  readonly />
-                                <button id="button__text-adminUrlCopy" type="button" onclick="copyToClipboard('adminUrl')">コピー</button>
+                                <button id="button__text-adminUrlCopy" class="button__text-adminUrlCopy" type="button" onclick="copyToClipboard('adminUrl')">コピー</button>
                             </p>
                         </div>
                     </div>
@@ -291,7 +300,7 @@
     </main>
     
     <script src="scripts/startup_screen.js"></script>
-    
+    <script src="scripts/header.js"></script>
     </body>
     
     </html>

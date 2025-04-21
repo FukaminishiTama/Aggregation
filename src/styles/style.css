@@ -284,10 +284,6 @@ header {
 /* -------------------------------------------------
 管理画面
 ----------------------------------------------------*/
-.section__projectLinks {
-  margin-bottom: 1rem;
-}
-
 .voteUrl, .adminUrl {
   border-radius: 0.25rem;
   border: 1px solid #ddd;
@@ -299,12 +295,34 @@ header {
   font-size: 0.8rem;
 }
 
+.card__body-URL {
+  padding: 0.5rem;
+}
+
+.card__title-URL {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.button__text-voteUrlCopy,
+.button__text-adminUrlCopy,
 .button__reset-project {
   border-radius: 0.25rem;
-  margin-top: 0.5rem;
+  margin-left: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  width: 5rem;
+  width: 3rem;
+  height: 2rem;
   text-align: center;
   background-color: #5b62c8;
   color: #ffffff;
@@ -312,6 +330,27 @@ header {
   font-size: 0.8rem;
 }
 
+.button__text-voteUrlCopy,
+.button__text-adminUrlCopy {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.button__reset-project {
+  margin-top: 0.5rem;
+  height: 2.5rem;
+  width: 5rem;
+}
+
+.button__text-voteUrlCopy:hover,
+.button__text-adminUrlCopy:hover,
 .button__reset-project:hover {
   background-color: #c8a55b;
 }
@@ -737,12 +776,13 @@ button {
 .point-confirm-button {
   padding: 0.275rem;
   margin: 0.5rem;
-  margin-left: 5rem;
+  margin-left: 1.5rem;
   border: none;
   border-radius: 4px;
   background-color: #5b62c8;
   color: #ffffff;
   cursor: pointer;
+  font-size: 0.8rem;
 }
 
 .highlight-yellow {

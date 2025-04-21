@@ -31,7 +31,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   console.error('❌ MongoDB connection error:', err);
 });
 
-// POST /api/vote
+// /api/vote は projectId に紐づいた votes: Map<nickname, selections> をPOSTすることで、サーバーにすべて保存される。
 app.post('/api/vote', async (req, res) => {
   const { projectId, nickname, selections } = req.body;
 
@@ -61,8 +61,7 @@ app.post('/api/vote', async (req, res) => {
   }
 });
 
-// GET /api/results?projectId=xxxx
-// votes.json で扱っていた形式と同じものを返す（例:{"ニックネーム": [["1回目", [[1, 7], [2, 2]]],["2回目", [[null]]]],"ニックネーム2": [...]}
+// /api/results?projectId=xxxxはvotes: Map<nickname, selections>をGETして、Object.fromEntries() で変換して返す
 app.get('/api/results', async (req, res) => {
   const projectId = req.query.projectId;
 

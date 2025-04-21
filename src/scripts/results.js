@@ -1,62 +1,68 @@
-document.addEventListener('DOMContentLoaded', () => {
-fetch('/api/results')
-  .then(res => res.json())
-  // (data => {"pointValues":[pt,pt,pt,pt],ニックネーム:[n回目:[順番,番号]]})
-  .then(data => {
-
-    // ----- 投票結果エリア -----
-    const voteResults = document.getElementById('vote__results');
-    voteResults.innerHTML = ''; // 初期化
-
-    // 最新のニックネームだけ取得
-    const nicknames = Object.keys(data);
-    const latestNickname = nicknames[nicknames.length - 1];
-    const selections = data[latestNickname];
-
-    // 見出し表示
-    const userHeading = document.createElement('h2');
-    userHeading.textContent = `${latestNickname}さん`;
-    voteResults.appendChild(userHeading);
-
-    selections.forEach(([roundTitle, rankings]) => {
-      // <div>
-      const roundTitleDiv = document.createElement('div');
-      // class='round'を指定
-      roundTitleDiv.className = 'round';
-      // n回目 
-      roundTitleDiv.textContent = roundTitle;
-      // <div class="round">n回目</div>をvoteResultsに追加
-      voteResults.appendChild(roundTitleDiv);
-
-      const voteBlock = document.createElement('div');
-      voteBlock.className = 'round__rankings';
-      const voteText = document.createElement('p');
-
-      // rankingsがnullなら投票なし
-      if (rankings[0][0] === null) {
-        voteText.textContent = '投票なし';
-      } else {
-      // 存在すれば、例:1位【9】
-        voteText.textContent = rankings.map(([rank, number]) =>
-          `${rank}位【${number}】`
-        ).join('-  ');
+document.addEventListener('DOMContentLoaded', async() => {
+  const urlParams = new URLSearchParams(window.location.search);  
+  // 1. projectId を URL から取得
+  const projectId = urlParams.get('project');
+  // 2. /api/results?projectId=〇〇 へリクエスト
+  const res = await fetch(`/api/results?projectId=${projectId}`);
+  const data = await res.json();
+  
+    // タイトル変更
+    if (projectId) {
+      const title = document.getElementById('section__main-title');
+      if (title) {
+        title.textContent = `${projectId}：投票結果`;
       }
+    }
 
-      // <p>順位【番号】- 順位【番号】</p>をvoteBlockに追加
-      voteBlock.appendChild(voteText);
-      // 上記に更に<div class="round__rankings">をvoteBlockに追加
-      voteResults.appendChild(voteBlock);
+  // ----- 投票結果エリア -----
+  const voteResults = document.getElementById('vote__results');
+  voteResults.innerHTML = ''; // 初期化
 
-    });
+  // 最新の nickname を抽出
+  const latestNickname = Object.keys(data).pop(); // 最後に投票した人と仮定
+  const selections = data[latestNickname];
+  
+  // ニックネーム表示
+  const userHeading = document.createElement('h2');
+  userHeading.textContent = `${latestNickname}さん`;
+  voteResults.appendChild(userHeading);
 
-  // ----- 集計結果エリア -----
+  selections.forEach(([roundTitle, rankings]) => {
+    // <div>
+    const roundTitleDiv = document.createElement('div');
+    // class='round'を指定
+    roundTitleDiv.className = 'round';
+    // n回目 
+    roundTitleDiv.textContent = roundTitle;
+    // <div class="round">n回目</div>をvoteResultsに追加
+    voteResults.appendChild(roundTitleDiv);
+
+    const voteBlock = document.createElement('div');
+    voteBlock.className = 'round__rankings';
+    const voteText = document.createElement('p');
+
+    // rankingsがnullなら投票なし
+    if (rankings[0][0] === null) {
+      voteText.textContent = '投票なし';
+    } else {
+    // 存在すれば、例:1位【9】
+      voteText.textContent = rankings.map(([rank, number]) =>
+        `${rank}位【${number}】`
+      ).join('-  ');
+    }
+
+    // <p>順位【番号】- 順位【番号】</p>をvoteBlockに追加
+    voteBlock.appendChild(voteText);
+    // 上記に更に<div class="round__rankings">をvoteBlockに追加
+    voteResults.appendChild(voteBlock);
+
+  });
+
+  // ----- 集計結果エリア -----  
   const pointConfirmButton = document.getElementById('point-confirm-button');
-  const aggregateResultsContainer = document.getElementById('aggregate-results__container');
   const pointInputs = document.querySelectorAll('.card__sub input[type="number"]');
-
-  // 非同期の順番を待つ（前行の処理を待つ）ためにasyncを使用
   pointConfirmButton.addEventListener('click', async () => {
-    //ポイントの入力値を取得、pointValuesリストで保持（例:[3,2,1.5,1]）
+    // 順位によるポイントの入力値を取得、pointValuesリストで保持（例:[3,2,1.5,1]）
     const inputPointValues = Array.from(pointInputs).map(input => parseFloat(input.value) || 0);
 
     // 配列が空かどうかをチェック
@@ -64,22 +70,20 @@ fetch('/api/results')
       alert('ポイントの入力値がありません');
       return; // ここで処理を終了（関数内ならreturn、または処理を打ち切る）
   }
-
-    // 表示用の文字列を作成
-    const pointText = inputPointValues.map((pt, index) => `${index + 1}位:${pt}pt`).join('   ');
     // 表示エリアを取得
     const pointTextDisplay = document.getElementById('point-text');
-
+    // 表示用の文字列を作成
+    const pointText = inputPointValues.map((pt, index) => `${index + 1}位:${pt}pt`).join('   ');
     // 結果を更新
     pointTextDisplay.textContent = pointText;
-    // pt結果表示
-    aggregateResultsContainer.setAttribute('aria-expanded', String('true'));
-
+    
+    // 表示、非表示切り替え
+    const aggregateContainer = document.getElementById('aggregate-results__container');
     // hidden属性をfalseにして「LINE共有を表示」
-    aggregateResultsContainer.hidden = false;
+    aggregateContainer.hidden = false;
+    // pt結果表示
+    aggregateContainer.setAttribute('aria-expanded', String('true'));
 
-    // 順位による入力ptデータ取得
-    const pointValues =  inputPointValues;
     
     // 集計結果エリアの初期化
     const aggregateResults = document.getElementById('aggregate__results');
@@ -101,7 +105,7 @@ fetch('/api/results')
             // 各順位のポイントを計算して合算
             rankings.forEach(([rank, number]) => {
               // 順位に応じてポイントリストから取得
-              const points = pointValues[rank - 1] || 0;
+              const points = inputPointValues[rank - 1] || 0;
               // 番号と準じたポイント（例:"1回目": {"3": 1.5,"7": 2}）
               totalRoundPoints[roundTitle][number] =
                 (totalRoundPoints[roundTitle][number] || 0) + points;
@@ -199,4 +203,3 @@ fetch('/api/results')
       });
     });
   });
-});
