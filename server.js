@@ -53,6 +53,8 @@ app.post('/api/create-project', async (req, res) => {
 // 14日後の削除日を表示
 app.get('/api/create-auto-delete', async (req, res) => {
   const project = await authenticateProject(req, res);
+  // 完全削除後で存在しない場合は終了
+  if (!project) return;
   const votesObject = Object.fromEntries(project.votes);
   res.json({
       createdAt: project.createdAt,
@@ -65,7 +67,8 @@ app.post('/api/vote', async (req, res) => {
   const { nickname, selections } = req.body;
 
   const project = await authenticateProject(req, res);
-  if (!project) return; // 認証失敗時は終了
+  // 完全削除後で存在しない場合は終了
+  if (!project) return;
 
   project.votes.set(nickname, selections);
   await project.save();
@@ -77,9 +80,10 @@ app.post('/api/vote', async (req, res) => {
 // `/api/results?projectId=${projectId}&token=${token}`で投票データを取得する
 app.get('/api/results', async (req, res) => {
   const project = await authenticateProject(req, res);
+  // 完全削除後で存在しない場合は終了
   if (!project) return;
-    const votesObject = Object.fromEntries(project.votes);
-    res.json(votesObject);
+  const votesObject = Object.fromEntries(project.votes);
+  res.json(votesObject);
 });
 
 // サーバ接続確認
@@ -94,6 +98,8 @@ app.delete('/api/admin/reset-user', async (req, res) => {
   // projectId と nickname の両方を使用して処理
   const { projectId, token, nickname } = req.query;
   const project = await Project.findOne({ projectId, token });
+  // 完全削除後で存在しない場合は終了
+  if (!project) return;
   project.votes.delete(nickname);
   await project.save();
   res.json({ success: true });
@@ -102,6 +108,7 @@ app.delete('/api/admin/reset-user', async (req, res) => {
 // 指定されたプロジェクトを完全削除するエンドポイント
 app.delete('/api/admin/delete-project', async (req, res) => {
   const project = await authenticateProject(req, res);
+  // 完全削除後で存在しない場合は終了
   if (!project) return;
 
   await Project.deleteOne({ projectId: project.projectId });

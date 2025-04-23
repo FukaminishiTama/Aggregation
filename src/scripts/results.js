@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', async() => {
   const voteResults = document.getElementById('vote__results');
   voteResults.innerHTML = ''; // 初期化
 
+  if (!res.ok) {
+    const voteResults = document.getElementById('vote__results');
+    voteResults.innerHTML = '<p>該当するプロジェクトが存在しません。削除された可能性があります。</p>';
+    return;
+  }
+
   // 最新の nickname を抽出
   const nicknameList = Object.keys(data);
   const userHeading = document.createElement('h2');
