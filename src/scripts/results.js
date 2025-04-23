@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', async() => {
   const urlParams = new URLSearchParams(window.location.search);  
-  // 1. projectId を URL から取得
+  // projectIdとtoken を URL から取得
   const projectId = urlParams.get('project');
-  // 2. /api/results?projectId=〇〇 へリクエスト
-  const res = await fetch(`/api/results?projectId=${projectId}`);
+  const token = urlParams.get('token');
+  // /api/results?projectId=${projectId}&token=${token} へリクエスト
+  const res = await fetch(`/api/results?projectId=${projectId}&token=${token}`);
   const data = await res.json();
   
   // 投票画面タイトル
@@ -17,20 +18,17 @@ document.addEventListener('DOMContentLoaded', async() => {
   voteResults.innerHTML = ''; // 初期化
 
   // 最新の nickname を抽出
-  const nickname = Object.keys(data)
-  // 最後に投票した人
-  const latestNickname = nickname.pop();
-  const selections = data[latestNickname];
-  
-  // ニックネーム表示
+  const nicknameList = Object.keys(data);
   const userHeading = document.createElement('h2');
-    // ユーザがいない場合 
-    if (nickname.length === 0 || !data) {
-      userHeading.textContent = '投票ユーザーなし';
-      voteResults.appendChild(userHeading);
-      return; // 処理を終了
-    }
-  // ユーザがいる場合
+  if (nicknameList.length === 0 || !data) {
+    userHeading.textContent = '投票ユーザーなし';
+    voteResults.appendChild(userHeading);
+    return;
+  }
+  
+  const latestNickname = nicknameList[nicknameList.length - 1];
+  const selections = data[latestNickname];
+  // ユーザ表示
   userHeading.textContent = `${latestNickname}さん`;
   voteResults.appendChild(userHeading);
 

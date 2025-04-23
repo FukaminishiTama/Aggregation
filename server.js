@@ -4,17 +4,19 @@ import dotenv from 'dotenv';
 
 import Project from './models/Project.js';
 
-//  projectId, token のチェック
+// projectId と token を元にプロジェクトを取得する共通認証関数
 async function authenticateProject(req, res) {
-  const { projectId, token } = req.query;
-  // projectId と token の両方が
+  const projectId = req.query.projectId || req.body.projectId;
+  const token = req.query.token || req.body.token;
+
   const project = await Project.findOne({ projectId, token });
   if (!project) {
-    res.status(403).json({ error: '認証失敗：projectId または token が違います' });
+    res.status(403).json({ error: '認証失敗' });
     return null;
   }
   return project;
 }
+
 
 // .env ファイルを読み込んで、そこに書かれた変数を process.env に登録
 dotenv.config();
@@ -60,15 +62,17 @@ app.get('/api/create-auto-delete', async (req, res) => {
 
 // データ更新
 app.post('/api/vote', async (req, res) => {
-  const { projectId, token, nickname, selections } = req.body;
-  
-  const project = await Project.findOne({ projectId, token });
-  // ユーザーの投票データを更新 or 追加
+  const { nickname, selections } = req.body;
+
+  const project = await authenticateProject(req, res);
+  if (!project) return; // 認証失敗時は終了
+
   project.votes.set(nickname, selections);
-  // 保存
   await project.save();
-  res.status(201).json({ success: true , message: 'データを更新or保存しました' });
+
+  res.status(201).json({ success: true, message: 'データを更新or保存しました' });
 });
+
 
 // `/api/results?projectId=${projectId}&token=${token}`で投票データを取得する
 app.get('/api/results', async (req, res) => {
@@ -88,14 +92,8 @@ app.listen(PORT, () => {
 // 指定されたプロジェクトの中の、特定のニックネーム1人分の投票データだけを削除
 app.delete('/api/admin/reset-user', async (req, res) => {
   // projectId と nickname の両方を使用して処理
-  const { nickname } = req.query;
-  const project = await authenticateProject(req, res);
-  if (!project || !nickname) return;
-
-  if (!project.votes.has(nickname)) {
-    return res.status(404).json({ error: '該当ユーザーの投票が見つかりません' });
-  }
-
+  const { projectId, token, nickname } = req.query;
+  const project = await Project.findOne({ projectId, token });
   project.votes.delete(nickname);
   await project.save();
   res.json({ success: true });

@@ -297,6 +297,29 @@ header {
   gap: 0.5rem;               
 }
 
+// 数字ボタンの図
+.number-figure {
+  padding: 10px 15px; 
+  margin: 5px; 
+  border: none; 
+  border-radius: 4px; 
+  background-color: #5b62c8; 
+  color: #ffffff;
+  cursor: pointer;
+}
+
+// リセットボタンの図
+.reset-button-figure {
+  border-radius: 0.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 5rem;
+  text-align: center;
+  background: #c85b5b;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
 .template__main {
   margin: 3rem auto 9rem;
   max-width: 77.375rem;
@@ -588,9 +611,9 @@ button {
 /* -------------------------------------------------
 フッター
 ----------------------------------------------------*/
-
 // フッター全体のコンテナ周り
 .footer__inner {
+  margin-top: 2rem;
   margin-left: auto;
   margin-right: auto;
   max-width: 77.375rem;
@@ -690,7 +713,7 @@ button {
 投票結果
 ------------------------------------------------- */
 // タイトルテキスト
-.section_results-text {
+.section__results-text {
   font-size: 1.2rem;
 }
 
@@ -849,7 +872,7 @@ button {
   }
   // フッターのコンテナ
   .footer__content {
-    grid-template-columns: min-content 1fr;
+    // grid-template-columns: min-content 1fr;
     justify-items: start;
 }
   // フッターの各項目のリスト

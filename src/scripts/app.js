@@ -3,10 +3,10 @@
 addEventListener関数:「この場所で何かが起きたら何をするか」を登録
 'DOMContentLoaded':「HTMLが全部読み込まれたとき」*/ 
 document.addEventListener('DOMContentLoaded', () => {
-
     // URLからprojectIdとtokenを取得
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('project');
+    const token = urlParams.get('token');
   
     // 投票画面タイトル
     const title = document.getElementById('section__main-title');
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // nickname と selections をサーバーに POST
   // 非同期の順番を待つ（前行の処理を待つ）ためにasyncを使用
-  document.querySelector('.vote-button__action').addEventListener('click', async () => {
+  document.querySelector('.vote-button__action').addEventListener('click', async (event) => {
     // フォーム送信を防ぐ
     event.preventDefault();
     // 入力欄 #form__input から名前を取得（空白は除去）
@@ -117,15 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 各ラウンドを表す要素（.number-buttons）をすべて取得
     document.querySelectorAll('.number-buttons').forEach(section => {
       
-      // 1. タイトル部分の取得
-      // .section__number-title 内のspanタグのテキストを抽出
+      // タイトル部分の取得
       const titleElement = section.querySelector('.section__number-title span');
       let roundTitle = titleElement ? titleElement.textContent.trim() : '';
       // "選択 : " などの不要な部分を取り除いて、"1 回目" のような文字列を得る
       roundTitle = roundTitle.replace(/^選択\s*:\s*/, '');
       
-      // 2. ランキング情報の取得
-      // ラウンド内で選択された要素(.selected-ranking__text)を取得
+      // ランキング情報の取得
       const selectedSpans = section.querySelectorAll('.selected-ranking__text');
       const rankings = [];
       
@@ -142,11 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
         rankings.push([null]);
       }
       
-      // 3. ラウンドタイトルとランキング情報の配列を selections に追加する
+      // ラウンドタイトルとランキング情報の配列を selections に追加する
       selections.push([roundTitle, rankings]);
     });    
   
-    const payload = { projectId, nickname, selections };
+    const payload = { projectId, token, nickname, selections };
   
     // Web API など外部のサービスと非同期通信する（await:非同期の順番を待つ）
     // fetch 関数が返す Promise が解決されるまで処理が一時停止（POST リクエストが完了し、サーバーからレスポンスを受け取るまで次のコードに進まないようにする）
@@ -161,8 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
     // 遷移先の URL に projectId を付けて渡す
-    const token = urlParams.get('token');
-    window.location.href = `results.html?project=${encodeURIComponent(projectId)}&token=${encodeURIComponent(token)}`;
+    const baseUrl = window.location.origin;
+    window.location.href = `${baseUrl}/results.html?project=${encodeURIComponent(projectId)}&token=${encodeURIComponent(token)}`;
   });
 
 });

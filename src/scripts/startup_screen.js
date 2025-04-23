@@ -121,7 +121,7 @@ const deletionDate = new Date(createdAt);
         if (!confirm(`${nickname} の投票データを削除しますか？`)) return;
 
         const res = await fetch(
-          `/api/admin/reset-user?projectId=${projectId}&nickname=${encodeURIComponent(nickname)}`,
+          `/api/admin/reset-user?projectId=${projectId}&token=${token}&nickname=${encodeURIComponent(nickname)}`,
           { method: 'DELETE' }
         );
         const result = await res.json();
@@ -148,11 +148,10 @@ const deletionDate = new Date(createdAt);
 
 // プロジェクト全体削除
 document.getElementById('deleteProjectButton')?.addEventListener('click', async () => {
-  if (!projectId) return alert('プロジェクトIDが見つかりません');
   if (!confirm('本当にこのプロジェクトを完全に削除しますか？この操作は元に戻せません。')) return;
 
   try {
-    const res = await fetch(`/api/admin/delete-project?projectId=${projectId}`, {
+    const res = await fetch(`/api/admin/delete-project?projectId=${projectId}&token=${token}`, {
       method: 'DELETE'
     });
     const result = await res.json();
