@@ -77,117 +77,6 @@ header {
 }
 
 /* -------------------------------------------------
-言語選択「日本語」「English」
- 地球儀と「Language」と下矢印
-----------------------------------------------------*/
-.language-selector {
-  position: relative;
-}
-
-.language-selector__button {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border-radius: calc(infinity * 1rem);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 0.875rem;
-  font-weight: 400;
-  gap: 0.25rem;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  min-height: 2.75rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  --tw-text-opacity: 1;
-  color: rgb(51 51 51/var(--tw-text-opacity));
-}
-
-.language-selector__check-icon, .language-selector__language-icon svg {
-  height: 1.25rem;
-  width: 1.25rem;
-}
-
-/* 閉じているテキスト、アイコンを非表示 */
-.language-selector__button[aria-expanded=false] .language-selector__text--close {
-  display: none;
-}
-
-/* 開いているので「閉じる関連」テキスト、アイコンを非表示 */
-.language-selector__button[aria-expanded=true] .language-selector__text--open {
-  display: none;
-}
-
-.language-selector__button:hover {
-  outline-color: #000;
-  outline-style: dashed;
-  outline-width: 1px;
-}
-
-.language-selector__list {
-  border-radius: 0.5rem;
-  border-width: 1px;
-  left: 0;
-  max-height: 18.875rem;
-  min-width: -webkit-fit-content;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-  overflow: auto;
-  position: absolute;
-  top: 100%;
-  width: auto;
-  --tw-border-opacity: 1;
-  border-color: rgb(148 148 148/var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255/var(--tw-bg-opacity));
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
-  --tw-shadow: 0 2px 8px 1px #0000001a, 0 1px 5px 0 #0000004d;
-  --tw-shadow-colored: 0 2px 8px 1px var(--tw-shadow-color), 0 1px 5px 0 var(--tw-shadow-color);
-  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
-          box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
-}
-
-.language-selector__link[aria-current=true] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(217, 230, 255) !important;
-  font-weight: 700;
-  --tw-text-opacity: 1 !important;
-  color: rgb(0, 17, 143) !important;
-}
-
-.language-selector__link {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-column-gap: 0.5rem;
-     -moz-column-gap: 0.5rem;
-          column-gap: 0.5rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  text-wrap: nowrap;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255, 255, 255) !important;
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  padding: 0.75rem 1.5rem 0.75rem 0.75rem;
-  --tw-text-opacity: 1;
-  color: rgb(51, 51, 51) !important;
-}
-
-.header-item__text--close:lang(ja), .header-item__text--open:lang(ja) {
-  min-width: 7.125rem;
-}
-
-/* -------------------------------------------------
 ヘッダーメニューバー
 ----------------------------------------------------*/
 .header-item {
@@ -284,13 +173,28 @@ header {
 /* -------------------------------------------------
 管理画面
 ----------------------------------------------------*/
-.voteUrl, .adminUrl {
+.section__admin-text {
+  font-size: 1.2rem;
+}
+
+.automatic-deletion-text {
+  font-size: 1rem;
+  margin-top: 2.3rem;
+}
+
+.precautions-text {
+  color: #c86b5b;
+}
+
+.voteUrl, .resultUrl, .adminUrl {
   border-radius: 0.25rem;
   border: 1px solid #ddd;
-  margin-left: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  width: 15rem;
+  width: 100%;
+  max-width: 100%; /* はみ出し防止 */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* padding, borderも含めた幅にする */
   text-align: center;
   font-size: 0.8rem;
 }
@@ -315,19 +219,21 @@ header {
 }
 
 .button__text-voteUrlCopy,
+.button__text-resultUrlCopy,
 .button__text-adminUrlCopy,
-.button__reset-project {
+.button__reset-nickname,
+.button__delete-project {
   border-radius: 0.25rem;
   margin-left: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  width: 3rem;
+  padding: 0.2em;
+  width: 3.1rem;
   height: 2rem;
   text-align: center;
   background-color: #5b62c8;
   color: #ffffff;
   cursor: pointer;
   font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .button__text-voteUrlCopy,
@@ -343,21 +249,65 @@ header {
           align-items: center;
 }
 
-.button__reset-project {
+.user-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button__reset-nickname {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0.2em;
+  height: 2rem;
+  width: 2rem;
+}
+
+.button__delete-project {
   margin-top: 0.5rem;
   height: 2.5rem;
   width: 5rem;
+  background-color: #c85b5b;
 }
 
 .button__text-voteUrlCopy:hover,
 .button__text-adminUrlCopy:hover,
-.button__reset-project:hover {
+.button__reset-nickname:hover,
+.button__delete-project:hover {
   background-color: #c8a55b;
 }
 
 /* -------------------------------------------------
 投票画面
 ----------------------------------------------------*/
+.section__main-text {
+  font-size: 1.2rem;
+}
+
+.selection-example-figure {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .template__main {
   margin: 3rem auto 9rem;
   max-width: 77.375rem;
@@ -724,6 +674,10 @@ button {
 /* ---------------------------------------------
 投票結果
 ------------------------------------------------- */
+.section_results-text {
+  font-size: 1.2rem;
+}
+
 .round, .points {
   font-size: 1rem;
   font-weight: 700;
@@ -765,6 +719,7 @@ button {
   border-radius: 0.5rem;
   border-width: 1px;
   display: grid;
+  width: 20rem;
   height: 100%;
   overflow: hidden;
   --tw-border-opacity: 1;
@@ -843,7 +798,6 @@ button {
   }
   .form__label {
     width: 100%;
-    max-width: 248px;
     letter-spacing: 0.05em;
     font-weight: bold;
     font-size: 18px;
@@ -962,6 +916,15 @@ button {
 !important; 重要度を持つプロパティを設定
             他のスタイルよりも優先される
 ------------------------------------------------- */
+.down-arrow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; /* 横方向中央 */
+}
+
 /* HTMLの<button>要素はもちろん、role="button"が付与された要素に適用 */
 [role=button], button {
   /* ポインター（手の形）*/

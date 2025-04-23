@@ -6,24 +6,31 @@ document.addEventListener('DOMContentLoaded', async() => {
   const res = await fetch(`/api/results?projectId=${projectId}`);
   const data = await res.json();
   
-    // タイトル変更
-    if (projectId) {
-      const title = document.getElementById('section__main-title');
-      if (title) {
-        title.textContent = `${projectId}：投票結果`;
-      }
-    }
+  // 投票画面タイトル
+  const title = document.getElementById('section__results-title');
+  if (title) {
+    title.innerHTML = `${projectId}<h3 class="section__results-text">結果</h3>`;
+  }
 
   // ----- 投票結果エリア -----
   const voteResults = document.getElementById('vote__results');
   voteResults.innerHTML = ''; // 初期化
 
   // 最新の nickname を抽出
-  const latestNickname = Object.keys(data).pop(); // 最後に投票した人と仮定
+  const nickname = Object.keys(data)
+  // 最後に投票した人
+  const latestNickname = nickname.pop();
   const selections = data[latestNickname];
   
   // ニックネーム表示
   const userHeading = document.createElement('h2');
+    // ユーザがいない場合 
+    if (nickname.length === 0 || !data) {
+      userHeading.textContent = '投票ユーザーなし';
+      voteResults.appendChild(userHeading);
+      return; // 処理を終了
+    }
+  // ユーザがいる場合
   userHeading.textContent = `${latestNickname}さん`;
   voteResults.appendChild(userHeading);
 

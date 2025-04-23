@@ -1,18 +1,23 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-// import path from 'path';
-// import { fileURLToPath } from 'url';
 
 import Project from './models/Project.js';
 
+//  projectId, token のチェック
+async function authenticateProject(req, res) {
+  const { projectId, token } = req.query;
+  // projectId と token の両方が
+  const project = await Project.findOne({ projectId, token });
+  if (!project) {
+    res.status(403).json({ error: '認証失敗：projectId または token が違います' });
+    return null;
+  }
+  return project;
+}
+
 // .env ファイルを読み込んで、そこに書かれた変数を process.env に登録
 dotenv.config();
-
-// // 今のファイルのURL（例: file:///Users/user/server.js）を通常のファイルパスに変換（例: /Users/user/server.js）
-// const __filename = fileURLToPath(import.meta.url);
-// // ディレクトリ部分だけを取り出す（例: /Users/user）
-// const __dirname = path.dirname(__filename);
 
 // Webサーバーアプリを作成
 const app = express();  
@@ -31,80 +36,76 @@ mongoose.connect(process.env.MONGODB_URI, {
   console.error('❌ MongoDB connection error:', err);
 });
 
-// /api/vote は projectId に紐づいた votes: Map<nickname, selections> をPOSTすることで、サーバーにすべて保存される。
+// プロジェクトを新規作成する
+app.post('/api/create-project', async (req, res) => {
+  const { projectId, token } = req.body;
+  const newProject = new Project({
+      projectId,
+      token,
+      votes: new Map(),
+    });
+    await newProject.save();
+    res.status(200).json({ success: true, message: 'プロジェクトを作成しました' });
+});
+
+// 14日後の削除日を表示
+app.get('/api/create-auto-delete', async (req, res) => {
+  const project = await authenticateProject(req, res);
+  const votesObject = Object.fromEntries(project.votes);
+  res.json({
+      createdAt: project.createdAt,
+      votes: votesObject,
+    });
+  });
+
+// データ更新
 app.post('/api/vote', async (req, res) => {
-  const { projectId, nickname, selections } = req.body;
-
-  if (!projectId || !nickname || !selections) {
-    return res.status(400).json({ error: 'Missing data' });
-  }
-
-  try {
-    // 既存プロジェクトを探す
-    let project = await Project.findOne({ projectId });
-
-    if (!project) {
-      // なければ新規作成
-      project = new Project({ projectId, votes: new Map() });
-    }
-
-    // ユーザーの投票データを更新 or 追加
-    project.votes.set(nickname, selections);
-
-    // 保存
-    await project.save();
-
-    res.status(200).json({ success: true });
-  } catch (err) {
-    console.error('❌ /api/vote error:', err);
-    res.status(500).json({ error: 'Server error' });
-  }
+  const { projectId, token, nickname, selections } = req.body;
+  
+  const project = await Project.findOne({ projectId, token });
+  // ユーザーの投票データを更新 or 追加
+  project.votes.set(nickname, selections);
+  // 保存
+  await project.save();
+  res.status(201).json({ success: true , message: 'データを更新or保存しました' });
 });
 
-// /api/results?projectId=xxxxはvotes: Map<nickname, selections>をGETして、Object.fromEntries() で変換して返す
+// `/api/results?projectId=${projectId}&token=${token}`で投票データを取得する
 app.get('/api/results', async (req, res) => {
-  const projectId = req.query.projectId;
-
-  if (!projectId) {
-    return res.status(400).json({ error: 'Missing projectId' });
-  }
-
-  try {
-    const project = await Project.findOne({ projectId });
-
-    if (!project) {
-      return res.status(404).json({ error: 'Project not found' });
-    }
-
-    // Map → 普通のオブジェクトに変換して返す
+  const project = await authenticateProject(req, res);
+  if (!project) return;
     const votesObject = Object.fromEntries(project.votes);
-
     res.json(votesObject);
-  } catch (err) {
-    console.error('❌ /api/results error:', err);
-    res.status(500).json({ error: 'Server error' });
-  }
 });
 
+// サーバ接続確認
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🌐 Server running: http://localhost:${PORT}`);
 });
 
-// server.js に追加
-app.delete('/api/admin/reset', async (req, res) => {
-  const { projectId } = req.query;
-  if (!projectId) return res.status(400).json({ error: 'projectIdが必要です' });
 
-  try {
-    const project = await Project.findOne({ projectId });
-    if (!project) return res.status(404).json({ error: 'プロジェクトが見つかりません' });
+// 指定されたプロジェクトの中の、特定のニックネーム1人分の投票データだけを削除
+app.delete('/api/admin/reset-user', async (req, res) => {
+  // projectId と nickname の両方を使用して処理
+  const { nickname } = req.query;
+  const project = await authenticateProject(req, res);
+  if (!project || !nickname) return;
 
-    project.votes = new Map(); // 投票データを初期化
-    await project.save();
-    res.json({ success: true });
-  } catch (err) {
-    console.error('❌ /api/admin/reset error:', err);
-    res.status(500).json({ error: 'サーバーエラー' });
+  if (!project.votes.has(nickname)) {
+    return res.status(404).json({ error: '該当ユーザーの投票が見つかりません' });
   }
+
+  project.votes.delete(nickname);
+  await project.save();
+  res.json({ success: true });
+});
+
+// 指定されたプロジェクトを完全削除するエンドポイント
+app.delete('/api/admin/delete-project', async (req, res) => {
+  const project = await authenticateProject(req, res);
+  if (!project) return;
+
+  await Project.deleteOne({ projectId: project.projectId });
+  res.json({ success: true, message: `プロジェクト ${project.projectId} を削除しました` });
 });

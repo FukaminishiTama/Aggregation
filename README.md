@@ -4,7 +4,9 @@
 
 ## 概要
 
-このプロジェクトは、ユーザーが投票を行い、その結果をリアルタイムで集計・表示するためのWebアプリケーションです。投票データはMongoDBに保存され、管理画面から簡単に操作できます。また、LINE共有機能を通じて、結果を他のユーザーと簡単に共有することができます。
+- ユーザーが投票を行い、その結果をリアルタイムで集計・表示するためのWebアプリケーションです。
+- 投票データはMongoDBに保存され、管理画面から簡単に操作できます。
+- LINE共有機能を通じて、結果を他のユーザーと簡単に共有することができます。
 
 ---
 
@@ -24,6 +26,7 @@
 
 4. **管理画面**
    - プロジェクトごとに投票データを管理できます。
+   - プロジェクト名の重複を回避するため、tokenを生成
    - 投票データのリセットや、投票済みユーザーの一覧表示が可能です。
 
 ---
@@ -34,6 +37,28 @@
 - **バックエンド**: Node.js, Express
 - **データベース**: MongoDB
 - **スタイリング**: Sass
+- **デプロイ**: Render
+
+### MongoDB
+読込、更新用ユーザを作成し、.envファイルにて接続を管理
+以下形式のJSONを保存
+```
+// プロジェクトの名前
+  projectId: { type: String, required: true, unique: true }, 
+// プロジェクト同名回避用のキー
+  token: { type: String, required: true }, 
+// { "ニックネーム": [ [1回目[順位,番号], [順位,番号]],2回目[順位,番号]... ] }
+  votes: { type: Map, of: Array }, 
+```
+「作成」ボタンクリック時に作成されるデータ例
+```
+_id: 68079f15062402991219ff3c
+projectId: "生姜焼きGP2025" ←入力
+token: "Dpe0oFbb"　←自動生成
+votes: Object
+createdAt: 2025-04-22T13:52:21.748+00:00
+__v: 0
+```
 
 ---
 
@@ -58,11 +83,14 @@
 
 ---
 
-## 主な開発構成
+## 開発環境
+VScode
+GitHub Copilot
 
 ```
 Aggregation
 ├── README.md
+├── .env (ローカル)
 ├── package.json
 ├── prettier.config.js
 ├── server.js
@@ -70,24 +98,24 @@ Aggregation
 ├── models
 │   └── Project.js
 └── src
-	   ├── admin.html
-	   ├── index.html
-	   ├── main.html
-	   ├── results.html
-	   ├── images
-	   │   ├── Button
-	   │   ├── Main
-	   │   └── SNS
-	   ├── sass
-	   │   └── style.scss
-	   ├── scripts
-	   │   ├── app.js
-	   │   ├── header.js
-	   │   ├── results.js
-	   │   └── startup_screen.js
-	   └── styles
-	        ├── style.css.map
-	        └── style.css
+	├── admin.html
+	├── index.html
+	├── main.html
+	├── results.html
+	├── images
+	│   ├── Button
+	│   ├── Main
+	│   └── SNS
+	├── sass
+	│   └── style.scss
+	├── scripts
+	│   ├── app.js
+	│   ├── header.js
+	│   ├── results.js
+	│   └── startup_screen.js
+	└── styles
+	      ├── style.css.map
+	      └── style.css
 ```
 
 ---
@@ -176,7 +204,4 @@ forEach で画面に描画
 
 
 ## 今後の改善点
-
-- **検索機能**: 投票履歴を検索できる機能を追加予定。
 - **レスポンシブ対応**: モバイルデバイスでの表示最適化。
-- **多言語対応**: 日本語以外の言語サポートを拡充。

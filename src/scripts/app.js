@@ -8,12 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('project');
   
-    // タイトル変更
-    if (projectId) {
-      const title = document.getElementById('section__main-title');
-      if (title) {
-        title.textContent = `${projectId}：投票画面`;
-      }
+    // 投票画面タイトル
+    const title = document.getElementById('section__main-title');
+    if (title) {
+      title.innerHTML = `${projectId}<h3 class="section__main-text">投票</h3>`;
     }
 
 // 4つまでの数字ボタン選択と表示、リセットボタンの表示
@@ -163,7 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
     // 遷移先の URL に projectId を付けて渡す
-    window.location.href = `results.html?project=${encodeURIComponent(projectId)}`;
+    const token = urlParams.get('token');
+    window.location.href = `results.html?project=${encodeURIComponent(projectId)}&token=${encodeURIComponent(token)}`;
   });
 
 });

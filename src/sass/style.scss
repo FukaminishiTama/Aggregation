@@ -90,110 +90,10 @@ header {
 }
 
 /* -------------------------------------------------
-言語選択「日本語」「English」
- 地球儀と「Language」と下矢印
-----------------------------------------------------*/
-.language-selector {
-  position: relative;
-}
-
-.language-selector__button {
-  align-items: center;
-  border-radius: calc(infinity* 1rem);
-  display: flex;
-  font-size: .875rem;
-  font-weight: 400;
-  gap: .25rem;
-  letter-spacing: .02em;
-  line-height: 1;
-  min-height: 2.75rem;
-  padding-left: .5rem;
-  padding-right: .5rem;
-  width: fit-content;
-  --tw-text-opacity: 1;
-  color: rgb(51 51 51 / var(--tw-text-opacity));
-}
-
-.language-selector__check-icon, .language-selector__language-icon svg {
-  height: 1.25rem;
-  width: 1.25rem;
-}
-
-/* 閉じているテキスト、アイコンを非表示 */
-.language-selector__button[aria-expanded="false"] .language-selector__text--close {
-  display: none;
-}
-
-/* 開いているので「閉じる関連」テキスト、アイコンを非表示 */
-.language-selector__button[aria-expanded="true"] .language-selector__text--open {
-  display: none;
-}
-
-// ホバー時は黒点線
-.language-selector__button:hover {
-  outline-color: #000;
-  outline-style: dashed;
-  outline-width: 1px;
-}
-
-// Languageをクリックしたときに表示される「日本語」「English」のボックス表示
-.language-selector__list {
-  border-radius: .5rem;
-  border-width: 1px;
-  left: 0;
-  max-height: 18.875rem;
-  min-width: fit-content;
-  overflow: auto;
-  position: absolute;
-  top: 100%;
-  width: auto;
-  --tw-border-opacity: 1;
-  border-color: rgb(148 148 148 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  padding-bottom: .5rem;
-  padding-top: .5rem;
-  --tw-shadow: 0 2px 8px 1px #0000001a, 0 1px 5px 0 #0000004d;
-  --tw-shadow-colored: 0 2px 8px 1px var(--tw-shadow-color), 0 1px 5px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.language-selector__link[aria-current=true] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(217 230 255/ 1) !important;
-  font-weight: 700;
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 17 143/ 1) !important;
-}
-
-.language-selector__link {
-  align-items: center;
-  column-gap: .5rem;
-  display: flex;
-  position: relative;
-  text-wrap: nowrap;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255/ 1)!important;
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: .02em;
-  line-height: 1;
-  padding: .75rem 1.5rem .75rem .75rem;
-  --tw-text-opacity: 1;
-  color: rgb(51 51 51/ 1)!important;
-}
-
-// 閉じる状態のテキスト要素のうち、言語が日本語である場合
-.header-item__text--close:lang(ja), .header-item__text--open:lang(ja) {
-  // 最小幅
-  min-width: 7.125rem;
-}
-
-/* -------------------------------------------------
 ヘッダーメニューバー
 ----------------------------------------------------*/
 
-// 「ホーム」と区切り線、ハンバーガーアイコンと「すべてのメニュー」
+// 「ホーム」
 .header-item {
   align-items: center;
   // 要素の角を可能な限り丸くして、要素を完全な円形または楕円形にする
@@ -284,14 +184,29 @@ header {
 /* -------------------------------------------------
 管理画面
 ----------------------------------------------------*/
+// タイトルテキスト
+.section__admin-text {
+  font-size: 1.2rem;
+}
+.automatic-deletion-text{
+  font-size: 1rem;
+  margin-top: 2.3rem;
+}
+
+// 管理画面注意事項のテキスト
+.precautions-text {
+  color: #c86b5b;
+}
+
 // URL表示
-.voteUrl, .adminUrl {
+.voteUrl, .resultUrl, .adminUrl {
   border-radius: 0.25rem;
   border: 1px solid #ddd;
-  margin-left: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  width: 15rem;
+  width: 100%;
+  max-width: 100%;  /* はみ出し防止 */
+  box-sizing: border-box; /* padding, borderも含めた幅にする */
   text-align: center;
   font-size: 0.8rem;
 }
@@ -310,19 +225,23 @@ header {
 
 // ボタン
 .button__text-voteUrlCopy,
+.button__text-resultUrlCopy,
 .button__text-adminUrlCopy,
-.button__reset-project {
+.button__reset-nickname,
+.button__delete-project {
   border-radius: 0.25rem;
   margin-left: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  width: 3rem;
+  padding: 0.2em;
+  // padding-top: 0.5rem;
+  // padding-bottom: 0.5rem;
+  width: 3.1rem;
   height: 2rem;
   text-align: center;
   background-color: #5b62c8; 
   color: #ffffff;
   cursor: pointer;
   font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .button__text-voteUrlCopy,
@@ -332,21 +251,52 @@ header {
   align-items: center;
 }
 
-.button__reset-project {
+// 投票済みユーザ
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button__reset-nickname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2em;
+  height: 2rem;
+  width: 2rem;
+}
+
+.button__delete-project {
   margin-top: 0.5rem;
   height: 2.5rem;
   width: 5rem;
+  background-color: #c85b5b; 
 }
 
 .button__text-voteUrlCopy:hover,
 .button__text-adminUrlCopy:hover,
-.button__reset-project:hover {
+.button__reset-nickname:hover,
+.button__delete-project:hover {
   background-color: #c8a55b;  
 }
 
 /* -------------------------------------------------
 投票画面
 ----------------------------------------------------*/
+// タイトルテキスト
+.section__main-text {
+  font-size: 1.2rem;
+}
+// 説明の図
+.selection-example-figure {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;               
+}
+
 .template__main {
   margin: 3rem auto 9rem;
   max-width: 77.375rem;
@@ -446,7 +396,7 @@ header {
   grid-template-rows: min-content 1fr;
 }
 
-// ルールのポイント表のアンダーライン
+// アンダーライン
 .card__pointtable__title {
   border-bottom: 1px solid #ddd;
 }
@@ -739,6 +689,11 @@ button {
 /* ---------------------------------------------
 投票結果
 ------------------------------------------------- */
+// タイトルテキスト
+.section_results-text {
+  font-size: 1.2rem;
+}
+
 .round, .points {
   font-size: 1rem;
   font-weight: 700;
@@ -784,6 +739,7 @@ button {
   // カードの枠線の幅を1ピクセル
   border-width: 1px;
   display: grid;
+  width: 20rem;
   height: 100%;
   // カードのコンテンツがカードの領域を超えた場合に、超えた部分を非表示
   overflow: hidden;
@@ -859,7 +815,7 @@ button {
   // [必須][ニックネーム]まとめたボックス
   .form__label {
     width: 100%;
-    max-width: 248px;
+    // max-width: 248px;
     letter-spacing: 0.05em;
     font-weight: bold;
     font-size: 18px;
@@ -998,6 +954,11 @@ button {
 !important; 重要度を持つプロパティを設定
             他のスタイルよりも優先される
 ------------------------------------------------- */
+.down-arrow {
+  display: flex;
+  justify-content: center; /* 横方向中央 */
+}
+
 /* HTMLの<button>要素はもちろん、role="button"が付与された要素に適用 */
 [role=button], button {
   /* ポインター（手の形）*/
