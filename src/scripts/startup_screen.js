@@ -49,6 +49,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // 14日後の削除日を表示
 const resDataDate = await fetch(`/api/create-auto-delete?projectId=${projectId}&token=${token}`);
+if (!resDataDate.ok) {
+  // 403などが返ってきたら強制リダイレクトまたはエラーページへ
+  alert('このプロジェクトは存在しないか、すでに削除されています');
+  window.location.href = '/index.html';
+  return;
+}
+
 const dataAutoDeleteDate = await resDataDate.json();
 
 // createdAt を元に削除日を計算
