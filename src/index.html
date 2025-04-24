@@ -93,7 +93,7 @@
         </section>
         <ul class="stack stack--medium">
             <li>
-                <div class="card">
+                <div class="card__project">
                     <div class="card__body">
                         <p class="card__title">
                             <span>
@@ -111,7 +111,7 @@
             </svg>                  
             </li>
             <li>
-                <div class="card">
+                <div class="card__project">
                     <div class="card__body">
                         <p class="card__title">
                             <span>
@@ -130,10 +130,12 @@
                     プロジェクト名
                 </p>
                 <!-- テキストを入力 -->
-                <input id="form__projectInput" class="form__input--name" type="text" name="projectId" required placeholder="例: 生姜焼き定食GP2025">
-                <button class="create-button" type="submit">作成
-                    <span class="button__project-create"></span>
-                </button>
+                <div class="form__project-create">
+                    <input id="form__projectInput" class="form__input--name" type="text" name="projectId" required placeholder="例: 生姜焼き定食GP2025">
+                    <button class="create-button" type="submit">作成
+                        <span  id="loadingText" class="button__project-create"></span>
+                    </button>
+                </div>
             </form>
         </section>
 

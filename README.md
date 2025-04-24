@@ -1,6 +1,7 @@
 
 # 集計ツール - README
 これはHTML, CSS, JSの練習用に制作したWebツールです。
+https://aggregation-d1rr.onrender.com
 
 ## 概要
 - ユーザーが投票を行い、その結果をリアルタイムで集計・表示するためのWebツールです。
@@ -50,9 +51,20 @@
 - **バックエンド**: Node.js, Express
 - **データベース**: MongoDB
 - **スタイリング**: Sass
-- **デプロイ**: Render（予定）
+- **デプロイ**: Render
 
-### MongoDB
+### MongoDB(DB)とRenderの接続
+- `MongoDB Atlas`には `Render`の静的IPアドレスのみ許可
+- `.env` は環境変数としてRender上に登録
+
+1. GitHubリポジトリをRenderに接続
+2. 環境変数に以下を追加
+   - `MONGODB_URI`
+   - `PORT=3000`
+   - `NODE_ENV=production`
+3. 自動ビルド＆デプロイが実行される
+
+### MongoDBに保存するデータファイル
 - 読込、更新用ユーザを作成し、.envファイルにて接続を管理
 - 「作成」ボタンクリック時に、以下形式のJSONをMongoDBに保存
 ```

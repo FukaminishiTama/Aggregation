@@ -207,8 +207,21 @@ document.addEventListener('DOMContentLoaded', async() => {
 
       // LINE共有ボタンの処理
       document.getElementById('shareToLineBtn').addEventListener('click', () => {
-        const resultsText = document.getElementById('aggregate__results').innerText;
-        const encodedText = encodeURIComponent(resultsText);
+        const resultsTextElement = document.getElementById('aggregate__results');
+        const text = resultsTextElement.innerText || '';
+      
+        // 1. 改行・空白行の除去（空行は削除、改行はスペースに変換）
+        const cleanText = text
+          .split('\n')
+          .map(line => line.trim())
+          .filter(line => line.length > 0)
+          .join(' ');
+      
+        // 2. 先頭に projectId を追加
+        const projectId = new URLSearchParams(window.location.search).get('project') || '集計結果';
+        const finalText = `${projectId}： ${cleanText}`;
+      
+        const encodedText = encodeURIComponent(finalText);
         const lineUrl = `https://social-plugins.line.me/lineit/share?text=${encodedText}`;
         window.open(lineUrl, '_blank');
       });

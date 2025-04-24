@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const projectId = input.value.trim();
     if (!projectId) return alert('プロジェクトIDを入力してください');
 
+    // 🔸 作成中ローディング表示
+    const loadingText = document.getElementById('loadingText');
+    loadingText.textContent = ' 作成中...';
+    loadingText.classList.add('loading-animation'); // CSSアニメーション用
+
     localStorage.setItem('projectId', projectId);
 
     function generateProjectId(length = 16) {
