@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 
+<!-- prefix:OGP設定:TwitterやFacebookなどのSNS説明文を手動で設定 -->
 <html lang="ja" dir="ltr" prefix="og: http://ogp.me/ns#" class=" js">
-
 <head>
     <meta charset="UTF-8">
+    <!-- viewport設定でレスポンシブデザイン対応 -->
+    <!-- content="initial-scale=1.0 初期倍率1.0 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="WebApp">
     <link rel="shortlink" href="#">
+    <!-- canonical:評価してほしいページを検索エンジンに伝えるためのタグ-->
     <link rel="canonical" href="#">
+    <!-- 作成者 -->
     <meta name="author" content="con">
-    <!-- SNS用 -->
     <meta property="og:site_name" content="集計ツール">
     <meta property="og:url" content="#" />
     <meta property="og:type" content="WebApp" />
@@ -18,12 +21,14 @@
     <meta property="og:image" content="#" />
     <meta property="og:locale" content="ja_JP" />
 
+    <!-- iOSデバイス（iPhoneやiPad）でホーム画面追加のタイトル設定 -->
     <meta name="apple-mobile-web-app-title" content="集計ツール">
+    <!-- (旧)古いモバイルブラウザに対して、ウェブページの表示幅を端末の画面幅に合わせる -->
     <meta name="MobileOptimized" content="width">
+    <!-- モバイル端末（ハンドヘルドデバイス）での表示に最適化 -->
     <meta name="HandheldFriendly" content="true">
-    <link rel="icon" href="#/favicon.ico" type="#/vnd.microsoft.icon">
-    <link rel="alternate" hreflang="ja" href="#/jp">
-    <link rel="alternate" hreflang="en" href="#/en">
+    <!-- ウェブブラウザのブックマークバーなどに表示される小さなアイコン(ファビコン画像) -->
+    <link rel="icon" href="\images\favicon.ico">
 
     <title>条件付き集計-結果</title>
     
@@ -66,17 +71,6 @@
                                     <span class="header-item" data-text="ホーム">
                                         ホーム</span>
                                 </a>
-                            </li>
-                            <!-- 区切り線 -->
-                            <li aria-hidden="true" class="header-menu__item header-menu__item--divider">
-                                <!-- 区切り線の要素 -->
-                                <span class="header__nav-divider">
-                                    <!-- 区切り線のSVG(｜) -->
-                                    <svg width="2" height="16" viewBox="0 0 2 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <rect x="0.0566406" width="1" height="16" fill="#757578"></rect>
-                                    </svg>
-                                </span>
                             </li>
                         </ul>
                     </div>

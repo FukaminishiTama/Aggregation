@@ -1,92 +1,34 @@
-<!-- ユーザ入力 -->
-  <!DOCTYPE html>
+<!DOCTYPE html>
 
-  <!-- prefix:OGP設定をしていなかった場合、
-   TwitterやFacebookなどのSNS側が自動的に説明文や画像を表示してしまい、
-   ページ内容がユーザーに正しく伝わらなくなります。
-   適切に設定することで、どのようなページで何を伝えたいのかが
-   明確になり、共有されたユーザーの訴求率が高まる
-  <meta property="og:url" content=" ページの URL" />
-  <meta property="og:type" content=" ページの種類" />
-  <meta property="og:title" content=" ページの タイトル" />
-  <meta property="og:description" content=" ページの説明文" />
-  <meta property="og:site_name" content="サイト名" />
-  <meta property="og:image" content=" サムネイル画像の URL" />
-  -->
-  <html lang="ja" dir="ltr" prefix="og: http://ogp.me/ns#" class=" js">
-  
-  <head>
-      <meta charset="UTF-8">
-      <!-- viewport設定でレスポンシブデザイン対応。
-       モバイル（スマホ、タブレット）でコンテンツを閲覧したときに、
-       PC向けサイトの横幅になるので表示領域が最適化 -->
-      <!-- content="width=device-width
-        表示領域の幅で、端末画面の幅に合わせる指定ができる、
-        meta要素のcontent属性の属性値 -->
-      <!-- 
-        /*-----通常（PC向け）の記述-----*/
-          #menu-bg {
-          background-color: #00FFFF;　/*青色*/
-          }
-        /*-----スマホ向けの記述-----*/
-          @media screen and (max-width: 480px) {　/*ウィンドウ幅が0～479pxの場合にCSSを適用*/
-          #menu-bg {
-          background-color: #00FF00;　/*緑色*/
-          } }
-      /*-----タブレット向けの記述-----*/
-          @media screen and (min-width:768px) and ( max-width:1024px) {　/*ウィンドウ幅が0～767pxの場合にCSSを適用*/
-          #menu-bg {
-          background-color: #FF0000;　/*赤色*/
-          } }
-        -->
-      <!-- content="initial-scale=1.0
-        初期倍率1.0 -->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="WebApp">
-      <link rel="shortlink" href="#">
-      <!-- canonical
-        同じサイト内に、重複したコンテンツや類似するページが存在する場合、
-        どのページを評価してほしいかを検索エンジンに伝えるためのタグ-->
-      <!-- 全く同じコンテンツ内容で、URLが異なるケースは非常に多い
-         ・PCページとスマホページで異なるURLで表示する場合
-         ・同じ商品だけでカラーが異なるバリエーションページ
-         ・AMPページを利用している場合
-         検索エンジンに別ページとみなされるURLの例
-         ・httpとhtppsのスキームの違い
-         ・wwwのあり・なし
-         ・index.htmlのあり・なし
-         ・URL末尾のスラッシュのあり・なし
-         ・動的パラメータのあり・なし 
-         -->
-      <link rel="canonical" href="#">
-      <!-- 作成者 -->
-      <meta name="author" content="con">
-      <meta property="og:site_name" content="集計ツール">
-      <meta property="og:url" content="#" />
-      <meta property="og:type" content="WebApp" />
-      <meta property="og:title" content="集計ツール" />
-      <meta property="og:description" content="WebApp" />
-      <meta property="og:image" content="#" />
-      <meta property="og:locale" content="ja_JP" />
-  
-      <!-- AppleのiOSデバイス（iPhoneやiPad）において、
-       ウェブサイトをホーム画面に追加した際に表示されるタイトルを設定 -->
-      <meta name="apple-mobile-web-app-title" content="集計ツール">
-      <!-- 古いモバイルブラウザに対して、ウェブページの表示幅を端末の画面幅に合わせる
-        現在では、より柔軟で強力なviewportメタタグを使用することが一般的 -->
-      <meta name="MobileOptimized" content="width">
-      <!-- モバイル端末（ハンドヘルドデバイス）での表示に最適化
-      現在のウェブ開発では、レスポンシブウェブデザインや
-      ビューポートメタタグ（<meta name="viewport">）を使用することが一般的  -->
-      <meta name="HandheldFriendly" content="true">
-      <!-- ファビコンに設定する画像 -->
-      <link rel="icon" href="#/favicon.ico" type="#/vnd.microsoft.icon">
-      <!-- rel="alternate" リンク先ファイルが代替バージョン
-      リンク先のページの言語を指定します。jaは日本語（Japanese）
-      リンク先のファイルのURLが日本語のページ -->
-      <link rel="alternate" hreflang="ja" href="#/jp">
-      <!-- 上記の英語設定版 URLが英語のページ -->
-      <link rel="alternate" hreflang="en" href="#/en">
+<!-- prefix:OGP設定:TwitterやFacebookなどのSNS説明文を手動で設定 -->
+<html lang="ja" dir="ltr" prefix="og: http://ogp.me/ns#" class=" js">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport設定でレスポンシブデザイン対応 -->
+    <!-- content="initial-scale=1.0 初期倍率1.0 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WebApp">
+    <link rel="shortlink" href="#">
+    <!-- canonical:評価してほしいページを検索エンジンに伝えるためのタグ-->
+    <link rel="canonical" href="#">
+    <!-- 作成者 -->
+    <meta name="author" content="con">
+    <meta property="og:site_name" content="集計ツール">
+    <meta property="og:url" content="#" />
+    <meta property="og:type" content="WebApp" />
+    <meta property="og:title" content="集計ツール" />
+    <meta property="og:description" content="WebApp" />
+    <meta property="og:image" content="#" />
+    <meta property="og:locale" content="ja_JP" />
+
+    <!-- iOSデバイス（iPhoneやiPad）でホーム画面追加のタイトル設定 -->
+    <meta name="apple-mobile-web-app-title" content="集計ツール">
+    <!-- (旧)古いモバイルブラウザに対して、ウェブページの表示幅を端末の画面幅に合わせる -->
+    <meta name="MobileOptimized" content="width">
+    <!-- モバイル端末（ハンドヘルドデバイス）での表示に最適化 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- ウェブブラウザのブックマークバーなどに表示される小さなアイコン(ファビコン画像) -->
+    <link rel="icon" href="\images\favicon.ico">
   
       <!-- ページのタブやウィンドウの上部（タイトルバー）に表示されるもの -->
       <title>条件付き集計-投票</title>
