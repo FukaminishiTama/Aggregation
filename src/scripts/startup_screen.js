@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     localStorage.setItem('projectId', projectId);
 
-    function generateProjectId(length = 8) {
-      const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789こんにちわどうされましたか';
+    function generateProjectId(length = 16) {
+      const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789こんにちわどうされましたかもうすぐ雨が降りますね';
       return Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
     }
     const randam_text = generateProjectId();
