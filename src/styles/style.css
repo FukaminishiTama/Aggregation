@@ -260,6 +260,19 @@ header {
   background-color: #c8a55b;
 }
 
+.button__project-create {
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 2.5rem;
+  text-align: center;
+  background-color: #c8a55b;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
 .loading-animation::after {
   content: "...";
   -webkit-animation: dots 1s steps(3, end) infinite;
