@@ -107,6 +107,19 @@ header {
 /* -------------------------------------------------
 入力（ニックネーム、プロジェクト名）
 ----------------------------------------------------*/
+.card__project {
+  border-radius: 0.5rem;
+  border-width: 1px;
+  display: grid;
+  height: 100%;
+  width: 30rem;
+  overflow: hidden;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0/var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+}
+
 .form__input-field {
   padding-left: 14px;
   padding-right: 14px;
@@ -137,6 +150,11 @@ header {
   background: #5bc8ac;
   color: #fff;
   font-size: 0.8rem;
+}
+
+.form__project-create {
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .form__input--name {
@@ -170,6 +188,41 @@ header {
   background-color: #c8a55b;
 }
 
+.loading-animation::after {
+  content: "...";
+  -webkit-animation: dots 1s steps(3, end) infinite;
+          animation: dots 1s steps(3, end) infinite;
+}
+
+@-webkit-keyframes dots {
+  0% {
+    content: "";
+  }
+  33% {
+    content: ".";
+  }
+  66% {
+    content: "..";
+  }
+  100% {
+    content: "...";
+  }
+}
+
+@keyframes dots {
+  0% {
+    content: "";
+  }
+  33% {
+    content: ".";
+  }
+  66% {
+    content: "..";
+  }
+  100% {
+    content: "...";
+  }
+}
 /* -------------------------------------------------
 管理画面
 ----------------------------------------------------*/
@@ -940,9 +993,7 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center; /* 横方向中央 */
+  margin-left: 12.5rem;
 }
 
 /* HTMLの<button>要素はもちろん、role="button"が付与された要素に適用 */
