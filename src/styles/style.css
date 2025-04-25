@@ -105,14 +105,86 @@ header {
 }
 
 /* -------------------------------------------------
+各ページ、各項目のタイトル
+----------------------------------------------------*/
+.section {
+  margin-top: 2rem;
+}
+
+.section:nth-child(2) {
+  margin-top: 0;
+}
+
+.section__header {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.75rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 1rem;
+  z-index: auto;
+}
+
+.section__title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.attention {
+  list-style-type: disc;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding-left: 2rem;
+}
+
+/* .attention-item__link クラスを持つ要素のうち、
+.attention-item__text--isInformation クラスを持つ子要素が対象
+:has() は、指定されたセレクターを持つ要素を選択、古いブラウザではサポートされていない場合がある
+:hover により、マウスが要素の上にある状態を指定
+*/
+.attention-item__link:has(.attention-item__text--isInformation), .attention-item__link:not(.no-link):has(.attention-item__text--isInformation):hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 17 143/var(--tw-text-opacity));
+}
+
+.attention-item__link:not(.no-link) {
+  text-decoration-line: underline;
+  text-underline-offset: 0.1875rem;
+}
+
+/* -------------------------------------------------
 入力（ニックネーム、プロジェクト名）
 ----------------------------------------------------*/
+.project-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
 .card__project {
+  width: 100%;
+  max-width: 30rem;
+  min-width: 0;
   border-radius: 0.5rem;
-  border-width: 1px;
-  display: grid;
-  height: 100%;
-  width: 30rem;
+  border: 1px solid #000;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   overflow: hidden;
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0/var(--tw-border-opacity));
@@ -239,17 +311,17 @@ header {
   color: #c86b5b;
 }
 
-.voteUrl, .resultUrl, .adminUrl {
-  border-radius: 0.25rem;
-  border: 1px solid #ddd;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+.card__URL {
+  border-radius: 0.5rem;
+  border-width: 1px;
+  display: grid;
+  height: 100%;
   width: 100%;
-  max-width: 100%; /* はみ出し防止 */
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box; /* padding, borderも含めた幅にする */
-  text-align: center;
-  font-size: 0.8rem;
+  overflow: hidden;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0/var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255/var(--tw-bg-opacity));
 }
 
 .card__body-URL {
@@ -269,6 +341,20 @@ header {
   gap: 0.5rem;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+.voteUrl, .resultUrl, .adminUrl {
+  border-radius: 0.25rem;
+  border: 1px solid #ddd;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  max-width: 100%; /* はみ出し防止 */
+  min-width: 100%; /* はみ出し防止 */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* padding, borderも含めた幅にする */
+  text-align: center;
+  font-size: 0.8rem;
 }
 
 .button__text-voteUrlCopy,
@@ -356,6 +442,9 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 0.5rem;
@@ -372,6 +461,21 @@ header {
 }
 
 .reset-button-figure {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.reset-button-text {
   border-radius: 0.25rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -390,58 +494,6 @@ header {
   width: 100%;
 }
 
-.section {
-  margin-top: 2rem;
-}
-
-.section:nth-child(2) {
-  margin-top: 0;
-}
-
-.section__header {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 0.75rem;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin-bottom: 1rem;
-  z-index: auto;
-}
-
-.section__title {
-  font-size: 1.375rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.5;
-}
-
-.attention {
-  list-style-type: disc;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  padding-left: 2rem;
-}
-
-/* .attention-item__link クラスを持つ要素のうち、
-.attention-item__text--isInformation クラスを持つ子要素が対象
-:has() は、指定されたセレクターを持つ要素を選択、古いブラウザではサポートされていない場合がある
-:hover により、マウスが要素の上にある状態を指定
-*/
-.attention-item__link:has(.attention-item__text--isInformation), .attention-item__link:not(.no-link):has(.attention-item__text--isInformation):hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 17 143/var(--tw-text-opacity));
-}
-
-.attention-item__link:not(.no-link) {
-  text-decoration-line: underline;
-  text-underline-offset: 0.1875rem;
-}
-
 /* -------------------------------------------------
 カード形式のデザイン
 ----------------------------------------------------*/
@@ -450,6 +502,8 @@ header {
   border-width: 1px;
   display: grid;
   height: 100%;
+  width: 100%;
+  max-width: 40rem;
   overflow: hidden;
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0/var(--tw-border-opacity));
@@ -458,6 +512,7 @@ header {
 }
 
 .card__body {
+  text-align: center;
   padding: 0.5rem;
 }
 
@@ -497,10 +552,35 @@ header {
 }
 
 /* -------------------------------------------------
-文字カード
+カード
 ----------------------------------------------------*/
 .stack {
-  display: grid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; /* 縦に積む形 */
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; /* 子要素の中央揃え */
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 1rem; /* モバイル時の左右余白を確保 */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.stack > li {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .stack--medium {
@@ -899,10 +979,17 @@ button {
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
-    width: 100%;
     max-width: 410px;
     background: #eaedf2;
     font-size: 18px;
+  }
+  .create-button {
+    border-radius: 0.25rem;
+    margin-left: 1rem;
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+    width: 4rem;
+    font-size: 1rem;
   }
   .footer__content {
     justify-items: start;
@@ -989,20 +1076,12 @@ button {
 !important; 重要度を持つプロパティを設定
             他のスタイルよりも優先される
 ------------------------------------------------- */
-.down-arrow {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin-left: 12.5rem;
-}
-
 /* HTMLの<button>要素はもちろん、role="button"が付与された要素に適用 */
 [role=button], button {
   /* ポインター（手の形）*/
   cursor: pointer;
 }
 
-/*  */
 :root {
   --header-block-size: 4.5rem;
 }

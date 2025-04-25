@@ -210,14 +210,14 @@ document.addEventListener('DOMContentLoaded', async() => {
         const resultsTextElement = document.getElementById('aggregate__results');
         const text = resultsTextElement.innerText || '';
       
-        // 1. 改行・空白行の除去（空行は削除、改行はスペースに変換）
+        // 空白行の除去（空行は削除、改行はスペースに変換）
         const cleanText = text
-          .split('\n')
-          .map(line => line.trim())
-          .filter(line => line.length > 0)
-          .join(' ');
+        .split('\n') // 改行を分割して配列にする
+        .map(line => line.trim())
+        .filter(line => line.length > 0)
+        .join('\n'); // 改行を戻す
       
-        // 2. 先頭に projectId を追加
+        // 先頭に projectId を追加
         const projectId = new URLSearchParams(window.location.search).get('project') || '集計結果';
         const finalText = `${projectId}： ${cleanText}`;
       
