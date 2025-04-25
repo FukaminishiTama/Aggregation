@@ -12,9 +12,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 作成中ローディング表示
     const loadingText = document.getElementById('loadingText');
     loadingText.textContent = ' 作成中...';
+    loadingText.classList.add('button__project-create');
     // 「作成」を非表示
     const createBtn = document.querySelector('.create-button');
     createBtn.setAttribute('aria-expanded', String('false'));
+
     loadingText.classList.add('loading-animation'); // CSSアニメーション用
 
     localStorage.setItem('projectId', projectId);
