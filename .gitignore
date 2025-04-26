@@ -12,3 +12,11 @@ dist/
 
 # votes.jsonを扱うためのJSコード
 server_js.txt
+
+# 不要
+*.vscode
+*.sass
+.eslintrc.js
+.eslint.config.mjs
+.prettier.config.js
+Vscode_Copilot.md

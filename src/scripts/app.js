@@ -99,6 +99,43 @@ document.addEventListener('DOMContentLoaded', () => {
       focusNavigationLink();
   });
 
+// asyncを用いた処理を関数化
+async function fetchUserList() {
+  // ユーザー一覧表示
+  const res = await fetch(`/api/results?projectId=${projectId}&token=${token}`);
+  const data = await res.json();
+  // ユーザデータ
+  const nicknames = Object.keys(data);
+
+  const userList = document.getElementById('userList');
+  userList.innerHTML = '';
+
+  // 投票ユーザ一覧表示
+  if (nicknames){
+    nicknames.forEach(nickname => {
+    // ラッパーdivを用意
+    const wrapper = document.createElement('div');
+    wrapper.className = 'user-row';
+
+    const span = document.createElement('span');
+    span.textContent = nickname;
+    span.className = 'container__reset-nickname';
+
+    // spanとbuttonを同じdivにまとめて横並びに
+    wrapper.appendChild(span);
+    userList.appendChild(wrapper);
+  });
+}
+// ユーザがいない場合 
+if (nicknames.length === 0 || !data) {
+  const div = document.createElement('div');
+  div.textContent = '投票ユーザーなし';
+  userList.appendChild(div);
+  }
+}
+
+fetchUserList(); // 上記関数呼び出し
+
   // nickname と selections をサーバーに POST
   // 非同期の順番を待つ（前行の処理を待つ）ためにasyncを使用
   document.querySelector('.vote-button__action').addEventListener('click', async (event) => {
