@@ -1,8 +1,8 @@
 
 # 集計ツール - README
-これはHTML, CSS, JSの練習用に制作したWebツールです。
-  https://aggregation-d1rr.onrender.com
-  (Renderの無料版のため、最初は画面はAPPLICATION LOADINGとなり、時間がかかります)
+これはHTML, CSS, JSの練習用に制作したWebツールです  
+https://aggregation-d1rr.onrender.com  
+(Renderの無料版のため、最初は画面はAPPLICATION LOADINGとなり、時間がかかります)
 
 ## 概要
 - ユーザーが投票を行い、その結果をリアルタイムで集計・表示するためのWebツールです。
