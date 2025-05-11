@@ -79,7 +79,7 @@ https://aggregation-d1rr.onrender.com
 作成されるファイル例
 ```
 _id: 68079f15062402991219ff3c
-projectId: "生姜焼きGP2025"
+projectId: "空き地署杯2025"
 token: "Dpe0oFbb"
 votes: Object
 createdAt: 2025-04-22T13:52:21.748+00:00
@@ -163,7 +163,7 @@ Aggregation
     ?projectId=プロジェクトID&token=トークン
     ```
   - レスポンス:
-    ```json
+    ```
     {
       "createdAt": "プロジェクト作成日時",
       "votes": {
@@ -175,7 +175,7 @@ Aggregation
 - **POST /api/vote**
   - 投票データを保存または更新します。
   - リクエストボディ:
-    ```json
+    ```
     {
       "projectId": "プロジェクトID",
       "nickname": "ユーザー名",
@@ -197,7 +197,7 @@ Aggregation
     ?projectId=プロジェクトID&token=トークン
     ```
   - レスポンス:
-    ```json
+    ```
     {
       "ニックネーム": [ [ラウンド, ランキング[]], ... ]
     }
@@ -277,8 +277,8 @@ Aggregation
    - 「投票」ボタンを押下すると、以下のデータがサーバーに送信される。
      ```json
      {
-       "projectId": "生姜焼きGP2025",
-       "nickname": "たま",
+       "projectId": "空き地署杯2025",
+       "nickname": "青島",
        "selections": [["1回目", [[1, 3], [2, 6]]], ]
      }
      ```
