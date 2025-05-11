@@ -382,6 +382,13 @@ header {
 }
 
 //  5 回分の投票情報を、それぞれで記述
+.form__votedContenainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
 .form__votedInfo {
   display: flex;
   margin-bottom: 10px;
