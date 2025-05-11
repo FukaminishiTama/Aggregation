@@ -32,8 +32,6 @@ header {
 }
 
 .header__inner {
-  margin-left: auto;
-  margin-right: auto;
   max-width: 90rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -265,13 +263,13 @@ header {
   margin-left: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  width: 3.5rem;
+  width: 5rem;
   text-align: center;
   font-size: 0.8rem;
 }
 
 .loading-animation::after {
-  content: "...";
+  content: "";
   -webkit-animation: dots 1s steps(3, end) infinite;
           animation: dots 1s steps(3, end) infinite;
 }
@@ -280,14 +278,20 @@ header {
   0% {
     content: "";
   }
-  33% {
+  10% {
     content: ".";
   }
-  66% {
+  25% {
     content: "..";
   }
-  100% {
+  50% {
     content: "...";
+  }
+  75% {
+    content: "....";
+  }
+  100% {
+    content: ".....";
   }
 }
 
@@ -295,14 +299,20 @@ header {
   0% {
     content: "";
   }
-  33% {
+  10% {
     content: ".";
   }
-  66% {
+  25% {
     content: "..";
   }
-  100% {
+  50% {
     content: "...";
+  }
+  75% {
+    content: "....";
+  }
+  100% {
+    content: ".....";
   }
 }
 /* -------------------------------------------------
@@ -396,6 +406,58 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.section__headerVotedInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.form__votedInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.form__labelVotedInfo {
+  padding: 0 2rem;
+  line-height: 2;
+}
+
+.form__textareaVotedInfo,
+.form__inputVotedInfo {
+  -webkit-box-flex: 7;
+      -ms-flex: 7;
+          flex: 7;
+  font-family: sans-serif;
+  font-size: 1.1rem;
+  padding: 5px;
+}
+
+.form__textareaVotedInfo {
+  height: 60px;
+  border: 1px solid #000000;
+}
+
+.form__inputVotedButton {
+  border-radius: 0.25rem;
+  margin: 0 2rem;
+  width: 3.1rem;
+  height: 2rem;
+  text-align: center;
+  background-color: #5b62c8;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .user-row {

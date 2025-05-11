@@ -54,28 +54,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     title.innerHTML = `${projectId}<h3 class="section__admin-text">管理</h3>`;
   }
 
-// 14日後の削除日を表示
-const resDataDate = await fetch(`/api/create-auto-delete?projectId=${projectId}&token=${token}`);
-if (!resDataDate.ok) {
-  // 403などが返ってきたら強制リダイレクトまたはエラーページへ
-  alert('このプロジェクトは存在しないか、すでに削除されています');
-  window.location.href = '/index.html';
-  return;
-}
+// // 14日後の削除日を表示
+// const resDataDate = await fetch(`/api/create-auto-delete?projectId=${projectId}&token=${token}`);
+// if (!resDataDate.ok) {
+//   // 403などが返ってきたら強制リダイレクトまたはエラーページへ
+//   alert('このプロジェクトは存在しないか、すでに削除されています');
+//   window.location.href = '/index.html';
+//   return;
+// }
 
-const dataAutoDeleteDate = await resDataDate.json();
+// const dataAutoDeleteDate = await resDataDate.json();
 
-// createdAt を元に削除日を計算
-const createdAt = new Date(dataAutoDeleteDate.createdAt);
-const deletionDate = new Date(createdAt);
-  deletionDate.setDate(deletionDate.getDate() + 14);
+// // createdAt を元に削除日を計算
+// const createdAt = new Date(dataAutoDeleteDate.createdAt);
+// const deletionDate = new Date(createdAt);
+//   deletionDate.setDate(deletionDate.getDate() + 14);
 
-  const yyyy = deletionDate.getFullYear();
-  const mm = String(deletionDate.getMonth() + 1).padStart(2, '0');
-  const dd = String(deletionDate.getDate()).padStart(2, '0');
+//   const yyyy = deletionDate.getFullYear();
+//   const mm = String(deletionDate.getMonth() + 1).padStart(2, '0');
+//   const dd = String(deletionDate.getDate()).padStart(2, '0');
 
-  const formattedDate = `${yyyy}/${mm}/${dd}`;
-  document.getElementById('deletion-date').textContent = formattedDate;  
+//   const formattedDate = `${yyyy}/${mm}/${dd}`;
+//   document.getElementById('deletion-date').textContent = formattedDate;  
 
   // URL表示
   const baseUrl = window.location.origin;
