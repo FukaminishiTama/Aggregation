@@ -523,8 +523,12 @@ header {
 }
 
 .number-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   font-size: 1rem;
   gap: 0.5rem;
+  white-space: pre-wrap;
 }
 
 .number-figure {

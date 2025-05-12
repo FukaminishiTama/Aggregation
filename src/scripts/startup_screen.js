@@ -105,19 +105,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('button__text-adminUrlCopy')?.addEventListener('click', () => copyToClipboard('adminUrl'));
 
 
+  // データ取得
+  const res = await fetch(`/api/results?projectId=${projectId}&token=${token}`);
+  const data = await res.json();
+
   document.getElementById('form__inputVotedButton')?.addEventListener('click', async () => {
   const voteInfos = {};
 
+// votesInfo を textarea に反映
+if (data.votesInfo) {
   for (let i = 1; i <= 5; i++) {
-    const info = data.votesInfo[i];
-    const div = document.getElementById(`number-info-${i}`);
-    if (div && info) {
-      div.innerHTML = info.replace(/\n/g, '<br>'); // 改行を反映
+    const text = data.votesInfo[i];
+    const textarea = document.getElementById(`vote-info-${i}`);
+    if (textarea && text) {
+      textarea.value = text;
     }
   }
+}
 
 // voteInfos = {1: "テキスト1", 2: "テキスト2", ...}
-
   // 各番号ごとに個別送信（ループでPOST）
   for (const [number, text] of Object.entries(voteInfos)) {
     const res = await fetch('/api/admin/vote-info', {
@@ -136,9 +142,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   alert('投票情報を保存しました');
 });
 
-  // ユーザー一覧取得
-    const res = await fetch(`/api/results?projectId=${projectId}&token=${token}`);
-    const data = await res.json();
+
     // ユーザデータ
     const nicknames = Object.keys(data);
 

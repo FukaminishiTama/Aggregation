@@ -103,8 +103,7 @@ app.post('/api/admin/vote-info', async (req, res) => {
 
     project.votesInfo = voteInfos; // 上書き保存
     await project.save();
-
-    res.json({ success: true });
+    res.status(200).json({ success: true, message: '保存しました' });
   } catch (err) {
     res.status(500).json({ success: false, error: 'サーバーエラー: ' + err.message });
   }
