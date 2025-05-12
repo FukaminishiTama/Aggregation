@@ -1,7 +1,3 @@
-// ページの HTML がすべて読み込まれた後にJS処理を実行
-/* HTMLファイルを開くと、ブラウザの中でそれが「document」として扱われる
-addEventListener関数:「この場所で何かが起きたら何をするか」を登録
-'DOMContentLoaded':「HTMLが全部読み込まれたとき」*/ 
 document.addEventListener('DOMContentLoaded', () => {
     // URLからprojectIdとtokenを取得
     const urlParams = new URLSearchParams(window.location.search);
@@ -14,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title.innerHTML = `${projectId}<h3 class="section__main-text">投票</h3>`;
     }
 
-// 4つまでの数字ボタン選択と表示、リセットボタンの表示
+  // 4つまでの数字ボタン選択と表示、リセットボタンの表示
   // 各セクションのリセットボタンと選択結果表示エリアを取得
   const sections = document.querySelectorAll('.number-buttons');
   
@@ -136,68 +132,86 @@ if (nicknames.length === 0 || !data) {
 
 fetchUserList(); // 上記関数呼び出し
 
-  // nickname と selections をサーバーに POST
-  // 非同期の順番を待つ（前行の処理を待つ）ためにasyncを使用
-  document.querySelector('.vote-button__action').addEventListener('click', async (event) => {
-    // フォーム送信を防ぐ
-    event.preventDefault();
-    // 入力欄 #form__input から名前を取得（空白は除去）
-    const nickname = document.getElementById('form__input').value.trim();
-    // 返り値が空（null）なら、アラートを表示して終了
-    if (!nickname) {
-      alert('ニックネームを入力してください');
-      return; // 処理を終了
-    }
-  
-    // 各ラウンドのデータ[n回目,[順位,番号]]を収集
-    const selections = [];
-    // 各ラウンドを表す要素（.number-buttons）をすべて取得
-    document.querySelectorAll('.number-buttons').forEach(section => {
-      
-      // タイトル部分の取得
-      const titleElement = section.querySelector('.section__number-title span');
-      let roundTitle = titleElement ? titleElement.textContent.trim() : '';
-      // "選択 : " などの不要な部分を取り除いて、"1 回目" のような文字列を得る
-      roundTitle = roundTitle.replace(/^選択\s*:\s*/, '');
-      
-      // ランキング情報の取得
-      const selectedSpans = section.querySelectorAll('.selected-ranking__text');
-      const rankings = [];
-      
-      if(selectedSpans.length > 0) {
-        // 各選択要素について、rankとnumber属性の値を取り出す
-        selectedSpans.forEach(span => {
-          const rank = span.getAttribute('rank');    // 例： "1"
-          const number = span.getAttribute('number');  // 例： "7"
-          // 数値として扱いたい場合は Number() で変換（ここでは数値に変換しています）
-          rankings.push([Number(rank), Number(number)]);
-        });
-      } else {
-        // もし選択されている要素がなければ、ランキング情報がないことを示すために [null] とする例
-        rankings.push([null]);
-      }
-      
-      // ラウンドタイトルとランキング情報の配列を selections に追加する
-      selections.push([roundTitle, rankings]);
-    });    
-  
-    const payload = { projectId, token, nickname, selections };
-  
-    // Web API など外部のサービスと非同期通信する（await:非同期の順番を待つ）
-    // fetch 関数が返す Promise が解決されるまで処理が一時停止（POST リクエストが完了し、サーバーからレスポンスを受け取るまで次のコードに進まないようにする）
-    // HTTP リクエストを発行する関数(/api/vote というエンドポイントに POST リクエストを送信)
-    await fetch('/api/vote', {
-      // メソッドとしてPOST（サーバーにデータを送信）を指定
-      method: 'POST',
-      // リクエストのデータ形式などの追加情報をサーバーに伝える（ここではJSON形式）
-      headers: { 'Content-Type': 'application/json' },
-      // サーバーに送信するデータ本体（payload を JSON 形式の文字列に変換）
-      body: JSON.stringify(payload)
+// 投票情報表示
+async function loadVoteInfo() {
+  try {
+    const res = await fetch(`/api/vote-info?projectId=${projectId}&token=${token}`);
+    const infoMap = await res.json();
+    Object.entries(infoMap).forEach(([number, textArray]) => {
+      const el = document.getElementById(`number-info-${number}`);
+      if (!el) return;
+      el.textContent = Array.isArray(textArray)
+        ? textArray.join('\n')
+        : String(textArray);
     });
-  
-    // 遷移先の URL に projectId を付けて渡す
-    const baseUrl = window.location.origin;
-    window.location.href = `${baseUrl}/results.html?project=${encodeURIComponent(projectId)}&token=${encodeURIComponent(token)}`;
+  } catch (err) {
+    console.error("vote-info 取得失敗:", err);
+  }
+}
+
+loadVoteInfo(); // 上記関数呼び出し
+
+// nicknameの入力可否と保存
+document.querySelector('.vote-button__action').addEventListener('click', async (event) => {
+  // フォーム送信を防ぐ
+  event.preventDefault();
+  // 入力欄 #form__input から名前を取得（空白は除去）
+  const nickname = document.getElementById('form__input').value.trim();
+  // 返り値が空（null）なら、アラートを表示して終了
+  if (!nickname) {
+    alert('ニックネームを入力してください');
+    return; // 処理を終了
+  }
+
+  // 各ラウンドのデータ[n回目,[順位,番号]]を収集
+  const selections = [];
+  // 各ラウンドを表す要素（.number-buttons）をすべて取得
+  document.querySelectorAll('.number-buttons').forEach(section => {
+    
+    // タイトル部分の取得
+    const titleElement = section.querySelector('.section__number-title span');
+    let roundTitle = titleElement ? titleElement.textContent.trim() : '';
+    // "選択 : " などの不要な部分を取り除いて、"1 回目" のような文字列を得る
+    roundTitle = roundTitle.replace(/^選択\s*:\s*/, '');
+    
+    // ランキング情報の取得
+    const selectedSpans = section.querySelectorAll('.selected-ranking__text');
+    const rankings = [];
+    
+    if(selectedSpans.length > 0) {
+      // 各選択要素について、rankとnumber属性の値を取り出す
+      selectedSpans.forEach(span => {
+        const rank = span.getAttribute('rank');    // 例： "1"
+        const number = span.getAttribute('number');  // 例： "7"
+        // 数値として扱いたい場合は Number() で変換（ここでは数値に変換しています）
+        rankings.push([Number(rank), Number(number)]);
+      });
+    } else {
+      // もし選択されている要素がなければ、ランキング情報がないことを示すために [null] とする例
+      rankings.push([null]);
+    }
+    
+    // ラウンドタイトルとランキング情報の配列を selections に追加する
+    selections.push([roundTitle, rankings]);
+  });    
+
+  const payload = { projectId, token, nickname, selections };
+
+  // Web API など外部のサービスと非同期通信する（await:非同期の順番を待つ）
+  // fetch 関数が返す Promise が解決されるまで処理が一時停止（POST リクエストが完了し、サーバーからレスポンスを受け取るまで次のコードに進まないようにする）
+  // HTTP リクエストを発行する関数(/api/vote というエンドポイントに POST リクエストを送信)
+  await fetch('/api/vote', {
+    // メソッドとしてPOST（サーバーにデータを送信）を指定
+    method: 'POST',
+    // リクエストのデータ形式などの追加情報をサーバーに伝える（ここではJSON形式）
+    headers: { 'Content-Type': 'application/json' },
+    // サーバーに送信するデータ本体（payload を JSON 形式の文字列に変換）
+    body: JSON.stringify(payload)
   });
+
+  // 遷移先の URL に projectId を付けて渡す
+  const baseUrl = window.location.origin;
+  window.location.href = `${baseUrl}/results.html?project=${encodeURIComponent(projectId)}&token=${encodeURIComponent(token)}`;
+});
 
 });

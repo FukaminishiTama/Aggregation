@@ -17,7 +17,6 @@ async function authenticateProject(req, res) {
   return project;
 }
 
-
 // .env ファイルを読み込んで、そこに書かれた変数を process.env に登録
 dotenv.config();
 
@@ -39,6 +38,12 @@ mongoose.connect(process.env.MONGODB_URI, {
   console.error('❌ MongoDB connection error:', err);
 });
 
+// サーバ接続確認
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🌐 Server running: http://localhost:${PORT}`);
+});
+
 // プロジェクトを新規作成する
 app.post('/api/create-project', async (req, res) => {
   const { projectId, token } = req.body;
@@ -46,6 +51,7 @@ app.post('/api/create-project', async (req, res) => {
       projectId,
       token,
       votes: new Map(),
+      votesInfo: new Map(),
     });
     await newProject.save();
     res.status(200).json({ success: true, message: 'プロジェクトを作成しました' });
@@ -87,16 +93,39 @@ app.get('/api/results', async (req, res) => {
   res.json(votesObject);
 });
 
-// サーバ接続確認
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🌐 Server running: http://localhost:${PORT}`);
+// server.js：管理画面から votesInfo を保存するエンドポイント
+app.post('/api/admin/vote-info', async (req, res) => {
+  const { projectId, token, number, text } = req.body;
+  const project = await Project.findOne({ projectId, token });
+  if (!project) return;  // 認証失敗時はレスポンスを返して処理終了
+
+  // votesInfo マップがなければ作成
+  if (!project.votesInfo) {
+    project.votesInfo = new Map();
+  }
+
+  // 指定番号のテキストを Map にセット（キーは文字列）
+  project.votesInfo.set(String(number), [ text ]);
+
+  // 更新を保存
+  await project.save();
+
+  res.status(200).json({ success: true, message: '保存しました' });
 });
 
+// server.js：votesInfo を返すエンドポイント
+app.get('/api/vote-info', async (req, res) => {
+  const project = await authenticateProject(req, res);
+  if (!project) return;
+  const infoData = project.votesInfo
+    ? Object.fromEntries(project.votesInfo)
+    : {};
+  res.json(infoData);
+});
 
 // 指定されたプロジェクトの中の、特定のニックネーム1人分の投票データだけを削除
 app.delete('/api/admin/reset-user', async (req, res) => {
-  // projectId と nickname の両方を使用して処理
+  // projectId と tokenでプロジェクト確認し、その中の nickname を削除
   const { projectId, token, nickname } = req.query;
   const project = await Project.findOne({ projectId, token });
   // 完全削除後で存在しない場合は終了

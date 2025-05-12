@@ -104,6 +104,35 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('button__text-resultUrlCopy')?.addEventListener('click', () => copyToClipboard('resultUrl'));
   document.getElementById('button__text-adminUrlCopy')?.addEventListener('click', () => copyToClipboard('adminUrl'));
 
+
+  document.getElementById('form__inputVotedButton')?.addEventListener('click', async () => {
+  const voteInfos = {};
+
+  for (let i = 1; i <= 5; i++) {
+    const textarea = document.getElementById(`vote-info-${i}`);
+    if (textarea) voteInfos[i] = textarea.value.trim();
+  }
+  
+// voteInfos = {1: "テキスト1", 2: "テキスト2", ...}
+
+  // 各番号ごとに個別送信（ループでPOST）
+  for (const [number, text] of Object.entries(voteInfos)) {
+    const res = await fetch('/api/admin/vote-info', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ projectId, token, number, text })
+    });
+
+    const result = await res.json();
+    if (!result.success) {
+      alert(`番号 ${number} の保存に失敗しました: ${result.error}`);
+      return;
+    }
+  }
+
+  alert('投票情報を保存しました');
+});
+
   // ユーザー一覧取得
     const res = await fetch(`/api/results?projectId=${projectId}&token=${token}`);
     const data = await res.json();
