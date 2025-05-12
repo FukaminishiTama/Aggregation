@@ -93,7 +93,7 @@ app.get('/api/results', async (req, res) => {
   res.json(votesObject);
 });
 
-// server.js：管理画面から votesInfo を保存するエンドポイント
+// 管理画面から votesInfo を保存するエンドポイント
 app.post('/api/admin/vote-info', async (req, res) => {
   const { projectId, token, voteInfos } = req.body;
 
