@@ -522,6 +522,11 @@ header {
   gap: 0.5rem;
 }
 
+.number-info {
+  font-size: 1rem;
+  gap: 0.5rem;
+}
+
 .number-figure {
   padding: 10px 15px;
   margin: 5px;

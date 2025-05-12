@@ -109,10 +109,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const voteInfos = {};
 
   for (let i = 1; i <= 5; i++) {
-    const textarea = document.getElementById(`vote-info-${i}`);
-    if (textarea) voteInfos[i] = textarea.value.trim();
+    const info = data.votesInfo[i];
+    const div = document.getElementById(`number-info-${i}`);
+    if (div && info) {
+      div.innerHTML = info.replace(/\n/g, '<br>'); // 改行を反映
+    }
   }
-  
+
 // voteInfos = {1: "テキスト1", 2: "テキスト2", ...}
 
   // 各番号ごとに個別送信（ループでPOST）

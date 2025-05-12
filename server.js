@@ -95,22 +95,19 @@ app.get('/api/results', async (req, res) => {
 
 // server.js：管理画面から votesInfo を保存するエンドポイント
 app.post('/api/admin/vote-info', async (req, res) => {
-  const { projectId, token, number, text } = req.body;
-  const project = await Project.findOne({ projectId, token });
-  if (!project) return;  // 認証失敗時はレスポンスを返して処理終了
+  const { projectId, token, voteInfos } = req.body;
 
-  // votesInfo マップがなければ作成
-  if (!project.votesInfo) {
-    project.votesInfo = new Map();
+  try {
+    const project = await Project.findOne({ projectId, token });
+    if (!project) return res.status(404).json({ success: false, error: 'プロジェクトが見つかりません' });
+
+    project.votesInfo = voteInfos; // 上書き保存
+    await project.save();
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'サーバーエラー: ' + err.message });
   }
-
-  // 指定番号のテキストを Map にセット（キーは文字列）
-  project.votesInfo.set(String(number), [ text ]);
-
-  // 更新を保存
-  await project.save();
-
-  res.status(200).json({ success: true, message: '保存しました' });
 });
 
 // server.js：votesInfo を返すエンドポイント
