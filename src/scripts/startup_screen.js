@@ -112,19 +112,16 @@ const deletionDate = new Date(createdAt);
   document.getElementById('form__inputVotedButton')?.addEventListener('click', async () => {
   const voteInfos = {};
 
-// votesInfo を textarea に反映
-if (data.votesInfo) {
-  for (let i = 1; i <= 5; i++) {
-    const text = data.votesInfo[i];
+for (let i = 1; i <= 5; i++) {
     const textarea = document.getElementById(`vote-info-${i}`);
-    if (textarea && text) {
-      textarea.value = text;
+    if (textarea) {
+      const text = textarea.value.trim();
+      if (text) {
+        voteInfos[i] = text;
+      }
     }
   }
-}
 
-// voteInfos = {1: "テキスト1", 2: "テキスト2", ...}
-  // 各番号ごとに個別送信（ループでPOST）
   for (const [number, text] of Object.entries(voteInfos)) {
     const res = await fetch('/api/admin/vote-info', {
       method: 'POST',
