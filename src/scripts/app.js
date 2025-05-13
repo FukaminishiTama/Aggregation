@@ -132,21 +132,15 @@ if (nicknames.length === 0 || !data) {
 
 fetchUserList(); // 上記関数呼び出し
 
-// 投票情報表示
+// 投票説明情報表示
 async function loadVoteInfo() {
-  try {
     const res = await fetch(`/api/vote-info?projectId=${projectId}&token=${token}`);
     const infoMap = await res.json();
     Object.entries(infoMap).forEach(([number, textArray]) => {
       const el = document.getElementById(`number-info-${number}`);
       if (!el) return;
-      el.textContent = Array.isArray(textArray)
-        ? textArray.join('\n')
-        : String(textArray);
+    el.textContent = String(textArray);
     });
-  } catch (err) {
-    console.error("vote-info 取得失敗:", err);
-  }
 }
 
 loadVoteInfo(); // 上記関数呼び出し

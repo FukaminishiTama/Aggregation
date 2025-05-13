@@ -105,20 +105,29 @@ const deletionDate = new Date(createdAt);
   document.getElementById('button__text-adminUrlCopy')?.addEventListener('click', () => copyToClipboard('adminUrl'));
 
 
-  // データ取得
-  const res = await fetch(`/api/results?projectId=${projectId}&token=${token}`);
-  const data = await res.json();
+// 初期表示時に投票情報をテキストエリアに反映
+async function loadVoteInfos() {
+  const infoRes = await fetch(`/api/vote-info?projectId=${projectId}&token=${token}`);
+  const infoData = await infoRes.json();
 
-  document.getElementById('form__inputVotedButton')?.addEventListener('click', async () => {
+  for (let i = 1; i <= 5; i++) {
+    const textarea = document.getElementById(`vote-info-${i}`);
+    if (textarea && infoData[i] !== undefined) {
+      textarea.value = infoData[i];
+    }
+  }
+}
+
+loadVoteInfos(); // 読み込み時に実行
+
+// 保存ボタンクリック時
+document.getElementById('form__inputVotedButton')?.addEventListener('click', async () => {
   const voteInfos = {};
 
-for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 5; i++) {
     const textarea = document.getElementById(`vote-info-${i}`);
     if (textarea) {
-      const text = textarea.value.trim();
-      if (text) {
-        voteInfos[i] = text;
-      }
+      voteInfos[i] = textarea.value; // 空白も送信対象にするため if(text)は不要
     }
   }
 
@@ -139,59 +148,62 @@ for (let i = 1; i <= 5; i++) {
   alert('投票情報を保存しました');
 });
 
+  // データ取得
+  const res = await fetch(`/api/results?projectId=${projectId}&token=${token}`);
+  const data = await res.json();
 
-    // ユーザデータ
-    const nicknames = Object.keys(data);
+  // ユーザデータ個別削除
+  const nicknames = Object.keys(data);
 
-    const userList = document.getElementById('userList');
-    userList.innerHTML = '';
+  const userList = document.getElementById('userList');
+  userList.innerHTML = '';
 
-    // 投票ユーザ一覧表示
-    if (nicknames){
-      nicknames.forEach(nickname => {
-      // ラッパーdivを用意
-      const wrapper = document.createElement('div');
-      wrapper.className = 'user-row';
+  // 投票ユーザ一覧表示
+  if (nicknames){
+    nicknames.forEach(nickname => {
+    // ラッパーdivを用意
+    const wrapper = document.createElement('div');
+    wrapper.className = 'user-row';
 
-      const span = document.createElement('span');
-      span.textContent = nickname;
-      span.className = 'container__reset-nickname';
+    const span = document.createElement('span');
+    span.textContent = nickname;
+    span.className = 'container__reset-nickname';
 
-      const resetBtn = document.createElement('button');
-      resetBtn.className = 'button__reset-nickname';
-      resetBtn.type = 'button';
-      resetBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256">
-              <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(4,4)"><path d="M28,9c-1.105,0 -2,0.895 -2,2v1h-12c-1.104,0 -2,0.896 -2,2c0,1.104 0.896,2 2,2h36c1.104,0 2,-0.896 2,-2c0,-1.104 -0.896,-2 -2,-2h-12v-1c0,-1.105 -0.895,-2 -2,-2zM15,18v28c0,3.309 2.691,6 6,6h22c3.309,0 6,-2.691 6,-6v-28zM22.5,22c0.828,0 1.5,0.671 1.5,1.5v21c0,0.829 -0.672,1.5 -1.5,1.5c-0.828,0 -1.5,-0.671 -1.5,-1.5v-21c0,-0.829 0.672,-1.5 1.5,-1.5zM32,22c1.104,0 2,0.896 2,2v20c0,1.104 -0.896,2 -2,2c-1.104,0 -2,-0.896 -2,-2v-20c0,-1.104 0.896,-2 2,-2zM41.5,22c0.828,0 1.5,0.671 1.5,1.5v21c0,0.829 -0.672,1.5 -1.5,1.5c-0.828,0 -1.5,-0.671 -1.5,-1.5v-21c0,-0.829 0.672,-1.5 1.5,-1.5z"></path></g></g>
-              </svg>`;
+    const resetBtn = document.createElement('button');
+    resetBtn.className = 'button__reset-nickname';
+    resetBtn.type = 'button';
+    resetBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256">
+            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(4,4)"><path d="M28,9c-1.105,0 -2,0.895 -2,2v1h-12c-1.104,0 -2,0.896 -2,2c0,1.104 0.896,2 2,2h36c1.104,0 2,-0.896 2,-2c0,-1.104 -0.896,-2 -2,-2h-12v-1c0,-1.105 -0.895,-2 -2,-2zM15,18v28c0,3.309 2.691,6 6,6h22c3.309,0 6,-2.691 6,-6v-28zM22.5,22c0.828,0 1.5,0.671 1.5,1.5v21c0,0.829 -0.672,1.5 -1.5,1.5c-0.828,0 -1.5,-0.671 -1.5,-1.5v-21c0,-0.829 0.672,-1.5 1.5,-1.5zM32,22c1.104,0 2,0.896 2,2v20c0,1.104 -0.896,2 -2,2c-1.104,0 -2,-0.896 -2,-2v-20c0,-1.104 0.896,-2 2,-2zM41.5,22c0.828,0 1.5,0.671 1.5,1.5v21c0,0.829 -0.672,1.5 -1.5,1.5c-0.828,0 -1.5,-0.671 -1.5,-1.5v-21c0,-0.829 0.672,-1.5 1.5,-1.5z"></path></g></g>
+            </svg>`;
 
-      resetBtn.addEventListener('click', async () => {
-        if (!confirm(`${nickname} の投票データを削除しますか？`)) return;
+    resetBtn.addEventListener('click', async () => {
+      if (!confirm(`${nickname} の投票データを削除しますか？`)) return;
 
-        const res = await fetch(
-          `/api/admin/reset-user?projectId=${projectId}&token=${token}&nickname=${encodeURIComponent(nickname)}`,
-          { method: 'DELETE' }
-        );
-        const result = await res.json();
-        if (result.success) {
-          alert(`${nickname} の投票データを削除しました`);
-          location.reload();
-        } else {
-          alert('エラー: ' + result.error);
-        }
-      });
-
-      // spanとbuttonを同じdivにまとめて横並びに
-      wrapper.appendChild(span);
-      wrapper.appendChild(resetBtn);
-      userList.appendChild(wrapper);
+      const res = await fetch(
+        `/api/admin/reset-user?projectId=${projectId}&token=${token}&nickname=${encodeURIComponent(nickname)}`,
+        { method: 'DELETE' }
+      );
+      const result = await res.json();
+      if (result.success) {
+        alert(`${nickname} の投票データを削除しました`);
+        location.reload();
+      } else {
+        alert('エラー: ' + result.error);
+      }
     });
-  }
-  // ユーザがいない場合 
-  if (nicknames.length === 0 || !data) {
-    const div = document.createElement('div');
-    div.textContent = '投票ユーザーなし';
-    userList.appendChild(div);
-  };
+
+    // spanとbuttonを同じdivにまとめて横並びに
+    wrapper.appendChild(span);
+    wrapper.appendChild(resetBtn);
+    userList.appendChild(wrapper);
+  });
+}
+// ユーザがいない場合 
+if (nicknames.length === 0 || !data) {
+  const div = document.createElement('div');
+  div.textContent = '投票ユーザーなし';
+  userList.appendChild(div);
+};
 
 // プロジェクト全体削除
 document.getElementById('deleteProjectButton')?.addEventListener('click', async () => {

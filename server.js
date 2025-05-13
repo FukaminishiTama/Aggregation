@@ -95,13 +95,13 @@ app.get('/api/results', async (req, res) => {
 
 // 管理画面から votesInfo を保存するエンドポイント
 app.post('/api/admin/vote-info', async (req, res) => {
-  const { projectId, token, voteInfos } = req.body;
+  const { projectId, token, number, text } = req.body;
 
   try {
     const project = await Project.findOne({ projectId, token });
     if (!project) return res.status(404).json({ success: false, error: 'プロジェクトが見つかりません' });
 
-    project.votesInfo = voteInfos; // 上書き保存
+    project.votesInfo.set(number, text);
     await project.save();
     res.status(200).json({ success: true, message: '保存しました' });
   } catch (err) {
