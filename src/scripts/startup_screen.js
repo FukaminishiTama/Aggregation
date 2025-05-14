@@ -91,14 +91,19 @@ const deletionDate = new Date(createdAt);
 
 
   // コピー処理
-  function copyToClipboard(id) {
-    const input = document.getElementById(id);
-    if (!input) return;
-    input.select();
-    input.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    alert('コピーしました: ' + input.value);
-  }
+function copyToClipboard(id) {
+  const input = document.getElementById(id);
+  if (!input) return;
+
+  // モダンブラウザ対応：Clipboard API使用
+  navigator.clipboard.writeText(input.value)
+    .then(() => {
+      alert('コピーしました: ' + input.value);
+    })
+    .catch(err => {
+      alert('コピーに失敗しました: ' + err);
+    });
+}
 
   document.getElementById('button__text-voteUrlCopy')?.addEventListener('click', () => copyToClipboard('voteUrl'));
   document.getElementById('button__text-resultUrlCopy')?.addEventListener('click', () => copyToClipboard('resultUrl'));
